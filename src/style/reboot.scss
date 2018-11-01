@@ -1,0 +1,58 @@
+html, body {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+body {
+  font-family: -apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif;
+  word-spacing: 1px;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-overflow-scrolling: touch;
+  color: #333333;
+  margin: 0;
+
+  *, *:before, *:after
+  {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  *:focus, *:active {
+    outline-width: 0;
+  }
+}
+
+ul {
+  -webkit-overflow-scrolling: touch;
+}
+
+li {
+  list-style-type: none;
+}
+
+img {
+  color: transparent;
+  background-color: transparent;
+  border: 0;
+  display: inline-block;
+}
+
+span, i {
+  vertical-align: middle;
+}
+
+button {
+  cursor: default;
+  background-color: transparent;
+  border: none;
+  user-select: none;
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
+  cursor: default;
+  color: inherit;
+}

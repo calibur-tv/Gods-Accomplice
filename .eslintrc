@@ -1,0 +1,20 @@
+{
+  "extends": [
+    "plugin:vue/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "parserOptions": {
+    "parser": "babel-eslint"
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "mocha": true
+  },
+  "rules": {
+  },
+  "globals": {
+    "M": true,
+    "flvjs": true
+  }
+}
