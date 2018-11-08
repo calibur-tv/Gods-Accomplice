@@ -30,9 +30,6 @@ module.exports = (env = {}) => {
     },
 
     plugins: [
-      new webpack.DefinePlugin({
-        'process.env': config.env,
-      }),
       new TemplateHashPlugin({
         outputAssetsPath: BUILD_PATH,
         templatesSubPath: 'templates/',

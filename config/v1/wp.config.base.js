@@ -6,6 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const config = require('./env.config');
 const utils = require('./utils');
 const resolve = file => path.resolve(__dirname, file);
+const LodashModuleReplacementPlugin = require("lodash-webpack-plugin");
 
 const {
   APP_PATH,
@@ -57,6 +58,7 @@ module.exports = (env) => {
       templatePlugins.push(htmlPlugin);
     }
   });
+
   return {
     context: APP_PATH,
     entry: entries,
@@ -80,12 +82,7 @@ module.exports = (env) => {
                   loader: 'css-loader',
                   options: {
                     sourceMap: useCssSourceMap,
-                  },
-                },
-                {
-                  loader: 'postcss-loader',
-                  options: {
-                    sourceMap: useCssSourceMap,
+                    minimize: isProduction
                   },
                 },
                 {
@@ -105,10 +102,12 @@ module.exports = (env) => {
                 }
               ],
             },
+            postcss: [
+              require("autoprefixer")({
+                browsers: ["last 3 versions"]
+              })
+            ],
             cssSourceMap: useCssSourceMap,
-            postcss: {
-              options: {},
-            },
             cssModules: {
               localIdentName: '[local]-[hash:base64:5]',
               camelCase: true
@@ -126,44 +125,29 @@ module.exports = (env) => {
           exclude: [LIB_PATH],
         },
         {
-          test: /\.jsx?$/,
+          test: /\.(scss|css)$/,
           use: [
-            'babel-loader',
+            "vue-style-loader",
+            {
+              loader: "css-loader",
+              options: {
+                minimize: true,
+                importLoaders: 2
+              }
+            },
+            {
+              loader: "postcss-loader",
+              options: {
+                config: {
+                  path: "./postcss.config.js"
+                }
+              }
+            },
+            {
+              loader: "sass-loader",
+              options: {}
+            }
           ],
-          include: [APP_PATH],
-          exclude: [LIB_PATH],
-        },
-        {
-          test: /\.(sc|c)ss$/,
-          use: [
-            {
-              loader: 'style-loader',
-              options: {
-                sourceMap: useCssSourceMap,
-              },
-            },
-            {
-              loader: 'css-loader',
-              options: {
-                sourceMap: useCssSourceMap,
-                importLoaders: 2,
-              },
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                sourceMap: useCssSourceMap,
-              },
-            },
-            {
-              loader: 'sass-loader',
-              options: {
-                sourceMap: useCssSourceMap,
-              },
-            },
-          ],
-          include: APP_PATH,
-          exclude: LIB_PATH,
         },
         {
           test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -193,6 +177,15 @@ module.exports = (env) => {
     },
 
     plugins: [
+      new LodashModuleReplacementPlugin(),
+      new webpack.DefinePlugin({
+        "process.env": {
+          NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+          API_HOST: JSON.stringify(
+            process.env.API_HOST || "https://api.calibur.tv/"
+          )
+        }
+      }),
       new webpack.HashedModuleIdsPlugin({
         hashDigestLength: 8,
       }),

@@ -16,19 +16,36 @@ p {
 </template>
 
 <script>
+import Api from "@/api/v1/selfApi";
+
 export default {
   name: "App",
   components: {},
   props: {},
   data() {
-    return {};
+    return {
+      list: []
+    };
   },
   computed: {},
   watch: {},
-  created() {},
-  mounted() {
-    console.log("hahhahahahahaa");
+  created() {
+    this.getData();
   },
-  methods: {}
+  mounted() {},
+  methods: {
+    async getData() {
+      const api = new Api();
+      const len = this.list.length;
+      try {
+        const data = await api.getTransactions({
+          min_id: len ? this.list[len - 1].id : 0
+        });
+        this.list = this.list.concat(data);
+      } catch (e) {
+        this.$toast.error(e);
+      }
+    }
+  }
 };
 </script>

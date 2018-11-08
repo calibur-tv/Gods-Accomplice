@@ -17,6 +17,12 @@
   "plugins": [
     "syntax-dynamic-import",
     "transform-runtime",
-    "babel-plugin-lodash"
+    "babel-plugin-lodash",
+    ["component", [
+      {
+        "libraryName": "mint-ui",
+        "style": true
+      }
+    ]]
   ]
 }

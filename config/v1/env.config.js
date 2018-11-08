@@ -38,12 +38,7 @@ module.exports = {
         path: 'example.css',
       },
     ],
-    cssSourceMap: true,
-    redis: {
-      host: 'localhost',
-      port: 6379,
-      db: 9,
-    },
+    cssSourceMap: true
   },
   build: {
     env: {
