@@ -165,6 +165,11 @@ module.exports = (env) => {
             name: utils.assetsPath(assetsBasePath, 'fonts/[name].[hash:7].[ext]'),
           },
         },
+        {
+          test: /\.js$/,
+          loader: "babel-loader",
+          exclude: /node_modules/
+        }
       ],
     },
 

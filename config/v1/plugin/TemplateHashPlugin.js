@@ -12,20 +12,6 @@ function isFile(file) {
   return fs.statSync(file).isFile();
 }
 
-const addTestCode = (file, content, appName, version) => {
-  const css = `<style type="text/css">
-        body:before {
-          content: '${appName}-${version}';
-          position: absolute;
-          top: 125px;
-          right: 120px;
-        }
-      </style>
-    `;
-  const newContent = content.replace('</head>', `${css}</head>`);
-  fs.writeFileSync(file, newContent);
-};
-
 class TemplateHashPlugin {
   constructor(options) {
     this.options = Object.assign({
@@ -40,8 +26,7 @@ class TemplateHashPlugin {
     const {
       outputAssetsPath,
       templatesSubPath,
-      publicPath,
-      addTestCodeInTemplates,
+      publicPath
     } = this.options;
     const templatesPath = path.join(outputAssetsPath, templatesSubPath);
     const manifest = {};
@@ -83,9 +68,6 @@ class TemplateHashPlugin {
         // 写manifest
         const tplType = subPath.split('/')[0];
         const appName = _.kebabCase(subPath.split('/')[1]);
-        if (addTestCodeInTemplates) {
-          addTestCode(fileAbsPath, mustacheContent, appName, version);
-        }
         manifest[`${appName}-${version}`] = {
           build: chunkHash,
           file: `${publicPath}/${path.join(templatesSubPath, subPath, newMustache)}`,

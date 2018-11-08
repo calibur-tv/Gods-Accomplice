@@ -30,13 +30,6 @@ module.exports = (env = {}) => {
     },
 
     plugins: [
-      new TemplateHashPlugin({
-        outputAssetsPath: BUILD_PATH,
-        templatesSubPath: 'templates/',
-        publicPath: `${config.cdn}/hybrid`,
-        redisOptions: config.redis,
-        addTestCodeInTemplates: config.addTestCodeInTemplates,
-      }),
       new HtmlWebpackInlineSourcePlugin(),
       new webpack.optimize.UglifyJsPlugin({
         uglifyOptions: {
@@ -60,7 +53,12 @@ module.exports = (env = {}) => {
       }),
       new webpack.optimize.ModuleConcatenationPlugin(),
       new FriendlyErrorsPlugin(),
-      new webpack.NoEmitOnErrorsPlugin()
+      new webpack.NoEmitOnErrorsPlugin(),
+      new TemplateHashPlugin({
+        outputAssetsPath: BUILD_PATH,
+        templatesSubPath: 'templates/',
+        publicPath: `${config.cdn}/hybrid`
+      })
     ],
   });
 
