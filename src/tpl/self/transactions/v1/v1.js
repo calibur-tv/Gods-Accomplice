@@ -1,8 +1,7 @@
 import Vue from "vue";
 
 import app from "@/containers/transactions/v1/app.vue";
-import "@/style/reboot.scss";
-import "@/style/mint-ui.css";
+import "@/style/global.scss";
 import FastClick from "fastclick";
 import "@/util/prototype";
 
