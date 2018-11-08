@@ -7,11 +7,13 @@ p {
 <template>
   <div>
     <p>hello world</p>
+    <!--
     <img
       src="@/images/logo.png"
       width="300"
       height="300"
     >
+    -->
   </div>
 </template>
 
