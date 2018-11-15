@@ -21,7 +21,8 @@
     "fastclick": "^1.0.6",
     "mint-ui": "^2.2.13",
     "raven-js": "^3.24.2",
-    "vue": "^2.5.17"
+    "vue": "^2.5.17",
+    "vue-timeago": "^5.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^8.1.0",

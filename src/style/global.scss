@@ -6,3 +6,22 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+.container {
+  margin-left: 12px;
+  margin-right: 12px;
+}
+
+.clearfix {
+  &:after {
+    content: '';
+    clear: both;
+    display: table;
+  }
+
+  &:before {
+    content: '';
+    clear: both;
+    display: table;
+  }
+}

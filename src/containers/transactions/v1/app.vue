@@ -40,6 +40,8 @@ import Type11 from "../components/DeleteScore.vue";
 import Type12 from "../components/DeleteAnswer.vue";
 import Type13 from "../components/RewardVideo.vue";
 import Type14 from "../components/DeleteVideo.vue";
+import Type15 from "../components/ActivityGift.vue";
+import Type16 from "../components/ManagerGift.vue";
 
 export default {
   name: "App",
@@ -59,7 +61,9 @@ export default {
     Type11,
     Type12,
     Type13,
-    Type14
+    Type14,
+    Type15,
+    Type16
   },
   data() {
     return {
