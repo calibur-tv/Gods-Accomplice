@@ -1,5 +1,6 @@
 @import "reboot";
 @import "mint-ui.css";
+@import "variables";
 
 .oneline {
   overflow: hidden;
@@ -8,8 +9,8 @@
 }
 
 .container {
-  margin-left: 12px;
-  margin-right: 12px;
+  margin-left: $container-padding;
+  margin-right: $container-padding;
 }
 
 .clearfix {

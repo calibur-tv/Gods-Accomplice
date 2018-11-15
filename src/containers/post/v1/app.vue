@@ -120,7 +120,10 @@
       >
         <user-avatar :user="user"/>
         <div class="info">
-          <user-nickname :user="user"/>
+          <user-nickname
+            :user="user"
+            :show-owner="true"
+          />
           <v-time :datetime="post.created_at"/>
         </div>
       </div>
@@ -167,28 +170,14 @@
 </template>
 
 <script>
-import UserAvatar from "@/components/UserAvatar.vue";
-import UserNickname from "@/components/UserNickname.vue";
-
 export default {
   name: "App",
-  components: {
-    UserAvatar,
-    UserNickname
-  },
   data() {
     return {
       post: null,
       bangumi: null,
       user: null
     };
-  },
-  computed: {},
-  watch: {},
-  created() {},
-  mounted() {
-    console.log("hahhahahahahaa");
-  },
-  methods: {}
+  }
 };
 </script>

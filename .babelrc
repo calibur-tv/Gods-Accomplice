@@ -20,6 +20,10 @@
     "babel-plugin-lodash",
     ["component", [
       {
+        "libraryName": "element-ui",
+        "styleLibraryName": "theme-chalk"
+      },
+      {
         "libraryName": "mint-ui",
         "style": false
       }

@@ -32,7 +32,10 @@
         v-text="user.nickname"
       />
     </div>
-    <span class="badge owner-badge">
+    <span
+      v-if="showOwner"
+      class="badge owner-badge"
+    >
       楼主
     </span>
   </div>
@@ -45,6 +48,10 @@ export default {
     user: {
       type: Object,
       required: true
+    },
+    showOwner: {
+      type: Boolean,
+      default: false
     }
   }
 };
