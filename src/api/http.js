@@ -4,7 +4,6 @@ const timeout = 15000;
 const token = document.querySelector("meta[name=jwt-token]").content;
 
 export default (version = "latest") => {
-  console.log(process.env.API_HOST);
   const http = axios.create({
     baseURL: process.env.API_HOST,
     headers: { Accept: `application/x.api.${version}+json` },

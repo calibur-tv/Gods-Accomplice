@@ -7,4 +7,10 @@ export default class extends BaseApi {
       take
     });
   }
+
+  getNotifications({ minId }) {
+    return this.http.get("user/notification/list", {
+      params: { minId }
+    });
+  }
 }
