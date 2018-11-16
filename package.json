@@ -18,12 +18,14 @@
     "axios": "^0.18.0",
     "babel-runtime": "^6.26.0",
     "element-ui": "^2.4.9",
-    "eslint-config-prettier": "^3.1.0",
     "fastclick": "^1.0.6",
     "mint-ui": "^2.2.13",
     "raven-js": "^3.24.2",
+    "ulid": "^2.3.0",
     "vue": "^2.5.17",
-    "vue-timeago": "^5.0.0"
+    "vue-slicksort": "^1.1.1",
+    "vue-timeago": "^5.0.0",
+    "vuedraggable": "^2.16.0"
   },
   "devDependencies": {
     "autoprefixer": "^8.1.0",
@@ -44,6 +46,7 @@
     "css-loader": "^0.28.7",
     "eslint": "^4.18.2",
     "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-config-prettier": "^3.1.0",
     "eslint-loader": "^2.0.0",
     "eslint-plugin-import": "^2.9.0",
     "eslint-plugin-prettier": "^3.0.0",

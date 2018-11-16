@@ -10,10 +10,10 @@
 </template>
 
 <script>
-import TxtParser from "./parser/TxtParser";
-import ImgParser from "./parser/ImgParser";
-import UseParser from "./parser/UseParser";
-import ListParser from "./parser/ListParser";
+import TxtParser from "./TxtParser";
+import ImgParser from "./ImgParser";
+import UseParser from "./UseParser";
+import ListParser from "./ListParser";
 
 export default {
   name: "JsonContent",

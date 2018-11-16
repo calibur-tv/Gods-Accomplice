@@ -118,7 +118,7 @@
 
 <script>
 import { Rate } from "element-ui";
-import JsonContent from "@/components/jsonEditor/JsonContent";
+import JsonContent from "@/components/jsonEditor/parser/index.vue";
 
 export default {
   name: "App",

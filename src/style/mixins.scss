@@ -17,13 +17,13 @@
   word-break: break-all;
 }
 
-@mixin twoline($line-height) {
+@mixin mutiline($line-height, $line: 2) {
   line-height: $line-height;
-  max-height: $line-height * 2;
+  max-height: $line-height * $line;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: $line;
   -webkit-box-orient: vertical;
 }
 
