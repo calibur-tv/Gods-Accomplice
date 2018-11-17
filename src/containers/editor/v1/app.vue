@@ -1,3 +1,10 @@
+<style lang="scss">
+#json-editor {
+  min-height: 100vh;
+  background-color: RGB(241, 243, 244);
+}
+</style>
+
 <template>
   <div id="json-editor">
     <json-editor v-model="content"/>
@@ -15,7 +22,8 @@ export default {
   props: {},
   data() {
     return {
-      content: []
+      content: [],
+      empty: []
     };
   },
   computed: {},

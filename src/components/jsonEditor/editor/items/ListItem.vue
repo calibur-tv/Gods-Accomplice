@@ -25,8 +25,8 @@
 
 <template>
   <common-item
+    :id="item.id"
     class="list-item"
-    @delete="emitDelete"
   >
     <template slot="poster">
       <i class="iconfont ic-list"/>
@@ -91,11 +91,6 @@ export default {
         list = list.replace(/\n\n/g, "\n");
       }
       return list.split("\n").slice(0, 4);
-    },
-    emitDelete() {
-      this.$emit("delete", {
-        id: this.item.id
-      });
     }
   }
 };

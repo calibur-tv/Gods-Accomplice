@@ -8,8 +8,8 @@
 
 <template>
   <common-item
+    :id="item.id"
     class="txt-item"
-    @delete="emitDelete"
   >
     <template slot="poster">
       <i class="iconfont ic-text"/>
@@ -64,12 +64,6 @@ export default {
   watch: {},
   created() {},
   mounted() {},
-  methods: {
-    emitDelete() {
-      this.$emit("delete", {
-        id: this.item.id
-      });
-    }
-  }
+  methods: {}
 };
 </script>

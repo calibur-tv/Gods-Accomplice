@@ -4,7 +4,7 @@ import app from "@/containers/editor/v1/app.vue";
 import "@/style/global.scss";
 import FastClick from "fastclick";
 import "@/util/prototype";
-import "@/components/ImageLazyLoad";
+import "@/util/alert";
 
 // 初始化container
 const pageData = JSON.parse(document.getElementById("page-data").textContent);

@@ -13,8 +13,8 @@
 
 <template>
   <common-item
+    :id="item.id"
     class="use-item"
-    @delete="emitDelete"
   >
     <template slot="poster">
       <i class="iconfont ic-use"/>
@@ -53,12 +53,6 @@ export default {
   watch: {},
   created() {},
   mounted() {},
-  methods: {
-    emitDelete() {
-      this.$emit("delete", {
-        id: this.item.id
-      });
-    }
-  }
+  methods: {}
 };
 </script>

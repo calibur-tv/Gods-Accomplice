@@ -1,5 +1,5 @@
 <style lang="scss">
-.div-json-editor-container {
+#json-editor-container {
   width: 100%;
   background-color: RGB(241, 243, 244);
 
@@ -20,25 +20,39 @@
       opacity: 0;
     }
   }
+
+  .last-create-btn {
+    padding-bottom: 165px;
+  }
 }
 </style>
 
 <template>
-  <draggable
-    v-model="content"
-    :options="options"
-    class="div-json-editor-container"
-  >
-    <component
-      v-for="(item, index) in content"
-      :index="index"
-      :key="item.id"
-      :item="item"
-      :is="`${item.type}-item`"
-      class="flip-list-item"
-      @delete="handleDelete"
-    />
-  </draggable>
+  <div id="json-editor-container">
+    <draggable
+      v-model="content"
+      :options="options"
+    >
+      <component
+        v-for="(item, index) in content"
+        :index="index"
+        :key="item.id"
+        :item="item"
+        :is="`${item.type}-item`"
+        class="flip-list-item"
+      />
+    </draggable>
+    <stats-component
+      :once="false"
+      @enter="handleCreateBtnEnter"
+      @leave="handleCreateBtnLeave"
+    >
+      <create-btn
+        v-model="showCreatePopover"
+        class="last-create-btn"
+      />
+    </stats-component>
+  </div>
 </template>
 
 <script>
@@ -49,10 +63,14 @@ import UseItem from "./items/UseItem.vue";
 import ListItem from "./items/ListItem.vue";
 import { ulid } from "ulid";
 import "./font.css";
+import CreateBtn from "./CreateBtn.vue";
+import StatsComponent from "@/components/StatsComponent.vue";
 
 export default {
   name: "JsonEditor",
   components: {
+    StatsComponent,
+    CreateBtn,
     draggable,
     TxtItem,
     ImgItem,
@@ -71,7 +89,8 @@ export default {
         return Object.assign(_, {
           id: ulid()
         });
-      })
+      }),
+      showCreatePopover: false
     };
   },
   computed: {
@@ -89,11 +108,33 @@ export default {
       this.content = val;
     }
   },
-  created() {},
+  created() {
+    this.$channel.$on("delete-editor-item", this.handleDelete);
+    this.$channel.$on("create-editor-item", this.handleCreate);
+  },
   mounted() {},
   methods: {
     handleDelete({ id }) {
-      console.log("delete", id);
+      this.$confirm("确定删除当前文章段落?")
+        .then(() => {
+          this.content.forEach((item, index) => {
+            if (item.id === id) {
+              this.content.splice(index, 1);
+            }
+          });
+        })
+        .catch(() => {});
+    },
+    handleCreate({ id, type }) {
+      console.log("id", id);
+      console.log("type", type);
+    },
+    handleCreateBtnEnter() {
+      this.showCreatePopover = true;
+    },
+    handleCreateBtnLeave() {
+      console.log("handleCreateBtnLeave");
+      this.showCreatePopover = false;
     }
   }
 };

@@ -2,21 +2,26 @@
 .img-item {
   .poster {
     background-color: #67c23a;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
   }
 }
 </style>
 
 <template>
   <common-item
+    :id="item.id"
     class="img-item"
-    @delete="emitDelete"
   >
     <template slot="poster">
-      <v-img
+      <img
         v-if="item.url"
-        :src="item.url"
-        :size="76"
-      />
+        :src="$resize(item.url, { width: 152 })"
+      >
       <i
         v-else
         class="iconfont ic-image"
@@ -54,12 +59,6 @@ export default {
   watch: {},
   created() {},
   mounted() {},
-  methods: {
-    emitDelete() {
-      this.$emit("delete", {
-        id: this.item.id
-      });
-    }
-  }
+  methods: {}
 };
 </script>

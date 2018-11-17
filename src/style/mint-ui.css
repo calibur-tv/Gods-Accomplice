@@ -1682,7 +1682,6 @@ display: inline-block;
 .mint-indicator-enter, .mint-indicator-leave-active {
   opacity: 0;
 }
-/*
 .mint-msgbox {
   position: fixed;
   top: 50%;
@@ -1841,7 +1840,6 @@ display: inline-block;
   opacity: 0.5;
   background: #000;
 }
-*/
 
 /* Cell Component */
 /* Header Component */

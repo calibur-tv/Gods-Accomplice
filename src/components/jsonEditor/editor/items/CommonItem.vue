@@ -61,7 +61,7 @@
 
 <template>
   <div class="editor-item-wrap">
-    <create-btn/>
+    <create-btn @create="emitCreateItem"/>
     <div class="editor-item">
       <div class="poster">
         <slot name="poster">
@@ -95,7 +95,12 @@ export default {
   components: {
     CreateBtn
   },
-  props: {},
+  props: {
+    id: {
+      required: true,
+      type: [Number, String]
+    }
+  },
   data() {
     return {};
   },
@@ -105,7 +110,15 @@ export default {
   mounted() {},
   methods: {
     emitDeleteItem() {
-      this.$emit("delete");
+      this.$channel.$emit("delete-editor-item", {
+        id: this.id
+      });
+    },
+    emitCreateItem({ type }) {
+      this.$channel.$emit("create-editor-item", {
+        id: this.id,
+        type
+      });
     },
     showSortToast() {
       this.$toast.info("长按并拖拽段落可以调整排序");
