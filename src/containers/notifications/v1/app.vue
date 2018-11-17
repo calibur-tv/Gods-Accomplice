@@ -19,7 +19,7 @@
       <v-loadmore
         :loading="loading"
         :no-more="noMore"
-        :nothing="!list.length"
+        :nothing="nothing"
         :error="error"
         :fetch="getData"
       />
@@ -46,6 +46,7 @@ export default {
       list: [],
       total: 0,
       noMore: false,
+      nothing: false,
       loading: false,
       error: false
     };
@@ -68,6 +69,7 @@ export default {
         });
         this.list = this.list.concat(data);
         this.noMore = !data.length;
+        this.nothing = !this.list.length;
       } catch (e) {
         this.$toast.error(e);
         this.error = true;

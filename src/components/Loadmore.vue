@@ -118,7 +118,7 @@ export default {
       default: "点击加载更多"
     }
   },
-  created() {
+  mounted() {
     if (this.auto) {
       this.onScroll();
     }

@@ -6,15 +6,12 @@ import FastClick from "fastclick";
 import "@/util/prototype";
 import "@/util/components";
 
-// 初始化container
-const pageData = JSON.parse(document.getElementById("page-data").textContent);
-
 // eslint-disable-next-line no-multi-assign
 const M = (window.M = {});
 
 const App = Vue.extend(app);
 
 // 这里的M.app就是最大的Vue实例
-M.app = new App({ data: pageData }).$mount("#app");
+M.app = new App().$mount("#app");
 
 FastClick.attach(document.body);
