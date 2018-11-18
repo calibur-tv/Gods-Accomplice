@@ -37,6 +37,7 @@
     display: block;
     height: 50px;
     line-height: 50px;
+    font-size: 15px;
   }
 }
 </style>

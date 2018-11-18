@@ -1,30 +1,32 @@
 <style lang="scss">
+#notifications {
+  min-height: 100vh;
+}
 </style>
 
 <template>
-  <div id="notifications">
-    <mt-loadmore
-      ref="loadmore"
-      :top-method="refreshPage"
-      :auto-fill="false"
-      :top-loading-text="''"
-      top-pull-text="下拉刷新"
-      top-drop-text="松开并刷新"
-    >
-      <common-item
-        v-for="item in list"
-        :key="item.id"
-        :item="item"
-      />
-      <v-loadmore
-        :loading="loading"
-        :no-more="noMore"
-        :nothing="nothing"
-        :error="error"
-        :fetch="getData"
-      />
-    </mt-loadmore>
-  </div>
+  <mt-loadmore
+    id="notifications"
+    ref="loadmore"
+    :top-method="refreshPage"
+    :auto-fill="false"
+    :top-loading-text="''"
+    top-pull-text="下拉刷新"
+    top-drop-text="松开并刷新"
+  >
+    <common-item
+      v-for="item in list"
+      :key="item.id"
+      :item="item"
+    />
+    <v-loadmore
+      :loading="loading"
+      :no-more="noMore"
+      :nothing="nothing"
+      :error="error"
+      :fetch="getData"
+    />
+  </mt-loadmore>
 </template>
 
 <script>
