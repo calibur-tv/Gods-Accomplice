@@ -5,7 +5,7 @@
   @extend %breakWord;
 
   &:after {
-    content: "";
+    content: '';
     position: absolute;
     bottom: 0;
     left: 0;
@@ -83,7 +83,7 @@
 
 <script>
 export default {
-  name: "TransDaySignNew",
+  name: 'TransDaySignNew',
   props: {
     item: {
       required: true,
@@ -92,8 +92,8 @@ export default {
   },
   computed: {
     sign() {
-      return this.item.type ? "+" : "-";
+      return this.item.type ? '+' : '-'
     }
   }
-};
+}
 </script>

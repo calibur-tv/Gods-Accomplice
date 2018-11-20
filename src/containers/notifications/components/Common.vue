@@ -65,12 +65,12 @@ export default {
     }
   },
   data() {
-    return {};
+    return {}
   },
   computed: {},
   watch: {},
   created() {},
   mounted() {},
   methods: {}
-};
+}
 </script>

@@ -43,7 +43,7 @@
 
 <script>
 export default {
-  name: "UserNickname",
+  name: 'UserNickname',
   props: {
     user: {
       type: Object,
@@ -54,5 +54,5 @@ export default {
       default: false
     }
   }
-};
+}
 </script>

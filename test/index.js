@@ -1,6 +1,6 @@
-const fs = require('fs');
+const fs = require('fs')
 
-fs.readdirSync('./').map((v) => {
-  console.log('aaa::', v);
-  return v;
-});
+fs.readdirSync('./').map(v => {
+  console.log('aaa::', v)
+  return v
+})

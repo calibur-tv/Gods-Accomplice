@@ -21,12 +21,12 @@
 
 <script>
 export default {
-  name: "UserAvatar",
+  name: 'UserAvatar',
   props: {
     user: {
       type: Object,
       required: true
     }
   }
-};
+}
 </script>

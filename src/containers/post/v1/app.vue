@@ -171,13 +171,13 @@
 
 <script>
 export default {
-  name: "App",
+  name: 'App',
   data() {
     return {
       post: null,
       bangumi: null,
       user: null
-    };
+    }
   }
-};
+}
 </script>

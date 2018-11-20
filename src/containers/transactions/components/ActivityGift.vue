@@ -5,10 +5,10 @@
 </template>
 
 <script>
-import VCommon from "./Common.vue";
+import VCommon from './Common.vue'
 
 export default {
-  name: "ActivityGift",
+  name: 'ActivityGift',
   components: {
     VCommon
   },
@@ -18,5 +18,5 @@ export default {
       type: Object
     }
   }
-};
+}
 </script>

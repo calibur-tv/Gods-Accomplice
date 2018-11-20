@@ -56,18 +56,18 @@
 </template>
 
 <script>
-import draggable from "vuedraggable";
-import TxtItem from "./items/TxtItem.vue";
-import ImgItem from "./items/ImgItem.vue";
-import UseItem from "./items/UseItem.vue";
-import ListItem from "./items/ListItem.vue";
-import { ulid } from "ulid";
-import "./font.css";
-import CreateBtn from "./CreateBtn.vue";
-import StatsComponent from "@/components/StatsComponent.vue";
+import draggable from 'vuedraggable'
+import TxtItem from './items/TxtItem.vue'
+import ImgItem from './items/ImgItem.vue'
+import UseItem from './items/UseItem.vue'
+import ListItem from './items/ListItem.vue'
+import { ulid } from 'ulid'
+import './font.css'
+import CreateBtn from './CreateBtn.vue'
+import StatsComponent from '@/components/StatsComponent.vue'
 
 export default {
-  name: "JsonEditor",
+  name: 'JsonEditor',
   components: {
     StatsComponent,
     CreateBtn,
@@ -88,54 +88,53 @@ export default {
       content: this.value.map(_ => {
         return Object.assign(_, {
           id: ulid()
-        });
+        })
       }),
       showCreatePopover: false
-    };
+    }
   },
   computed: {
     options() {
       return {
         delay: 500
-      };
+      }
     }
   },
   watch: {
     content(val) {
-      this.$emit("input", val);
+      this.$emit('input', val)
     },
     value(val) {
-      this.content = val;
+      this.content = val
     }
   },
   created() {
-    this.$channel.$on("delete-editor-item", this.handleDelete);
-    this.$channel.$on("create-editor-item", this.handleCreate);
+    this.$channel.$on('delete-editor-item', this.handleDelete)
+    this.$channel.$on('create-editor-item', this.handleCreate)
   },
   mounted() {},
   methods: {
     handleDelete({ id }) {
-      this.$confirm("确定删除当前文章段落?")
+      this.$confirm('确定删除当前文章段落?')
         .then(() => {
           this.content.forEach((item, index) => {
             if (item.id === id) {
-              this.content.splice(index, 1);
+              this.content.splice(index, 1)
             }
-          });
+          })
         })
-        .catch(() => {});
+        .catch(() => {})
     },
     handleCreate({ id, type }) {
-      console.log("id", id);
-      console.log("type", type);
+      console.log('id', id) // eslint-disable-line
+      console.log('type', type) // eslint-disable-line
     },
     handleCreateBtnEnter() {
-      this.showCreatePopover = true;
+      this.showCreatePopover = true
     },
     handleCreateBtnLeave() {
-      console.log("handleCreateBtnLeave");
-      this.showCreatePopover = false;
+      this.showCreatePopover = false
     }
   }
-};
+}
 </script>

@@ -64,10 +64,10 @@
 </template>
 
 <script>
-import CommonItem from "./CommonItem.vue";
+import CommonItem from './CommonItem.vue'
 
 export default {
-  name: "ListItem",
+  name: 'ListItem',
   components: {
     CommonItem
   },
@@ -78,7 +78,7 @@ export default {
     }
   },
   data() {
-    return {};
+    return {}
   },
   computed: {},
   watch: {},
@@ -86,12 +86,12 @@ export default {
   mounted() {},
   methods: {
     computeList(text) {
-      let list = text;
+      let list = text
       while (/\n\n/.test(list)) {
-        list = list.replace(/\n\n/g, "\n");
+        list = list.replace(/\n\n/g, '\n')
       }
-      return list.split("\n").slice(0, 4);
+      return list.split('\n').slice(0, 4)
     }
   }
-};
+}
 </script>

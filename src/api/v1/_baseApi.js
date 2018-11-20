@@ -1,7 +1,7 @@
-import BaseApi from "../http";
+import BaseApi from '../http'
 
 export default class {
   constructor() {
-    this.http = BaseApi("v1");
+    this.http = BaseApi('v1')
   }
 }

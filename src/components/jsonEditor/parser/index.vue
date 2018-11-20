@@ -10,13 +10,13 @@
 </template>
 
 <script>
-import TxtParser from "./TxtParser";
-import ImgParser from "./ImgParser";
-import UseParser from "./UseParser";
-import ListParser from "./ListParser";
+import TxtParser from './TxtParser'
+import ImgParser from './ImgParser'
+import UseParser from './UseParser'
+import ListParser from './ListParser'
 
 export default {
-  name: "JsonContent",
+  name: 'JsonContent',
   components: {
     TxtParser,
     ImgParser,
@@ -29,5 +29,5 @@ export default {
       type: Array
     }
   }
-};
+}
 </script>

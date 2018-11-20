@@ -1,5 +1,5 @@
-import Vue from "vue";
-import comp from "./ImageLazyLoad.vue";
+import Vue from 'vue'
+import comp from './ImageLazyLoad.vue'
 
 comp.install = function(Vue, opts = {}) {
   Vue.component(comp.name, {
@@ -11,15 +11,15 @@ comp.install = function(Vue, opts = {}) {
         retryLimit: opts.retryLimit || 3,
         placeholderImage:
           opts.placeholderImage ||
-          "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
+          'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
         errorPlaceholder:
           opts.errorPlaceholder ||
-          "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7",
-        errorMessage: opts.errorMessage || "图片加载失败，请点击重试",
-        retryMessage: opts.retryMessage || "加载中..."
-      };
+          'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
+        errorMessage: opts.errorMessage || '图片加载失败，请点击重试',
+        retryMessage: opts.retryMessage || '加载中...'
+      }
     }
-  });
-};
+  })
+}
 
-Vue.use(comp, {});
+Vue.use(comp, {})

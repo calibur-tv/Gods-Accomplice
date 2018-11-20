@@ -10,10 +10,10 @@
 </template>
 
 <script>
-import VCommon from "./Common.vue";
+import VCommon from './Common.vue'
 
 export default {
-  name: "ForLover",
+  name: 'ForLover',
   components: {
     VCommon
   },
@@ -23,5 +23,5 @@ export default {
       type: Object
     }
   }
-};
+}
 </script>

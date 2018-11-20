@@ -1,10 +1,10 @@
-const webpack = require('webpack');
-const merge = require('webpack-merge');
-const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
-const baseWebpackConfig = require('./wp.config.base');
-const envConfig = require('./env.config');
+const webpack = require('webpack')
+const merge = require('webpack-merge')
+const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
+const baseWebpackConfig = require('./wp.config.base')
+const envConfig = require('./env.config')
 
-const config = envConfig.dev;
+const config = envConfig.dev
 
 module.exports = merge(baseWebpackConfig('development'), {
   devtool: '#source-map',
@@ -12,16 +12,16 @@ module.exports = merge(baseWebpackConfig('development'), {
   output: {
     filename: '[name]-[hash].js',
     chunkFilename: '[name]-[chunkhash].js',
-    publicPath: config.assetsPublicPath,
+    publicPath: config.assetsPublicPath
   },
 
   module: {
-    rules: [],
+    rules: []
   },
 
   plugins: [
     new FriendlyErrorsPlugin(),
     // new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
-  ],
-});
+    new webpack.NoEmitOnErrorsPlugin()
+  ]
+})

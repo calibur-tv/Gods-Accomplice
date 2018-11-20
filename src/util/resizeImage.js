@@ -1,54 +1,54 @@
 export default (url, options = {}) => {
   if (!url) {
-    return "";
+    return ''
   }
 
   if (!/image.calibur.tv/.test(url)) {
-    return url;
+    return url
   }
 
   if (/imageMogr2/.test(url)) {
-    return url;
+    return url
   }
 
-  const link = /^http/.test(url) ? url : `https://image.calibur.tv/${url}`;
+  const link = /^http/.test(url) ? url : `https://image.calibur.tv/${url}`
   const canUseWebP = () => {
-    if (typeof window === "undefined") {
-      return false;
+    if (typeof window === 'undefined') {
+      return false
     }
     if (window.supportWebP !== undefined) {
-      return window.supportWebP;
+      return window.supportWebP
     }
 
-    const elem = document.createElement("canvas");
+    const elem = document.createElement('canvas')
 
-    if (elem.getContext && elem.getContext("2d")) {
+    if (elem.getContext && elem.getContext('2d')) {
       const support =
-        elem.toDataURL("image/webp").indexOf("data:image/webp") === 0;
-      window.supportWebP = support;
-      return support;
+        elem.toDataURL('image/webp').indexOf('data:image/webp') === 0
+      window.supportWebP = support
+      return support
     }
 
-    return false;
-  };
+    return false
+  }
 
-  const format = options.share ? "" : canUseWebP() ? "/format/webp" : "";
-  const mode = options.mode === undefined ? 1 : options.mode;
+  const format = options.share ? '' : canUseWebP() ? '/format/webp' : ''
+  const mode = options.mode === undefined ? 1 : options.mode
 
   if ((mode === 1 && !options.width) || (!options.width && !options.height)) {
-    return `${link}?imageMogr2/auto-orient/strip${format}`;
+    return `${link}?imageMogr2/auto-orient/strip${format}`
   }
 
-  let width;
-  let height;
+  let width
+  let height
 
   if (mode === 1) {
-    width = `/w/${options.width}`;
-    height = options.height ? `/h/${options.height}` : `/h/${options.width}`;
+    width = `/w/${options.width}`
+    height = options.height ? `/h/${options.height}` : `/h/${options.width}`
   } else {
-    width = options.width ? `/w/${options.width}` : "";
-    height = options.height ? `/h/${options.height}` : "";
+    width = options.width ? `/w/${options.width}` : ''
+    height = options.height ? `/h/${options.height}` : ''
   }
 
-  return `${link}?imageMogr2/auto-orient/strip|imageView2/${mode}${width}${height}${format}`;
-};
+  return `${link}?imageMogr2/auto-orient/strip|imageView2/${mode}${width}${height}${format}`
+}

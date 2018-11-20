@@ -117,11 +117,11 @@
 </template>
 
 <script>
-import { Rate } from "element-ui";
-import JsonContent from "@/components/jsonEditor/parser/index.vue";
+import { Rate } from 'element-ui'
+import JsonContent from '@/components/jsonEditor/parser/index.vue'
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
     VRate: Rate,
     JsonContent
@@ -129,64 +129,64 @@ export default {
   props: {},
   data() {
     const labelMap = {
-      lol: "笑点",
-      cry: "泪点",
-      fight: "燃点",
-      moe: "萌点",
-      sound: "音乐",
-      vision: "画面",
-      story: "情节",
-      role: "人设",
-      express: "内涵",
-      style: "美感"
-    };
+      lol: '笑点',
+      cry: '泪点',
+      fight: '燃点',
+      moe: '萌点',
+      sound: '音乐',
+      vision: '画面',
+      story: '情节',
+      role: '人设',
+      express: '内涵',
+      style: '美感'
+    }
     return {
       labelMap,
       columns: Object.keys(labelMap),
       bangumi: null,
       content: [],
-      created_at: "",
-      cry: "",
-      express: "",
-      fight: "",
+      created_at: '',
+      cry: '',
+      express: '',
+      fight: '',
       id: 0,
-      intro: "",
+      intro: '',
       is_creator: false,
       like_users: null,
       liked: false,
-      lol: "",
+      lol: '',
       mark_users: null,
       marked: false,
-      moe: "",
-      published_at: "",
+      moe: '',
+      published_at: '',
       reward_users: null,
       rewarded: false,
-      role: "",
-      sound: "",
-      story: "",
-      style: "",
-      title: "",
-      total: "",
-      updated_at: "",
+      role: '',
+      sound: '',
+      story: '',
+      style: '',
+      title: '',
+      total: '',
+      updated_at: '',
       user: null,
       view_count: 0,
-      vision: ""
-    };
+      vision: ''
+    }
   },
   computed: {
     info() {
-      const result = {};
+      const result = {}
       Object.keys(this).forEach(key => {
         if (this.columns.indexOf(key) !== -1) {
-          result[key] = +this[key];
+          result[key] = +this[key]
         }
-      });
-      return result;
+      })
+      return result
     }
   },
   watch: {},
   created() {},
   mounted() {},
   methods: {}
-};
+}
 </script>

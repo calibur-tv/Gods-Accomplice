@@ -11,6 +11,7 @@
     "no-empty-source": null,
     "no-descending-specificity": null,
     "font-family-no-missing-generic-family-keyword": null,
-    "selector-type-no-unknown": null
+    "selector-type-no-unknown": null,
+    "block-no-empty": null
   }
 }

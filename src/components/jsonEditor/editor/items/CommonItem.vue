@@ -88,10 +88,10 @@
 </template>
 
 <script>
-import CreateBtn from "../CreateBtn.vue";
+import CreateBtn from '../CreateBtn.vue'
 
 export default {
-  name: "CommonItem",
+  name: 'CommonItem',
   components: {
     CreateBtn
   },
@@ -102,7 +102,7 @@ export default {
     }
   },
   data() {
-    return {};
+    return {}
   },
   computed: {},
   watch: {},
@@ -110,19 +110,19 @@ export default {
   mounted() {},
   methods: {
     emitDeleteItem() {
-      this.$channel.$emit("delete-editor-item", {
+      this.$channel.$emit('delete-editor-item', {
         id: this.id
-      });
+      })
     },
     emitCreateItem({ type }) {
-      this.$channel.$emit("create-editor-item", {
+      this.$channel.$emit('create-editor-item', {
         id: this.id,
         type
-      });
+      })
     },
     showSortToast() {
-      this.$toast.info("长按并拖拽段落可以调整排序");
+      this.$toast.info('长按并拖拽段落可以调整排序')
     }
   }
-};
+}
 </script>

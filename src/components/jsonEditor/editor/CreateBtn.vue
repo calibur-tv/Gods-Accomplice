@@ -124,10 +124,10 @@
 </template>
 
 <script>
-import { Popover } from "element-ui";
+import { Popover } from 'element-ui'
 
 export default {
-  name: "CreateBtn",
+  name: 'CreateBtn',
   components: {
     VPopover: Popover
   },
@@ -140,21 +140,21 @@ export default {
   data() {
     return {
       trigger: this.value
-    };
+    }
   },
   watch: {
     trigger(val) {
-      this.$emit("input", val);
+      this.$emit('input', val)
     },
     value(val) {
-      this.trigger = val;
+      this.trigger = val
     }
   },
   methods: {
     emitCreate(type) {
-      this.$emit("create", { type });
-      this.trigger = false;
+      this.$emit('create', { type })
+      this.trigger = false
     }
   }
-};
+}
 </script>

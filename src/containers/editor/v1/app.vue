@@ -12,10 +12,10 @@
 </template>
 
 <script>
-import JsonEditor from "@/components/jsonEditor/editor/index.vue";
+import JsonEditor from '@/components/jsonEditor/editor/index.vue'
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
     JsonEditor
   },
@@ -24,12 +24,12 @@ export default {
     return {
       content: [],
       empty: []
-    };
+    }
   },
   computed: {},
   watch: {},
   created() {},
   mounted() {},
   methods: {}
-};
+}
 </script>

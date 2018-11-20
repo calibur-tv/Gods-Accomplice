@@ -33,10 +33,10 @@
 </template>
 
 <script>
-import CommonItem from "./CommonItem.vue";
+import CommonItem from './CommonItem.vue'
 
 export default {
-  name: "UseItem",
+  name: 'UseItem',
   components: {
     CommonItem
   },
@@ -47,12 +47,12 @@ export default {
     }
   },
   data() {
-    return {};
+    return {}
   },
   computed: {},
   watch: {},
   created() {},
   mounted() {},
   methods: {}
-};
+}
 </script>

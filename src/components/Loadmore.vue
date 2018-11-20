@@ -85,10 +85,10 @@
 </template>
 
 <script>
-import Utils from "@/util/events.js";
+import Utils from '@/util/events.js'
 
 export default {
-  name: "Loadmore",
+  name: 'Loadmore',
   props: {
     auto: {
       type: Boolean,
@@ -116,36 +116,36 @@ export default {
     },
     text: {
       type: String,
-      default: "点击加载更多"
+      default: '点击加载更多'
     }
   },
   mounted() {
     if (this.auto) {
-      this.onScroll();
+      this.onScroll()
     }
   },
   methods: {
     onScroll() {
       if (Utils.checkInView(this.$el)) {
-        this.fetch();
+        this.fetch()
       }
       const id = Utils.on(
         document,
-        ["scroll"],
+        ['scroll'],
         Utils.throttle(() => {
           if (this.error) {
-            return;
+            return
           }
           if (this.noMore || !this.auto) {
-            Utils.off(id);
-            return;
+            Utils.off(id)
+            return
           }
           if (Utils.checkInView(this.$el)) {
-            this.fetch();
+            this.fetch()
           }
         }, 200)
-      );
+      )
     }
   }
-};
+}
 </script>

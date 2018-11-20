@@ -1,94 +1,94 @@
-import { Toast, Indicator } from "mint-ui";
+import { Toast, Indicator } from 'mint-ui'
 
 const timeout = (duration = 0) =>
   new Promise(resolve => {
-    setTimeout(resolve, duration);
-  });
+    setTimeout(resolve, duration)
+  })
 
-const showTime = 1500;
+const showTime = 1500
 
 class Message {
   success(tip) {
-    this.stop();
-    let text = "";
-    let time;
-    if (typeof tip === "object") {
-      text = tip.tip;
-      time = tip.time || showTime;
+    this.stop()
+    let text = ''
+    let time
+    if (typeof tip === 'object') {
+      text = tip.tip
+      time = tip.time || showTime
     } else {
-      text = tip;
-      time = showTime;
+      text = tip
+      time = showTime
     }
     Toast({
       duration: time,
-      message: text || "操作成功",
-      iconClass: "iconfont ic-alert-success"
-    });
-    return timeout(time);
+      message: text || '操作成功',
+      iconClass: 'iconfont ic-alert-success'
+    })
+    return timeout(time)
   }
 
   info(tip) {
-    this.stop();
-    let text = "";
-    let time;
-    if (typeof tip === "object") {
-      text = tip.tip;
-      time = tip.time || showTime;
+    this.stop()
+    let text = ''
+    let time
+    if (typeof tip === 'object') {
+      text = tip.tip
+      time = tip.time || showTime
     } else {
-      text = tip;
-      time = showTime;
+      text = tip
+      time = showTime
     }
     if (!text) {
-      return;
+      return
     }
     Toast({
       duration: time,
       message: text
-    });
-    return timeout(time);
+    })
+    return timeout(time)
   }
 
   error(tip) {
-    this.stop();
-    let text = "";
-    let time;
-    if (typeof tip === "object") {
-      text = tip.tip;
-      time = tip.time || showTime;
+    this.stop()
+    let text = ''
+    let time
+    if (typeof tip === 'object') {
+      text = tip.tip
+      time = tip.time || showTime
     } else {
-      text = tip;
-      time = showTime;
+      text = tip
+      time = showTime
     }
     Toast({
       duration: time,
-      message: text || "操作失败",
-      iconClass: "iconfont ic-alert-error"
-    });
-    return timeout(time);
+      message: text || '操作失败',
+      iconClass: 'iconfont ic-alert-error'
+    })
+    return timeout(time)
   }
 
   loading(tip) {
-    this.stop();
-    let message = "";
-    let time;
-    if (typeof tip === "object") {
-      message = tip.tip;
-      time = tip.time;
+    this.stop()
+    let message = ''
+    let time
+    if (typeof tip === 'object') {
+      message = tip.tip
+      time = tip.time
     } else {
-      message = tip;
+      message = tip
     }
     Indicator.open({
-      text: message || "加载中...",
-      spinnerType: "snake"
-    });
+      text: message || '加载中...',
+      spinnerType: 'snake'
+    })
     if (time) {
-      return timeout(time).then(() => this.stop());
+      return timeout(time).then(() => this.stop())
     }
   }
 
   stop() {
-    Indicator.close();
+    Indicator.close()
   }
 }
 
-export default new Message();
+export default new Message()

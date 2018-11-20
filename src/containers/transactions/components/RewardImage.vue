@@ -9,10 +9,10 @@
 </template>
 
 <script>
-import VCommon from "./Common.vue";
+import VCommon from './Common.vue'
 
 export default {
-  name: "RewardImage",
+  name: 'RewardImage',
   components: {
     VCommon
   },
@@ -22,5 +22,5 @@ export default {
       type: Object
     }
   }
-};
+}
 </script>
