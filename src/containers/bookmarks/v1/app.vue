@@ -20,6 +20,10 @@
     }
   }
 
+  ul {
+    margin-bottom: $container-padding !important;
+  }
+
   .posts {
     .deleted {
       text-decoration: line-through;
@@ -168,10 +172,7 @@
       @change="handleTabSwitch"
     >
       <van-tab title="帖子">
-        <ul
-          v-if="source[0].page"
-          class="posts"
-        >
+        <ul class="posts">
           <li
             v-for="item in source[0].list"
             :key="item.id"
@@ -187,16 +188,13 @@
           :auto="false"
           :loading="source[0].loading"
           :no-more="source[0].noMore"
-          :nothing="source[0].nothing"
+          :nothing="!source[0].list.length"
           :error="source[0].error"
           :fetch="loadMoreData"
         />
       </van-tab>
       <van-tab title="相册">
-        <ul
-          v-if="source[1].page"
-          class="images"
-        >
+        <ul class="images">
           <li
             v-for="item in source[1].list"
             :key="item.id"
@@ -218,16 +216,13 @@
           :auto="false"
           :loading="source[1].loading"
           :no-more="source[1].noMore"
-          :nothing="source[1].nothing"
+          :nothing="!source[1].list.length"
           :error="source[1].error"
           :fetch="loadMoreData"
         />
       </van-tab>
       <van-tab title="答案">
-        <ul
-          v-if="source[2].page"
-          class="answers"
-        >
+        <ul class="answers">
           <li
             v-for="item in source[2].list"
             :key="item.id"
@@ -243,16 +238,13 @@
           :auto="false"
           :loading="source[2].loading"
           :no-more="source[2].noMore"
-          :nothing="source[2].nothing"
+          :nothing="!source[2].list.length"
           :error="source[2].error"
           :fetch="loadMoreData"
         />
       </van-tab>
       <van-tab title="漫评">
-        <ul
-          v-if="source[3].page"
-          class="scores"
-        >
+        <ul class="scores">
           <li
             v-for="item in source[3].list"
             :key="item.id"
@@ -269,16 +261,13 @@
           :auto="false"
           :loading="source[3].loading"
           :no-more="source[3].noMore"
-          :nothing="source[3].nothing"
+          :nothing="!source[3].list.length"
           :error="source[3].error"
           :fetch="loadMoreData"
         />
       </van-tab>
       <van-tab title="视频">
-        <ul
-          v-if="source[4].page"
-          class="videos"
-        >
+        <ul class="videos">
           <li
             v-for="item in source[4].list"
             :key="item.id"
@@ -308,7 +297,7 @@
           :auto="false"
           :loading="source[4].loading"
           :no-more="source[4].noMore"
-          :nothing="source[4].nothing"
+          :nothing="!source[4].list.length"
           :error="source[4].error"
           :fetch="loadMoreData"
         />
