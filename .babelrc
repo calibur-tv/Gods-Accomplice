@@ -27,6 +27,11 @@
         "libraryName": "mint-ui",
         "style": false
       }
-    ]]
+    ]],
+    ["import", {
+      "libraryName": "vant",
+      "libraryDirectory": "es",
+      "style": true
+    }]
   ]
 }

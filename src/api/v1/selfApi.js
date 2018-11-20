@@ -13,4 +13,10 @@ export default class extends BaseApi {
       params: { minId }
     })
   }
+
+  getBookmarks({ page, take, type }) {
+    return this.http.get('user/bookmarks', {
+      params: { page, take, type }
+    })
+  }
 }

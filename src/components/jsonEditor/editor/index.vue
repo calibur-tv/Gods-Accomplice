@@ -11,7 +11,7 @@
     &-chosen {
       opacity: 1;
 
-      .create-btn {
+      .create-btn-wrap {
         opacity: 0;
       }
     }

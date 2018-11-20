@@ -70,6 +70,17 @@
     >
       没有更多了~
     </slot>
+    <!-- error -->
+    <slot
+      v-else-if="error"
+      name="text"
+    >
+      <button
+        :class="$style.btn"
+        @click="fetch"
+        v-text="'点击重试'"
+      />
+    </slot>
     <!-- 点击按钮 -->
     <slot
       v-else

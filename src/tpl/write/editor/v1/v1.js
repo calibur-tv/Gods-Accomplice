@@ -1,5 +1,4 @@
 import Vue from 'vue'
-
 import app from '@/containers/editor/v1/app.vue'
 import '@/style/global.scss'
 import FastClick from 'fastclick'

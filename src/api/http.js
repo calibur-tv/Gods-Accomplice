@@ -1,7 +1,9 @@
 import axios from 'axios'
 
 const timeout = 15000
-const token = document.querySelector('meta[name=jwt-token]').content
+// const token = document.querySelector('meta[name=jwt-token]').content
+const token =
+  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyZW1lbWJlciI6IjkyOGNiMjQwYjIwMWJkMzAwZDllNzE1Njc5ZDFlY2NiIiwic3ViIjoxLCJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjMwOTkvZG9vci9yZWZyZXNoIiwiaWF0IjoxNTQyNjM1Mjg5LCJleHAiOjE1NDUxMzgzMzMsIm5iZiI6MTU0MjcxOTEzMywianRpIjoiZVdhajh3VkV4QWhqUEY1eSJ9.lNzhJ5S2IpNQYYCv_bZw8-t015rojTNqA_681vCkDks'
 
 export default (version = 'latest') => {
   const http = axios.create({
