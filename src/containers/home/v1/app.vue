@@ -1,0 +1,349 @@
+<style lang="scss">
+#home {
+  background-color: transparent;
+
+  .panel {
+    height: 140px;
+    margin-left: 15px;
+    margin-right: 15px;
+    padding-top: 5px;
+
+    header {
+      margin-bottom: 18px;
+      @extend %clearfix;
+
+      .avatar {
+        width: 65px;
+        height: 65px;
+        display: block;
+        float: left;
+        border-radius: 50%;
+        margin-right: 14px;
+      }
+
+      .content {
+        overflow: hidden;
+
+        .nickname-wrap {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          line-height: 37px;
+          margin-top: 5px;
+
+          .nickname {
+            overflow: hidden;
+            margin-right: 6px;
+            color: #22222b;
+            font-size: 23px;
+            font-weight: 500;
+          }
+
+          .badge {
+            flex-shrink: 0;
+          }
+
+          .level {
+            height: 32px;
+            padding: 0 18px;
+            color: #fff;
+            background-color: #ffc83f;
+            border-radius: 16px;
+            @include half-font(11px);
+            line-height: 32px;
+            margin-right: -30px;
+          }
+        }
+
+        .intro {
+          color: #a4a4ae;
+          font-size: 13px;
+          line-height: 18px;
+        }
+      }
+
+      .link {
+        float: right;
+        width: 20px;
+        height: 20px;
+        margin-top: 23px;
+      }
+    }
+
+    main {
+      @extend %clearfix;
+
+      button {
+        float: right;
+        width: 78px;
+        height: 36px;
+        border-radius: 18px;
+        background: #ff6881;
+        color: #fff;
+        font-size: 14px;
+        text-align: center;
+        line-height: 36px;
+        margin-left: 10px;
+      }
+
+      .meta {
+        overflow: hidden;
+
+        .item {
+          width: 30%;
+          float: left;
+
+          &:not(:last-child) {
+            margin-right: 5%;
+          }
+
+          p {
+            color: #22222b;
+            font-size: 18px;
+            line-height: 20px;
+            font-weight: 500;
+          }
+
+          span {
+            font-size: 13px;
+            color: #797989;
+          }
+        }
+      }
+    }
+  }
+
+  .hr {
+    height: 10px;
+    background-color: #edf1f4;
+  }
+
+  .content {
+    margin-left: 15px;
+    margin-right: 15px;
+
+    .item {
+      @extend %clearfix;
+      height: 25px;
+      margin-top: 18px;
+      margin-bottom: 30px;
+
+      .icon {
+        width: 25px;
+        height: 25px;
+        margin-right: 8px;
+        float: left;
+      }
+
+      .text {
+        color: #22222b;
+        font-size: 16px;
+        overflow: hidden;
+        line-height: 25px;
+      }
+
+      .tail {
+        height: 25px;
+        float: right;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-left: 5px;
+
+        img {
+          width: 20px;
+          height: 20px;
+        }
+
+        span {
+          color: #a4a4ae;
+          font-size: 12px;
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+}
+</style>
+
+<template>
+  <div id="home">
+    <div class="panel">
+      <header>
+        <img
+          :src="$resize(avatar, { width: 130 })"
+          class="avatar"
+        >
+        <img
+          src="../icon/link.png"
+          class="link"
+        >
+        <div class="content">
+          <div class="nickname-wrap">
+            <div class="nickname">
+              <p
+                class="oneline"
+                v-text="nickname"
+              />
+            </div>
+            <div class="badge level">
+              LV{{ exp.level }}
+            </div>
+          </div>
+          <p class="intro">查看或编辑资料</p>
+        </div>
+      </header>
+      <main>
+        <button>
+          {{ daySign ? '已签到' : '签到' }}
+        </button>
+        <div class="meta">
+          <div class="item">
+            <p
+              class="oneline"
+              v-text="$utils.shortenNumber(power)"
+            />
+            <span>
+              战斗力
+            </span>
+          </div>
+          <div class="item">
+            <p
+              class="oneline"
+              v-text="exp.level"
+            />
+            <span>
+              等级
+            </span>
+          </div>
+          <div class="item">
+            <p
+              class="oneline"
+              v-text="$utils.shortenNumber(coin)"
+            />
+            <span>
+              团子
+            </span>
+          </div>
+        </div>
+      </main>
+    </div>
+    <div class="hr"/>
+    <div class="content">
+      <div class="item">
+        <img
+          src="../icon/post.png"
+          class="icon"
+        >
+        <div class="tail">
+          <img src="../icon/link.png">
+        </div>
+        <p class="text oneline">
+          帖子
+        </p>
+      </div>
+      <div class="item">
+        <img
+          src="../icon/comment.png"
+          class="icon"
+        >
+        <div class="tail">
+          <img src="../icon/link.png">
+        </div>
+        <p class="text oneline">
+          评论
+        </p>
+      </div>
+      <div class="item">
+        <img
+          src="../icon/history.png"
+          class="icon"
+        >
+        <div class="tail">
+          <img src="../icon/link.png">
+        </div>
+        <p class="text oneline">
+          浏览历史
+        </p>
+      </div>
+      <div class="item">
+        <img
+          src="../icon/invite.png"
+          class="icon"
+        >
+        <div class="tail">
+          <span>邀请送团子</span>
+          <img src="../icon/link.png">
+        </div>
+        <p class="text oneline">
+          我的邀请码
+        </p>
+      </div>
+      <div class="item">
+        <img
+          src="../icon/help.png"
+          class="icon"
+        >
+        <div class="tail">
+          <span>玩转C站</span>
+          <img src="../icon/link.png">
+        </div>
+        <p class="text oneline">
+          帮助
+        </p>
+      </div>
+      <div class="item">
+        <img
+          src="../icon/feedback.png"
+          class="icon"
+        >
+        <div class="tail">
+          <img src="../icon/link.png">
+        </div>
+        <p class="text oneline">
+          意见反馈
+        </p>
+      </div>
+      <div class="item">
+        <img
+          src="../icon/setting.png"
+          class="icon"
+        >
+        <div class="tail">
+          <img src="../icon/link.png">
+        </div>
+        <p class="text oneline">
+          设置
+        </p>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'App',
+  data() {
+    return {
+      id: 0,
+      zone: '',
+      avatar: '',
+      banner: '',
+      coin: 0,
+      coin_from_sign: 0,
+      daySign: false,
+      exp: {
+        have_exp: 0,
+        level: 1,
+        next_level_exp: 0
+      },
+      nickname: '',
+      power: '',
+      sex: 0,
+      sexSecret: false,
+      signature: ''
+    }
+  }
+}
+</script>

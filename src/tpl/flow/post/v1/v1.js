@@ -4,8 +4,9 @@ import '@/style/global.scss'
 import FastClick from 'fastclick'
 import '@/util/prototype'
 import '@/util/components'
-import '@/components/ImageLazyLoad'
+import ImageLazyLoad from '@/components/ImageLazyLoad'
 
+Vue.use(ImageLazyLoad, {})
 // 初始化container
 const pageData = JSON.parse(document.getElementById('page-data').textContent)
 

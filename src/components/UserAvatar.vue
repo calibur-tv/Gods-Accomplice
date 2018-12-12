@@ -2,7 +2,7 @@
 .user-avatar {
   width: 42px;
   height: 42px;
-  border-radius: 21px;
+  border-radius: 50%;
   overflow: hidden;
 
   img {
@@ -14,8 +14,11 @@
 </style>
 
 <template>
-  <div class="user-avatar">
-    <img :src="$resize(user.avatar, { width: 84 })">
+  <div
+    :style="{ width: `${size}px`, height: `${size}px` }"
+    class="user-avatar"
+  >
+    <img :src="$resize(user.avatar, { width: size * 2 })">
   </div>
 </template>
 
@@ -26,6 +29,10 @@ export default {
     user: {
       type: Object,
       required: true
+    },
+    size: {
+      type: Number,
+      default: 42
     }
   }
 }

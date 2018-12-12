@@ -1,12 +1,9 @@
 import Vue from 'vue'
-import app from '@/containers/image/v1/app.vue'
-import '@/style/global.scss'
 import FastClick from 'fastclick'
+import '@/style/global.scss'
 import '@/util/prototype'
-import '@/util/components'
-import ImageLazyLoad from '@/components/ImageLazyLoad'
+import app from '@/containers/home/v1/app.vue'
 
-Vue.use(ImageLazyLoad, {})
 // 初始化container
 const pageData = JSON.parse(document.getElementById('page-data').textContent)
 

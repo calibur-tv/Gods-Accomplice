@@ -1,7 +1,9 @@
 import fly from 'flyio'
 
 const timeout = 15000
-const token = document.querySelector('meta[name=jwt-token]').content
+const token =
+  document.querySelector('meta[name=jwt-token]').content ||
+  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyZW1lbWJlciI6IjI4ZGUzZWQ3ZmUyNjgzMTAzZTg5NGI1YTBiOGMwNjFjIiwic3ViIjoyLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjMwOTkvZG9vci9sb2dpbiIsImlhdCI6MTU0NDUyODEzOSwiZXhwIjoxNTQ2OTQ3MzM5LCJuYmYiOjE1NDQ1MjgxMzksImp0aSI6IklKNG1TSHAxa3dJc0VWWXYifQ.1wPpubQb9BadZ_6ITbULnjIYmETmsbErzHzcFkyjtMU'
 
 export default (version = 'latest') => {
   fly.interceptors.request.use(request => {

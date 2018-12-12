@@ -1,5 +1,7 @@
-import Vue from 'vue'
 import comp from './ImageLazyLoad.vue'
+
+const emptyImage =
+  'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
 
 comp.install = function(Vue, opts = {}) {
   Vue.component(comp.name, {
@@ -7,14 +9,8 @@ comp.install = function(Vue, opts = {}) {
     data() {
       return {
         heightLimit: opts.heightLimit || 0,
-        loadLimit: opts.loadLimit || 0,
-        retryLimit: opts.retryLimit || 3,
-        placeholderImage:
-          opts.placeholderImage ||
-          'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
-        errorPlaceholder:
-          opts.errorPlaceholder ||
-          'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
+        placeholderImage: opts.placeholderImage || emptyImage,
+        errorPlaceholder: opts.errorPlaceholder || emptyImage,
         errorMessage: opts.errorMessage || '图片加载失败，请点击重试',
         retryMessage: opts.retryMessage || '加载中...'
       }
@@ -22,4 +18,4 @@ comp.install = function(Vue, opts = {}) {
   })
 }
 
-Vue.use(comp, {})
+export default comp

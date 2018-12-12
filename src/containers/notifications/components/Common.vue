@@ -1,26 +1,25 @@
 <style lang="scss">
 .noti-item {
   @extend %clearfix;
-  margin: $container-padding $container-padding 0;
+  margin: 15px 15px 0;
   padding-bottom: $container-padding;
-  border-bottom: 1px solid #eee;
 
   .avatar {
     float: left;
-    margin-right: $container-padding;
+    margin-right: 15px;
   }
 
   .content {
     overflow: hidden;
 
     header {
-      margin-bottom: 10px;
-      font-size: 14px;
+      margin-top: 8px;
+      margin-bottom: 6px;
 
       a {
-        color: $color-pink;
-        margin-left: 3px;
-        margin-right: 3px;
+        color: #22222b;
+        font-size: 16px;
+        line-height: 23px;
       }
     }
 
@@ -37,6 +36,7 @@
     <div class="avatar">
       <user-avatar
         v-if="item.user"
+        :size="60"
         :user="item.user"
       />
       <slot
@@ -45,6 +45,12 @@
       />
     </div>
     <div class="content">
+      <header class="oneline">
+        <a href="javascript:;">
+          {{ item.user.nickname }}
+        </a>
+      </header>
+      <!--
       <header
         class="title"
         v-html="item.message"
@@ -52,6 +58,7 @@
       <footer>
         <v-time :datetime="item.created_at"/>
       </footer>
+      -->
     </div>
   </div>
 </template>

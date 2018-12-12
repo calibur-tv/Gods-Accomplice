@@ -1,0 +1,36 @@
+{
+  "avatar": "https://image.calibur.tv/user/1/avatar/0/1530281203832-e6c.jpeg",
+  "banner": "https://image.calibur.tv/user/1/banner/0/1530281125317-y03.jpeg",
+  "birthSecret": true,
+  "birthday": "1994-08-06 00:08:00",
+  "coin": 152,
+  "coin_from_sign": 45,
+  "daySign": true,
+  "exp": {
+    "have_exp": 455,
+    "level": 19,
+    "next_level_exp": 551
+  },
+  "faker": false,
+  "id": 1,
+  "is_admin": true,
+  "nickname": "冰淤",
+  "notification": "2",
+  "power": 1177,
+  "providers": {
+    "bind_qq": true,
+    "bind_wechat": true
+  },
+  "roles": [
+    "审核后台快速通道",
+    "幕后主使者"
+  ],
+  "sex": 1,
+  "sexSecret": false,
+  "signature": "天下漫友是一家",
+  "uptoken": {
+    "expiredAt": 1544625432,
+    "upToken": "liU4ohXRsbaSB4uQyR5lij97IsP7YT7NcyC2CND7:tPWPrx9p5Bxnys3AqnurnF38uV4=:eyJlbmRVc2VyIjoiMSIsInJldHVybkJvZHkiOiJ7XG4gICAgICAgICAgICAgICAgXCJjb2RlXCI6IDAsXG4gICAgICAgICAgICAgICAgXCJkYXRhXCI6IHtcbiAgICAgICAgICAgICAgICAgICAgXCJoZWlnaHRcIjogJChpbWFnZUluZm8uaGVpZ2h0KSxcbiAgICAgICAgICAgICAgICAgICAgXCJ3aWR0aFwiOiAkKGltYWdlSW5mby53aWR0aCksXG4gICAgICAgICAgICAgICAgICAgIFwidHlwZVwiOiBcIiQobWltZVR5cGUpXCIsXG4gICAgICAgICAgICAgICAgICAgIFwic2l6ZVwiOiAkKGZzaXplKSxcbiAgICAgICAgICAgICAgICAgICAgXCJ1cmxcIjogXCIkKGtleSlcIlxuICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgIH0iLCJtaW1lTGltaXQiOiJpbWFnZVwvanBlZztpbWFnZVwvcG5nO2ltYWdlXC9qcGc7aW1hZ2VcL2dpZiIsInNjb3BlIjoiY2xhbm5hZGVyIiwiZGVhZGxpbmUiOjE1NDQ2MjU0MzJ9"
+  },
+  "zone": "bing-yu"
+}
