@@ -9,14 +9,10 @@ export default class extends BaseApi {
   }
 
   getNotifications({ minId }) {
-    return this.http.get('user/notification/list', {
-      params: { minId }
-    })
+    return this.http.get('user/notification/list', { minId })
   }
 
   getBookmarks({ page, take, type }) {
-    return this.http.get('user/bookmarks', {
-      params: { page, take, type }
-    })
+    return this.http.get('user/bookmarks', { page, take, type })
   }
 }

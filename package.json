@@ -19,6 +19,7 @@
     "babel-runtime": "^6.26.0",
     "element-ui": "^2.4.9",
     "fastclick": "^1.0.6",
+    "flyio": "^0.6.6",
     "mint-ui": "^2.2.13",
     "raven-js": "^3.24.2",
     "ulid": "^2.3.0",
