@@ -1,9 +1,9 @@
 import Vue from 'vue'
-import FastClick from 'fastclick'
 import '@/style/global.scss'
-import '@/util/prototype'
-import app from '@/containers/bookmarks/v1/app.vue'
+import '@/util/global'
+import FastClick from 'fastclick'
 import ImageLazyLoad from '@/components/ImageLazyLoad'
+import app from '@/containers/bookmarks/v1/app.vue'
 
 Vue.use(ImageLazyLoad, {})
 const M = (window.M = {})

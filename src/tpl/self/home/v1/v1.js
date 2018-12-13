@@ -1,7 +1,7 @@
 import Vue from 'vue'
-import FastClick from 'fastclick'
 import '@/style/global.scss'
-import '@/util/prototype'
+import '@/util/global'
+import FastClick from 'fastclick'
 import app from '@/containers/home/v1/app.vue'
 
 // 初始化container

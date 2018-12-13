@@ -119,6 +119,52 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
+"@sentry/browser@^4.4.1":
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/@sentry/browser/-/browser-4.4.1.tgz#3473ca9e61926c2e896abe84bddfb2651004fb5a"
+  dependencies:
+    "@sentry/core" "4.4.1"
+    "@sentry/types" "4.4.1"
+    "@sentry/utils" "4.4.1"
+    tslib "^1.9.3"
+
+"@sentry/core@4.4.1":
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/@sentry/core/-/core-4.4.1.tgz#8836813d9d309059913b464cee6d23da09cc4056"
+  dependencies:
+    "@sentry/hub" "4.4.1"
+    "@sentry/minimal" "4.4.1"
+    "@sentry/types" "4.4.1"
+    "@sentry/utils" "4.4.1"
+    tslib "^1.9.3"
+
+"@sentry/hub@4.4.1":
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/@sentry/hub/-/hub-4.4.1.tgz#3f82405131bf10ef9e751e2760d63bfff809fa4a"
+  dependencies:
+    "@sentry/types" "4.4.1"
+    "@sentry/utils" "4.4.1"
+    tslib "^1.9.3"
+
+"@sentry/minimal@4.4.1":
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/@sentry/minimal/-/minimal-4.4.1.tgz#332e97395a20a01e398ae6614a8fb857f2566c31"
+  dependencies:
+    "@sentry/hub" "4.4.1"
+    "@sentry/types" "4.4.1"
+    tslib "^1.9.3"
+
+"@sentry/types@4.4.1":
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/@sentry/types/-/types-4.4.1.tgz#d19f9b0450a543aa11b136681ea19612e3cc1611"
+
+"@sentry/utils@4.4.1":
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/@sentry/utils/-/utils-4.4.1.tgz#cf80fe596d43dc04f51cb780e0cf70017a8c1eb1"
+  dependencies:
+    "@sentry/types" "4.4.1"
+    tslib "^1.9.3"
+
 abbrev@1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
@@ -6702,6 +6748,10 @@ trim-right@^1.0.1:
 tryer@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/tryer/-/tryer-1.0.1.tgz#f2c85406800b9b0f74c9f7465b81eaad241252f8"
+
+tslib@^1.9.3:
+  version "1.9.3"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
 
 tty-browserify@0.0.0:
   version "0.0.0"

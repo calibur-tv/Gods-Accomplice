@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import app from '@/containers/notifications/v1/app.vue'
 import '@/style/global.scss'
-import FastClick from 'fastclick'
-import '@/util/prototype'
+import '@/util/global'
 import '@/util/components'
+import FastClick from 'fastclick'
 
 const M = (window.M = {})
 

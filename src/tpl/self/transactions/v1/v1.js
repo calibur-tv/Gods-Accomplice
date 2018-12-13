@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import app from '@/containers/transactions/v1/app.vue'
 import '@/style/global.scss'
+import '@/util/global'
 import FastClick from 'fastclick'
-import '@/util/prototype'
 
 // 初始化container
 const pageData = JSON.parse(document.getElementById('page-data').textContent)
