@@ -13,7 +13,6 @@ $placeholder-color: RGB(241, 243, 244);
   .image-wrap {
     width: 100%;
     height: 100%;
-    background-color: $placeholder-color;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

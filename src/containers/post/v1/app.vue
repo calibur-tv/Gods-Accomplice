@@ -79,41 +79,10 @@
 
   footer {
     .tag-wrap {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
       margin-bottom: 20px;
-
-      .bangumi {
-        font-size: 12px;
-        color: #6d757a;
-        font-weight: bold;
-        margin-right: 20px;
-        line-height: 18px;
-        flex-shrink: 0;
-      }
-
-      .tags {
-        font-size: 0;
-        height: 18px;
-        overflow: hidden;
-        text-align: right;
-        @extend %breakWord;
-
-        span {
-          display: inline-block;
-          padding-left: 7px;
-          padding-right: 7px;
-          height: 18px;
-          font-size: 12px;
-          border-radius: 9px;
-          line-height: 18px;
-          background-color: #e5e9ef;
-          color: #6d757a;
-          margin-left: 5px;
-        }
-      }
+      height: 25px;
+      overflow: hidden;
+      font-size: 0;
     }
 
     .reward-wrap {
@@ -121,6 +90,10 @@
       height: 75px;
       padding-top: 15px;
       padding-bottom: 15px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
 
       &:before {
         content: '';
@@ -131,6 +104,39 @@
         height: 1px;
         width: 100%;
         transform: scaleY(0.5);
+      }
+
+      .reward-users {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+
+        .avatars {
+          margin-right: 8px;
+          margin-left: 12px;
+
+          .avatar {
+            border: 3px solid #fff;
+            margin-left: -15px;
+            border-radius: 50%;
+          }
+        }
+
+        .count {
+          font-size: 15px;
+          color: #ff6881;
+          margin-right: 3px;
+        }
+
+        .tail {
+          color: #797989;
+          font-size: 13px;
+        }
+      }
+
+      button {
+        margin-left: 10px;
       }
     }
   }
@@ -188,25 +194,50 @@
     <!-- 番剧 -->
     <footer>
       <div class="tag-wrap">
-        <span
+        <bubble-tag
           v-if="bangumi"
-          class="bangumi"
-        >来自：{{ bangumi.name }}</span>
-        <div
-          v-if="post && post.tags.length"
-          class="tags"
-        >
-          <span
+          :text="bangumi.name"
+        />
+        <template v-if="post && post.tags.length">
+          <bubble-tag
             v-for="item in post.tags"
             :key="item.id"
-            v-text="item.name"
+            :text="item.name"
           />
-        </div>
+        </template>
+        <bubble-tag
+          v-if="bangumi"
+          :text="bangumi.name"
+        />
+        <template v-if="post && post.tags.length">
+          <bubble-tag
+            v-for="item in post.tags"
+            :key="item.id"
+            :text="item.name"
+          />
+        </template>
       </div>
       <div
         v-if="post.is_creator"
         class="reward-wrap"
       >
+        <div 
+          v-if="post.reward_users.total"
+          class="reward-users"
+        >
+          <div class="avatars">
+            <v-img
+              v-for="item in displayRewardUsers"
+              :key="item.id"
+              :src="item.avatar"
+              :width="30"
+              :height="30"
+              class="avatar"
+            />
+          </div>
+          <span class="count">{{ post.reward_users.total }}</span>
+          <span class="tail">人投食</span>
+        </div>
         <reward-btn
           :id="user.id"
           :rewarded="post.rewarded"
@@ -221,11 +252,13 @@
 <script>
 import UserFollowBtn from '@/components/UserFollowBtn'
 import RewardBtn from '@/components/RewardBtn'
+import BubbleTag from '@/components/BubbleTag'
 
 export default {
   name: 'App',
   components: {
     UserFollowBtn,
+    BubbleTag,
     RewardBtn
   },
   data() {
@@ -233,6 +266,14 @@ export default {
       post: null,
       bangumi: null,
       user: null
+    }
+  },
+  computed: {
+    displayRewardUsers() {
+      if (!this.post.reward_users.total) {
+        return []
+      }
+      return this.post.reward_users.list.slice(0, 4)
     }
   }
 }
