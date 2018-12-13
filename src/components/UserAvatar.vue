@@ -32,7 +32,7 @@ export default {
     },
     size: {
       type: Number,
-      default: 42
+      default: 40
     }
   }
 }

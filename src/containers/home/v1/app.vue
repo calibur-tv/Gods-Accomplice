@@ -75,14 +75,6 @@
 
       button {
         float: right;
-        width: 78px;
-        height: 36px;
-        border-radius: 18px;
-        background: #ff6881;
-        color: #fff;
-        font-size: 14px;
-        text-align: center;
-        line-height: 36px;
         margin-left: 10px;
       }
 
@@ -195,9 +187,7 @@
         </div>
       </header>
       <main>
-        <button>
-          {{ daySign ? '已签到' : '签到' }}
-        </button>
+        <day-sign-btn :signed="daySign"/>
         <div class="meta">
           <div class="item">
             <p
@@ -322,8 +312,13 @@
 </template>
 
 <script>
+import DaySignBtn from '@/components/DaySignBtn'
+
 export default {
   name: 'App',
+  components: {
+    DaySignBtn
+  },
   data() {
     return {
       id: 0,

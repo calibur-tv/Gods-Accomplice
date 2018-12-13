@@ -6,6 +6,9 @@
 
   .nickname {
     overflow: hidden;
+    color: #484853;
+    font-size: 16px;
+    line-height: 22px;
   }
 
   .badge {
