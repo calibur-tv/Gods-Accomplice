@@ -205,17 +205,6 @@
             :text="item.name"
           />
         </template>
-        <bubble-tag
-          v-if="bangumi"
-          :text="bangumi.name"
-        />
-        <template v-if="post && post.tags.length">
-          <bubble-tag
-            v-for="item in post.tags"
-            :key="item.id"
-            :text="item.name"
-          />
-        </template>
       </div>
       <div
         v-if="post.is_creator"
