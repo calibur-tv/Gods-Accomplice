@@ -6,7 +6,7 @@ import ImageLazyLoad from '@/components/ImageLazyLoad'
 import app from '@/containers/bookmarks/v1/app.vue'
 
 Vue.use(ImageLazyLoad, {})
-const M = (window.M = {})
+window.M = window.M || Object.create(null)
 
 const App = Vue.extend(app)
 

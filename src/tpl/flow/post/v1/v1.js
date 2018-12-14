@@ -10,8 +10,7 @@ Vue.use(ImageLazyLoad, {})
 // 初始化container
 const pageData = JSON.parse(document.getElementById('page-data').textContent)
 
-// eslint-disable-next-line no-multi-assign
-const M = (window.M = {})
+window.M = window.M || Object.create(null)
 
 const App = Vue.extend(app)
 

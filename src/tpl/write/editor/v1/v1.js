@@ -9,7 +9,7 @@ import FastClick from 'fastclick'
 const pageData = JSON.parse(document.getElementById('page-data').textContent)
 
 // eslint-disable-next-line no-multi-assign
-const M = (window.M = {})
+window.M = window.M || Object.create(null)
 
 const App = Vue.extend(app)
 

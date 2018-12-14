@@ -19,7 +19,10 @@
 </style>
 
 <template>
-  <button :class="[$style.btn, { [$style.followed]: followed }]">
+  <button
+    :class="[$style.btn, { [$style.followed]: followed }]"
+    @click="handleClick"
+  >
     {{ followed ? '已关注' : '关注' }}
   </button>
 </template>
@@ -35,6 +38,13 @@ export default {
     followed: {
       type: Boolean,
       default: false
+    }
+  },
+  methods: {
+    handleClick() {
+      M.invoker.getDeviceInfo(data => {
+        alert(JSON.stringify(data))
+      })
     }
   }
 }

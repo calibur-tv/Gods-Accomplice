@@ -1,9 +1,6 @@
 module.exports = {
   root: true,
-  extends: [
-    'plugin:vue/recommended',
-    'plugin:prettier/recommended'
-  ],
+  extends: ['plugin:vue/recommended', 'plugin:prettier/recommended'],
   parserOptions: {
     parser: 'babel-eslint'
   },
@@ -12,10 +9,7 @@ module.exports = {
     node: true,
     mocha: true
   },
-  plugins: [
-    'vue',
-    'prettier'
-  ],
+  plugins: ['vue', 'prettier'],
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
@@ -24,6 +18,6 @@ module.exports = {
     'no-else-return': 'warn'
   },
   globals: {
-    M: true  // custom namespace
+    M: true // custom namespace
   }
 }

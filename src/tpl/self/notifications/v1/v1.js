@@ -5,7 +5,7 @@ import '@/util/global'
 import '@/util/components'
 import FastClick from 'fastclick'
 
-const M = (window.M = {})
+window.M = window.M || Object.create(null)
 
 const App = Vue.extend(app)
 

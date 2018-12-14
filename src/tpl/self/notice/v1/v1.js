@@ -4,7 +4,7 @@ import '@/util/global'
 import FastClick from 'fastclick'
 import app from '@/containers/notice/v1/app.vue'
 
-const M = (window.M = {})
+window.M = window.M || Object.create(null)
 
 const App = Vue.extend(app)
 
