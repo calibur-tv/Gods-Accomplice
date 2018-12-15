@@ -1,8 +1,8 @@
 import invokerInterface from './invokerInterface'
 
 export default class extends invokerInterface {
-  constructor() {
-    super()
+  constructor(data) {
+    super(data)
     this.initIOSBridge()
   }
 
