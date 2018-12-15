@@ -21,7 +21,6 @@ export default class extends invokerInterface {
     } catch (e) {
       paramsObj = {}
     }
-
     const func = paramsObj.func
     const params = paramsObj.params || {}
     const jsFunction = this.jsFuncs[func]
@@ -40,7 +39,7 @@ export default class extends invokerInterface {
    * @param {Function} callback
    */
   JsCallApp(func, params = {}, callback = null) {
-    this.setupWebViewJavascriptBridge(function(bridge) {
+    this.setupWebViewJavascriptBridge(bridge => {
       // Javascrit call Object-C
       bridge.callHandler(
         'mpWebBridge',
@@ -58,10 +57,14 @@ export default class extends invokerInterface {
   }
 
   registerAppCallJsHnandler() {
-    this.setupWebViewJavascriptBridge(function(bridge) {
+    this.setupWebViewJavascriptBridge(bridge => {
       // Object-C call Javascript
-      bridge.registerHandler('mpWebBridge', function(data, responseCallback) {
-        responseCallback(this.appCallJs(data))
+      bridge.registerHandler('mpWebBridge', (data, responseCallback) => {
+        const result = this.appCallJs(data)
+        if (result === undefined) {
+          return
+        }
+        responseCallback(JSON.stringify({ params: result }))
       })
     })
   }
@@ -79,7 +82,7 @@ export default class extends invokerInterface {
     WVJBIframe.style.display = 'none'
     WVJBIframe.src = 'https://__bridge_loaded__'
     document.documentElement.appendChild(WVJBIframe)
-    setTimeout(function() {
+    setTimeout(() => {
       document.documentElement.removeChild(WVJBIframe)
     }, 0)
   }
