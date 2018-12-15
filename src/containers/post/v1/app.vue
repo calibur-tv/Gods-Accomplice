@@ -133,6 +133,11 @@
           color: #797989;
           font-size: 13px;
         }
+
+        p {
+          font-size: 13px;
+          color: #797989;
+        }
       }
 
       button {
@@ -210,22 +215,22 @@
         v-if="post.is_creator"
         class="reward-wrap"
       >
-        <div 
-          v-if="post.reward_users.total"
-          class="reward-users"
-        >
-          <div class="avatars">
-            <v-img
-              v-for="item in displayRewardUsers"
-              :key="item.id"
-              :src="item.avatar"
-              :width="30"
-              :height="30"
-              class="avatar"
-            />
-          </div>
-          <span class="count">{{ post.reward_users.total }}</span>
-          <span class="tail">人投食</span>
+        <div class="reward-users">
+          <template v-if="!post.reward_users.total">
+            <div class="avatars">
+              <v-img
+                v-for="item in displayRewardUsers"
+                :key="item.id"
+                :src="item.avatar"
+                :width="30"
+                :height="30"
+                class="avatar"
+              />
+            </div>
+            <span class="count">{{ post.reward_users.total }}</span>
+            <span class="tail">人投食</span>
+          </template>
+          <p v-else>这是你唯一表达喜欢的方式</p>
         </div>
         <reward-btn
           :id="user.id"
