@@ -33,8 +33,6 @@ $placeholder-color: RGB(241, 243, 244);
   }
 
   &.retry {
-    cursor: pointer;
-
     img {
       display: none;
     }

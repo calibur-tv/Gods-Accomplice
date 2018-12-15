@@ -3,7 +3,7 @@ import invokerInterface from './invokerInterface'
 export default class extends invokerInterface {
   constructor(data) {
     super(data)
-    this.initIOSBridge()
+    this.registerAppCallJsHnandler()
   }
 
   getDeviceInfo(callback) {
@@ -57,8 +57,7 @@ export default class extends invokerInterface {
     })
   }
 
-  // 初始化 iOS bridge
-  initIOSBridge() {
+  registerAppCallJsHnandler() {
     this.setupWebViewJavascriptBridge(function(bridge) {
       // Object-C call Javascript
       bridge.registerHandler('mpWebBridge', function(data, responseCallback) {
