@@ -13,19 +13,10 @@
 </style>
 
 <template>
-  <common-item
-    :id="item.id"
-    class="img-item"
-  >
+  <CommonItem :id="item.id" class="img-item">
     <template slot="poster">
-      <img
-        v-if="item.url"
-        :src="$resize(item.url, { width: 152 })"
-      >
-      <i
-        v-else
-        class="iconfont ic-image"
-      />
+      <img v-if="item.url" :src="$resize(item.url, { width: 152 })" />
+      <i v-else class="iconfont ic-image" />
     </template>
     <template slot="content">
       <template v-if="item.text">
@@ -35,7 +26,7 @@
         点击添加图片描述
       </template>
     </template>
-  </common-item>
+  </CommonItem>
 </template>
 
 <script>

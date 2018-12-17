@@ -17,6 +17,8 @@ export default class {
         integrations: [new Sentry.Integrations.Vue({ Vue })]
       })
       return Sentry
-    } catch (e) {}
+    } catch (e) {
+      // do nothing
+    }
   }
 }

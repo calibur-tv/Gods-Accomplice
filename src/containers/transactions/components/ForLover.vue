@@ -1,12 +1,7 @@
 <template>
-  <v-common :item="item">
-    为
-    <a
-      href="javascript:;"
-      v-text="item.about.name"
-    />
-    应援
-  </v-common>
+  <VCommon :item="item">
+    为 <a href="javascript:;" v-text="item.about.name" /> 应援
+  </VCommon>
 </template>
 
 <script>

@@ -95,39 +95,26 @@
 </style>
 
 <template>
-  <div
-    id="image-show"
-    class="container"
-  >
+  <div id="image-show" class="container">
     <!-- 头部 -->
     <header>
       <!-- 标题 -->
       <div class="title">
-        <span class="badge creator-badge">原创</span>
-        {{ name }}
+        <span class="badge creator-badge"> 原创 </span> {{ name }}
       </div>
       <!-- 用户 -->
-      <div
-        v-if="user"
-        class="user"
-      >
-        <user-avatar :user="user"/>
+      <div v-if="user" class="user">
+        <UserAvatar :user="user" />
         <div class="info">
-          <user-nickname
-            :user="user"
-            :show-owner="true"
-          />
-          <v-time :datetime="created_at"/>
+          <UserNickname :user="user" :show-owner="true" />
+          <VTime :datetime="created_at" />
         </div>
       </div>
     </header>
     <!-- 正文 -->
     <main>
-      <section
-        v-if="images.length"
-        class="images"
-      >
-        <v-img
+      <section v-if="images.length" class="images">
+        <VImg
           v-for="(item, index) in images"
           :key="index"
           :src="item.url"
@@ -140,10 +127,7 @@
     </main>
     <!-- 番剧 -->
     <footer>
-      <span
-        v-if="bangumi"
-        class="bangumi"
-      >来自：{{ bangumi.name }}</span>
+      <span v-if="bangumi" class="bangumi"> 来自：{{ bangumi.name }} </span>
     </footer>
   </div>
 </template>

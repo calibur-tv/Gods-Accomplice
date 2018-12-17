@@ -17,21 +17,15 @@
 
 <template>
   <div class="sub-comment-item">
-    <a 
-      :href="$alias.user(comment.from_user_zone)" 
-      class="nickname" 
-      v-text="comment.from_user_name"/>
+    <div class="nickname" v-text="comment.from_user_name" />
     <template v-if="comment.to_user_zone">
       回复
-      <a 
-        :href="$alias.user(comment.to_user_zone)" 
-        class="nickname" 
-        v-text="comment.to_user_name"/>
+      <div class="nickname" v-text="comment.to_user_name" />
     </template>
     :
-    <span 
-      class="reply-btn comment-content" 
-      @click="handleSubCommentClick">{{ comment.content }}</span>
+    <span class="reply-btn comment-content" @click="handleSubCommentClick">
+      comment.content }}
+    </span>
   </div>
 </template>
 

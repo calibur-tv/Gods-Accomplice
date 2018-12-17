@@ -34,21 +34,12 @@
 <template>
   <div class="noti-item">
     <div class="avatar">
-      <user-avatar
-        v-if="item.user"
-        :size="60"
-        :user="item.user"
-      />
-      <slot
-        v-else
-        name="avatar"
-      />
+      <UserAvatar v-if="item.user" :size="60" :user="item.user" />
+      <slot v-else name="avatar" />
     </div>
     <div class="content">
       <header class="oneline">
-        <a href="javascript:;">
-          {{ item.user.nickname }}
-        </a>
+        <a href="javascript:;"> {{ item.user.nickname }} </a>
       </header>
       <!--
       <header

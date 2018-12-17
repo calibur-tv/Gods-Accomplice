@@ -12,9 +12,7 @@
 </style>
 
 <template>
-  <button :class="$style.btn">
-    {{ text }}
-  </button>
+  <button :class="$style.btn">{{ text }}</button>
 </template>
 
 <script>

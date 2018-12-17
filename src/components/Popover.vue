@@ -50,7 +50,7 @@
 
 <template>
   <span :class="className">
-    <el-popover
+    <ElPopover
       v-model="show"
       :width="width"
       trigger="click"
@@ -64,15 +64,12 @@
           :key="index"
           @click="item.method"
         >
-          <i class="el-icon-arrow-right"/>
-          <span
-            class="oneline"
-            v-text="item.name"
-          />
+          <i class="el-icon-arrow-right" />
+          <span class="oneline" v-text="item.name" />
         </li>
       </ul>
-      <slot slot="reference"/>
-    </el-popover>
+      <slot slot="reference" />
+    </ElPopover>
   </span>
 </template>
 
@@ -82,7 +79,7 @@ import { Popover } from 'element-ui'
 export default {
   name: 'VPopover',
   components: {
-    'el-popover': Popover
+    ElPopover: Popover
   },
   props: {
     width: {

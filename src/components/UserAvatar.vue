@@ -14,11 +14,8 @@
 </style>
 
 <template>
-  <div
-    :style="{ width: `${size}px`, height: `${size}px` }"
-    class="user-avatar"
-  >
-    <img :src="$resize(user.avatar, { width: size * 2 })">
+  <div :style="{ width: `${size}px`, height: `${size}px` }" class="user-avatar">
+    <img :src="$resize(user.avatar, { width: size * 2 })" />
   </div>
 </template>
 

@@ -1,11 +1,7 @@
 <template>
-  <v-common :item="item">
-    删除漫评
-    <a
-      href="javascript:;"
-      v-text="item.about.title"
-    />
-  </v-common>
+  <VCommon :item="item">
+    删除漫评 <a href="javascript:;" v-text="item.about.title" />
+  </VCommon>
 </template>
 
 <script>

@@ -13,9 +13,7 @@
 </style>
 
 <template>
-  <div class="json-content-txt-parser">
-    <blockquote v-html="item.text"/>
-  </div>
+  <div class="json-content-txt-parser"><blockquote v-html="item.text" /></div>
 </template>
 
 <script>

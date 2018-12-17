@@ -29,29 +29,23 @@
 
 <template>
   <div id="json-editor-container">
-    <draggable
-      v-model="content"
-      :options="options"
-    >
-      <component
-        v-for="(item, index) in content"
-        :index="index"
-        :key="item.id"
-        :item="item"
+    <Draggable v-model="content" :options="options">
+      <Component
         :is="`${item.type}-item`"
+        v-for="(item, index) in content"
+        :key="item.id"
+        :index="index"
+        :item="item"
         class="flip-list-item"
       />
-    </draggable>
-    <stats-component
+    </Draggable>
+    <StatsComponent
       :once="false"
       @enter="handleCreateBtnEnter"
       @leave="handleCreateBtnLeave"
     >
-      <create-btn
-        v-model="showCreatePopover"
-        class="last-create-btn"
-      />
-    </stats-component>
+      <CreateBtn v-model="showCreatePopover" class="last-create-btn" />
+    </StatsComponent>
   </div>
 </template>
 

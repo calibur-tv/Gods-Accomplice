@@ -30,44 +30,29 @@
   <div id="comment-wrap">
     <!-- 主列表的头部 -->
     <slot name="header">
-      <h3 class="sub-title">
-        评论{{ total ? `(${total})` : '' }}
-      </h3>
+      <h3 class="sub-title">评论{{ total ? `(${total})` : '' }}</h3>
     </slot>
     <!-- 主列表的 list -->
     <template v-if="list.length">
       <div id="comment-list-wrap">
         <!-- 每条主评论 -->
-        <div
+        <CommentItem
           v-for="comment in list"
           :key="comment.id"
-          class="comment-item-wrap"
-        >
-          <!-- 主评论的内容 -->
-          <slot 
-            :comment="comment" 
-            name="comment-item"
-          >
-            <comment-item
-              :type="type"
-              :comment="comment"
-              :master-id="masterId"
-              @delete="deleteCommentCallback"
-            />
-          </slot>
-        </div>
+          :type="type"
+          :comment="comment"
+          :master-id="masterId"
+          @delete="deleteCommentCallback"
+        />
       </div>
     </template>
-    <p
-      v-else-if="emptyText" 
-      class="no-content" 
-      v-text="emptyText"
-    />
-    <load-more
+    <p v-else-if="emptyText" class="no-content" v-text="emptyText" />
+    <Loadmore
       :no-more="noMore"
-      :loading="loadingMainComment"
-      :auto="true"
-      @fetch="loadMoreMainComment(false)"
+      :nothing="nothing"
+      :error="error"
+      :loading="loading"
+      :fetch="getMainComments"
     />
   </div>
 </template>
@@ -75,6 +60,7 @@
 <script>
 import CommentItem from './CommentItem'
 import Loadmore from '@/components/Loadmore'
+import Api from '@/api/v1/commentApi'
 
 export default {
   name: 'CommentMain',
@@ -120,69 +106,50 @@ export default {
   },
   data() {
     return {
-      loadingMainComment: false
+      loading: false,
+      nothing: false,
+      error: false,
+      lastFetchId: 0,
+      total: 0,
+      list: [],
+      noMore: false
     }
   },
-  computed: {
-    store() {
-      return this.$store.state.comment
-    },
-    list() {
-      return this.store.list
-    },
-    noMore() {
-      return this.store.noMore
-    },
-    total() {
-      return this.store.total
-    },
-    currentUserId() {
-      return this.$store.state.login ? this.$store.state.user.id : 0
-    }
+  created() {
+    this.getMainComments()
   },
-  mounted() {},
   methods: {
-    async loadMoreMainComment(firstRequest = false) {
-      if (this.loadingMainComment) {
+    async getMainComments() {
+      if (this.loading || this.noMoreComment) {
         return
       }
-      this.loadingMainComment = true
+      this.loading = true
+      const api = new Api()
       try {
-        await this.$store.dispatch('comment/getMainComments', {
-          ctx: this,
-          type: this.type,
+        const data = await api.getMainCommentList({
           id: this.id,
-          onlySeeMaster: this.onlySeeMaster ? 1 : 0,
-          firstRequest
-        })
-      } catch (e) {
-        this.$toast.error(e)
-      } finally {
-        this.loadingMainComment = false
-      }
-    },
-    async loadMoreSubComment() {
-      if (this.loadingSubComment) {
-        return
-      }
-      this.loadingSubComment = true
-      try {
-        await this.$store.dispatch('comment/getSubComments', {
-          ctx: this,
           type: this.type,
-          id: this.focusCommentId
+          fetchId: this.lastFetchId,
+          onlySeeMaster: this.onlySeeMaster
         })
+        const { total, list, noMore } = data
+        this.total = total
+        const oldIds = this.list.map(_ => _.id)
+        const filterdList = list.filter(_ => oldIds.indexOf(_.id) === -1)
+        this.list = this.list.concat(filterdList)
+        this.noMore = noMore
+        this.nothing = !total
+        if (list.length) {
+          this.lastFetchId = list[list.length - 1].id
+        }
       } catch (e) {
+        this.error = true
         this.$toast.error(e)
       } finally {
-        this.loadingSubComment = false
+        this.loading = false
       }
     },
     async toggleFocusCommentLike() {
-      if (!this.currentUserId) {
-        this.$channel.$emit('sign-in')
-        return
-      }
       if (this.replyForm.liking) {
         return
       }
@@ -193,7 +160,6 @@ export default {
           type: this.type,
           id: this.focusCommentId
         })
-      } catch (e) {
       } finally {
         this.replyForm.liking = false
       }

@@ -156,43 +156,26 @@
 </style>
 
 <template>
-  <div
-    id="post-show"
-    class="container"
-  >
+  <div id="post-show" class="container">
     <!-- 头部 -->
     <header v-if="post">
       <!-- 用户 -->
-      <div
-        v-if="user"
-        class="user"
-      >
-        <user-avatar :user="user"/>
-        <user-follow-btn
-          :user-id="user.id"
-          :followed="false"
-        />
+      <div v-if="user" class="user">
+        <UserAvatar :user="user" />
+        <UserFollowBtn :user-id="user.id" :followed="false" />
         <div class="info">
-          <user-nickname :user="user"/>
-          <v-time :datetime="post.created_at"/>
+          <UserNickname :user="user" />
+          <VTime :datetime="post.created_at" />
         </div>
       </div>
       <!-- 标题 -->
-      <div class="title">
-        {{ post.title }}
-      </div>
+      <div class="title">{{ post.title }}</div>
     </header>
     <!-- 正文 -->
     <main>
-      <section
-        class="content"
-        v-html="post.content"
-      />
-      <section
-        v-if="post.images.length"
-        class="images"
-      >
-        <v-img
+      <section class="content" v-html="post.content" />
+      <section v-if="post.images.length" class="images">
+        <VImg
           v-for="(item, index) in post.images"
           :key="index"
           :src="item.url"
@@ -206,26 +189,20 @@
     <!-- 番剧 -->
     <footer>
       <div class="tag-wrap">
-        <bubble-tag
-          v-if="bangumi"
-          :text="bangumi.name"
-        />
+        <BubbleTag v-if="bangumi" :text="bangumi.name" />
         <template v-if="post && post.tags.length">
-          <bubble-tag
+          <BubbleTag
             v-for="item in post.tags"
             :key="item.id"
             :text="item.name"
           />
         </template>
       </div>
-      <div
-        v-if="post.is_creator"
-        class="reward-wrap"
-      >
+      <div v-if="post.is_creator" class="reward-wrap">
         <div class="reward-users">
           <template v-if="!post.reward_users.total">
             <div class="avatars">
-              <v-img
+              <VImg
                 v-for="item in displayRewardUsers"
                 :key="item.id"
                 :src="item.avatar"
@@ -234,12 +211,12 @@
                 class="avatar"
               />
             </div>
-            <span class="count">{{ post.reward_users.total }}</span>
-            <span class="tail">人投食</span>
+            <span class="count"> {{ post.reward_users.total }} </span>
+            <span class="tail"> 人投食 </span>
           </template>
           <p v-else>这是你唯一表达喜欢的方式</p>
         </div>
-        <reward-btn
+        <RewardBtn
           :id="user.id"
           :rewarded="post.rewarded"
           type="user"
@@ -247,12 +224,10 @@
         />
       </div>
     </footer>
-    <div class="hr"/>
-    <comment-main
-      :id="post.id"
-      :master-id="user.id"
-      type="post"
-    />
+    <div class="hr" />
+    <VLazy>
+      <CommentMain :id="post.id" :master-id="user.id" type="post" />
+    </VLazy>
   </div>
 </template>
 

@@ -6,9 +6,7 @@
 </style>
 
 <template>
-  <div id="json-editor">
-    <json-editor v-model="content"/>
-  </div>
+  <div id="json-editor"><JsonEditor v-model="content" /></div>
 </template>
 
 <script>

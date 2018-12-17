@@ -45,52 +45,29 @@
 <template>
   <div :class="$style.loadmore">
     <!-- loading -->
-    <slot
-      v-if="loading"
-      name="loading"
-    >
-      <div :class="$style.rolling">
-        <div/>
-      </div>
+    <slot v-if="loading" name="loading">
+      <div :class="$style.rolling"><div /></div>
     </slot>
     <!-- nothing -->
-    <slot
-      v-else-if="nothing"
-      name="nothing"
-    >
+    <slot v-else-if="nothing" name="nothing">
       <div :class="$style.nothing">
-        <img :src="$resize('https://image.calibur.tv/owner/no-content', { width: 300 })">
+        <img
+          :src="
+            $resize('https://image.calibur.tv/owner/no-content', { width: 300 })
+          "
+        />
         <p>还没有内容</p>
       </div>
     </slot>
     <!-- noMore -->
-    <slot
-      v-else-if="noMore"
-      name="no-more"
-    >
-      没有更多了~
-    </slot>
+    <slot v-else-if="noMore" name="no-more"> 没有更多了~ </slot>
     <!-- error -->
-    <slot
-      v-else-if="error"
-      name="text"
-    >
-      <button
-        :class="$style.btn"
-        @click="fetch"
-        v-text="'点击重试'"
-      />
+    <slot v-else-if="error" name="text">
+      <button :class="$style.btn" @click="fetch" v-text="'点击重试'" />
     </slot>
     <!-- 点击按钮 -->
-    <slot
-      v-else-if="!auto"
-      name="text"
-    >
-      <button
-        :class="$style.btn"
-        @click="fetch"
-        v-text="text"
-      />
+    <slot v-else-if="!auto" name="text">
+      <button :class="$style.btn" @click="fetch" v-text="text" />
     </slot>
   </div>
 </template>

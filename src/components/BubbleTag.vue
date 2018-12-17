@@ -40,15 +40,10 @@
 }
 </style>
 
-
 <template>
   <button :class="$style.tag">
-    <i
-      v-if="icon"
-      :class="`ic-${icon}`"
-      class="iconfont"
-    />
-    <span v-text="text"/>
+    <i v-if="icon" :class="`ic-${icon}`" class="iconfont" />
+    <span v-text="text" />
   </button>
 </template>
 

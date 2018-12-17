@@ -1,7 +1,5 @@
 <template>
-  <v-common :item="item">
-    提现
-  </v-common>
+  <VCommon :item="item"> 提现 </VCommon>
 </template>
 
 <script>

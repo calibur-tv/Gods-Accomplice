@@ -61,28 +61,14 @@
 
 <template>
   <div class="editor-item-wrap">
-    <create-btn @create="emitCreateItem"/>
+    <CreateBtn @create="emitCreateItem" />
     <div class="editor-item">
-      <div class="poster">
-        <slot name="poster">
-          poster
-        </slot>
-      </div>
+      <div class="poster"><slot name="poster"> poster </slot></div>
       <div class="control">
-        <i
-          class="iconfont ic-cancel"
-          @click="emitDeleteItem"
-        />
-        <i
-          class="iconfont ic-sort"
-          @click="showSortToast"
-        />
+        <i class="iconfont ic-cancel" @click="emitDeleteItem" />
+        <i class="iconfont ic-sort" @click="showSortToast" />
       </div>
-      <div class="content">
-        <slot name="content">
-          content
-        </slot>
-      </div>
+      <div class="content"><slot name="content"> content </slot></div>
     </div>
   </div>
 </template>

@@ -12,9 +12,7 @@
 </style>
 
 <template>
-  <button :class="$style.btn">
-    {{ signed ? '已签到' : '签到' }}
-  </button>
+  <button :class="$style.btn">{{ signed ? '已签到' : '签到' }}</button>
 </template>
 
 <script>

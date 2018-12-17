@@ -1,7 +1,5 @@
 <template>
-  <v-common :item="item">
-    签到获得团子奖励（可提现）
-  </v-common>
+  <VCommon :item="item"> 签到获得团子奖励（可提现） </VCommon>
 </template>
 
 <script>

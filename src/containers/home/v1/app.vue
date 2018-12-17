@@ -163,149 +163,79 @@
   <div id="home">
     <div class="panel">
       <header>
-        <img
-          :src="$resize(avatar, { width: 130 })"
-          class="avatar"
-        >
-        <img
-          src="../icon/link.png"
-          class="link"
-        >
+        <img :src="$resize(avatar, { width: 130 })" class="avatar" />
+        <img src="../icon/link.png" class="link" />
         <div class="content">
           <div class="nickname-wrap">
-            <div class="nickname">
-              <p
-                class="oneline"
-                v-text="nickname"
-              />
-            </div>
-            <div class="badge level">
-              LV{{ exp.level }}
-            </div>
+            <div class="nickname"><p class="oneline" v-text="nickname" /></div>
+            <div class="badge level">LV{{ exp.level }}</div>
           </div>
           <p class="intro">查看或编辑资料</p>
         </div>
       </header>
       <main>
-        <day-sign-btn :signed="daySign"/>
+        <DaySignBtn :signed="daySign" />
         <div class="meta">
           <div class="item">
-            <p
-              class="oneline"
-              v-text="$utils.shortenNumber(power)"
-            />
-            <span>
-              战斗力
-            </span>
+            <p class="oneline" v-text="$utils.shortenNumber(power)" />
+            <span> 战斗力 </span>
           </div>
           <div class="item">
-            <p
-              class="oneline"
-              v-text="exp.level"
-            />
-            <span>
-              等级
-            </span>
+            <p class="oneline" v-text="exp.level" />
+            <span> 等级 </span>
           </div>
           <div class="item">
-            <p
-              class="oneline"
-              v-text="$utils.shortenNumber(coin)"
-            />
-            <span>
-              团子
-            </span>
+            <p class="oneline" v-text="$utils.shortenNumber(coin)" />
+            <span> 团子 </span>
           </div>
         </div>
       </main>
     </div>
-    <div class="hr"/>
+    <div class="hr" />
     <div class="content">
       <div class="item">
-        <img
-          src="../icon/post.png"
-          class="icon"
-        >
-        <div class="tail">
-          <img src="../icon/link.png">
-        </div>
-        <p class="text oneline">
-          帖子
-        </p>
+        <img src="../icon/post.png" class="icon" />
+        <div class="tail"><img src="../icon/link.png" /></div>
+
+        <p class="text oneline">帖子</p>
       </div>
       <div class="item">
-        <img
-          src="../icon/comment.png"
-          class="icon"
-        >
-        <div class="tail">
-          <img src="../icon/link.png">
-        </div>
-        <p class="text oneline">
-          评论
-        </p>
+        <img src="../icon/comment.png" class="icon" />
+        <div class="tail"><img src="../icon/link.png" /></div>
+
+        <p class="text oneline">评论</p>
       </div>
       <div class="item">
-        <img
-          src="../icon/history.png"
-          class="icon"
-        >
-        <div class="tail">
-          <img src="../icon/link.png">
-        </div>
-        <p class="text oneline">
-          浏览历史
-        </p>
+        <img src="../icon/history.png" class="icon" />
+        <div class="tail"><img src="../icon/link.png" /></div>
+
+        <p class="text oneline">浏览历史</p>
       </div>
       <div class="item">
-        <img
-          src="../icon/invite.png"
-          class="icon"
-        >
+        <img src="../icon/invite.png" class="icon" />
         <div class="tail">
-          <span>邀请送团子</span>
-          <img src="../icon/link.png">
+          <span>邀请送团子</span> <img src="../icon/link.png" />
         </div>
-        <p class="text oneline">
-          我的邀请码
-        </p>
+        <p class="text oneline">我的邀请码</p>
       </div>
       <div class="item">
-        <img
-          src="../icon/help.png"
-          class="icon"
-        >
+        <img src="../icon/help.png" class="icon" />
         <div class="tail">
-          <span>玩转C站</span>
-          <img src="../icon/link.png">
+          <span>玩转C站</span> <img src="../icon/link.png" />
         </div>
-        <p class="text oneline">
-          帮助
-        </p>
+        <p class="text oneline">帮助</p>
       </div>
       <div class="item">
-        <img
-          src="../icon/feedback.png"
-          class="icon"
-        >
-        <div class="tail">
-          <img src="../icon/link.png">
-        </div>
-        <p class="text oneline">
-          意见反馈
-        </p>
+        <img src="../icon/feedback.png" class="icon" />
+        <div class="tail"><img src="../icon/link.png" /></div>
+
+        <p class="text oneline">意见反馈</p>
       </div>
       <div class="item">
-        <img
-          src="../icon/setting.png"
-          class="icon"
-        >
-        <div class="tail">
-          <img src="../icon/link.png">
-        </div>
-        <p class="text oneline">
-          设置
-        </p>
+        <img src="../icon/setting.png" class="icon" />
+        <div class="tail"><img src="../icon/link.png" /></div>
+
+        <p class="text oneline">设置</p>
       </div>
     </div>
   </div>

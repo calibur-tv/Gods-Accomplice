@@ -1,12 +1,7 @@
 <template>
-  <v-common :item="item">
-    邀请
-    <a
-      href="javascript:;"
-      v-text="item.about.nickname"
-    />
-    注册
-  </v-common>
+  <VCommon :item="item">
+    邀请 <a href="javascript:;" v-text="item.about.nickname" /> 注册
+  </VCommon>
 </template>
 
 <script>

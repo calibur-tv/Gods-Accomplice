@@ -12,24 +12,17 @@
 </style>
 
 <template>
-  <common-item
-    :id="item.id"
-    class="use-item"
-  >
+  <CommonItem :id="item.id" class="use-item">
     <template slot="poster">
-      <i class="iconfont ic-use"/>
+      <i class="iconfont ic-use" />
     </template>
     <template slot="content">
-      <p
-        v-if="item.text"
-        class="blockquote"
-        v-html="item.text"
-      />
+      <p v-if="item.text" class="blockquote" v-html="item.text" />
       <template v-else>
         点击添加引用内容
       </template>
     </template>
-  </common-item>
+  </CommonItem>
 </template>
 
 <script>

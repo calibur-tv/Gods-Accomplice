@@ -28,11 +28,8 @@
 
 <template>
   <div class="json-content-txt-parser">
-    <h3
-      v-if="item.title"
-      v-html="item.title"
-    />
-    <p v-html="item.text"/>
+    <h3 v-if="item.title" v-html="item.title" />
+    <p v-html="item.text" />
   </div>
 </template>
 

@@ -168,37 +168,32 @@ $placeholder-color: RGB(241, 243, 244);
     ]"
     :style="blockModeWrapStyle"
   >
-    <div
-      :style="blockModeShimPadding"
-      :class="$style.paddingShim"
-    />
+    <div :style="blockModeShimPadding" :class="$style.paddingShim" />
     <div :class="$style.imageWrap">
       <img
         v-if="!error"
-        :src="$isServer ? placeholderImage : loaded ? blockModeImageSrc : computePlaceholder"
+        :src="
+          $isServer
+            ? placeholderImage
+            : loaded
+            ? blockModeImageSrc
+            : computePlaceholder
+        "
         @error="handleImageLoadError"
         @load="handleImageLoadSuccess"
-      >
+      />
     </div>
-    <span
-      v-if="error"
-      :class="$style.message"
-      v-text="errorMessage"
-    />
-    <span
-      v-if="retrying"
-      :class="$style.message"
-      v-text="retryMessage"
-    />
-    <transition name="img-zoom">
+    <span v-if="error" :class="$style.message" v-text="errorMessage" />
+    <span v-if="retrying" :class="$style.message" v-text="retryMessage" />
+    <Transition name="img-zoom">
       <div
         v-if="displayGifMask"
         :class="$style.loadGif"
         @click="clickToLoadGIF"
       >
-        <span :class="{ [$style.rolling]: toggleClick }">GIF</span>
+        <span :class="{ [$style.rolling]: toggleClick }"> GIF </span>
       </div>
-    </transition>
+    </Transition>
   </div>
   <!-- inline 模式，主要是用户头像、横排图 -->
   <span
@@ -216,10 +211,18 @@ $placeholder-color: RGB(241, 243, 244);
   >
     <div :class="$style.imageWrap">
       <img
-        :src="error ? errorPlaceholder : $isServer ? '' : loaded ? inlineModeImageSrc : computePlaceholder"
+        :src="
+          error
+            ? errorPlaceholder
+            : $isServer
+            ? ''
+            : loaded
+            ? inlineModeImageSrc
+            : computePlaceholder
+        "
         :style="inlineImageStyle"
         @error="handleImageLoadError"
-      >
+      />
     </div>
   </span>
 </template>

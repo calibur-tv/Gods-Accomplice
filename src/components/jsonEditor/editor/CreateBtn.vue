@@ -71,7 +71,7 @@
 
 <template>
   <div class="create-btn-wrap">
-    <v-popover
+    <VPopover
       v-model="trigger"
       width="200"
       trigger="manual"
@@ -80,46 +80,32 @@
       <div>
         <div class="row">
           <div @click="emitCreate('img')">
-            <i class="iconfont ic-image"/>
-            <span>图片</span>
+            <i class="iconfont ic-image" /> <span>图片</span>
           </div>
           <div @click="emitCreate('txt')">
-            <i class="iconfont ic-text"/>
-            <span>段落</span>
+            <i class="iconfont ic-text" /> <span>段落</span>
           </div>
           <div @click="emitCreate('use')">
-            <i class="iconfont ic-use"/>
-            <span>引用</span>
+            <i class="iconfont ic-use" /> <span>引用</span>
           </div>
         </div>
         <div class="row">
           <div @click="emitCreate('list')">
-            <i class="iconfont ic-list"/>
-            <span>列表</span>
+            <i class="iconfont ic-list" /> <span>列表</span>
           </div>
           <div @click="emitCreate('title')">
-            <i class="iconfont ic-title"/>
-            <span>小标题</span>
+            <i class="iconfont ic-title" /> <span>小标题</span>
           </div>
           <div @click="emitCreate('divider')">
-            <i class="iconfont ic-divider"/>
-            <span>分割线</span>
+            <i class="iconfont ic-divider" /> <span>分割线</span>
           </div>
         </div>
       </div>
-      <button
-        slot="reference"
-        class="btn"
-        @click="trigger = true"
-      >
+      <button slot="reference" class="btn" @click="trigger = true">
         <span>+</span>
       </button>
-    </v-popover>
-    <div
-      v-if="trigger"
-      class="mask"
-      @click="trigger = false"
-    />
+    </VPopover>
+    <div v-if="trigger" class="mask" @click="trigger = false" />
   </div>
 </template>
 

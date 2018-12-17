@@ -1,7 +1,5 @@
 <template>
-  <v-common :item="item">
-    {{ item.about.title }}
-  </v-common>
+  <VCommon :item="item"> {{ item.about.title }} </VCommon>
 </template>
 
 <script>

@@ -164,27 +164,24 @@
 
 <template>
   <div id="bookmarks">
-    <van-tabs
+    <VanTabs
       v-model="active"
       :sticky="true"
       :swipeable="true"
       color="#ff8eb3"
       @change="handleTabSwitch"
     >
-      <van-tab title="帖子">
+      <VanTab title="帖子">
         <ul class="posts">
-          <li
-            v-for="item in source[0].list"
-            :key="item.id"
-          >
+          <li v-for="item in source[0].list" :key="item.id">
             <a
-              :class="[ item.deleted_at ? 'deleted' : 'blue-link' ]"
+              :class="[item.deleted_at ? 'deleted' : 'blue-link']"
               href="javascript:;"
               v-text="item.title"
             />
           </li>
         </ul>
-        <loadmore
+        <Loadmore
           :auto="false"
           :loading="source[0].loading"
           :no-more="source[0].noMore"
@@ -192,27 +189,17 @@
           :error="source[0].error"
           :fetch="loadMoreData"
         />
-      </van-tab>
-      <van-tab title="相册">
+      </VanTab>
+      <VanTab title="相册">
         <ul class="images">
-          <li
-            v-for="item in source[1].list"
-            :key="item.id"
-          >
+          <li v-for="item in source[1].list" :key="item.id">
             <a href="javascript:;">
-              <v-img
-                :src="item.url"
-                :width="140"
-                :height="180"
-              />
-              <div
-                v-if="item.deleted_at"
-                class="delete-mask"
-              >该相册已删除</div>
+              <VImg :src="item.url" :width="140" :height="180" />
+              <div v-if="item.deleted_at" class="delete-mask">该相册已删除</div>
             </a>
           </li>
         </ul>
-        <loadmore
+        <Loadmore
           :auto="false"
           :loading="source[1].loading"
           :no-more="source[1].noMore"
@@ -220,21 +207,18 @@
           :error="source[1].error"
           :fetch="loadMoreData"
         />
-      </van-tab>
-      <van-tab title="答案">
+      </VanTab>
+      <VanTab title="答案">
         <ul class="answers">
-          <li
-            v-for="item in source[2].list"
-            :key="item.id"
-          >
+          <li v-for="item in source[2].list" :key="item.id">
             <a
-              :class="[ item.deleted_at ? 'deleted' : 'blue-link' ]"
+              :class="[item.deleted_at ? 'deleted' : 'blue-link']"
               href="javascript:;"
               v-text="item.intro || '[图片]'"
             />
           </li>
         </ul>
-        <loadmore
+        <Loadmore
           :auto="false"
           :loading="source[2].loading"
           :no-more="source[2].noMore"
@@ -242,22 +226,19 @@
           :error="source[2].error"
           :fetch="loadMoreData"
         />
-      </van-tab>
-      <van-tab title="漫评">
+      </VanTab>
+      <VanTab title="漫评">
         <ul class="scores">
-          <li
-            v-for="item in source[3].list"
-            :key="item.id"
-          >
+          <li v-for="item in source[3].list" :key="item.id">
             <a
-              :class="[ item.deleted_at ? 'deleted' : 'blue-link' ]"
+              :class="[item.deleted_at ? 'deleted' : 'blue-link']"
               href="javascript:;"
               v-text="item.title"
             />
-            <p v-text="item.intro || '[图片]'"/>
+            <p v-text="item.intro || '[图片]'" />
           </li>
         </ul>
-        <loadmore
+        <Loadmore
           :auto="false"
           :loading="source[3].loading"
           :no-more="source[3].noMore"
@@ -265,35 +246,20 @@
           :error="source[3].error"
           :fetch="loadMoreData"
         />
-      </van-tab>
-      <van-tab title="视频">
+      </VanTab>
+      <VanTab title="视频">
         <ul class="videos">
-          <li
-            v-for="item in source[4].list"
-            :key="item.id"
-          >
+          <li v-for="item in source[4].list" :key="item.id">
             <a href="javascript:;">
               <div class="poster">
-                <v-img
-                  :src="item.poster"
-                  :width="120"
-                  :height="80"
-                />
-                <div
-                  v-if="item.deleted_at"
-                  class="delete-mask"
-                >
-                  视频已失效
-                </div>
+                <VImg :src="item.poster" :width="120" :height="80" />
+                <div v-if="item.deleted_at" class="delete-mask">视频已失效</div>
               </div>
-              <p
-                class="name"
-                v-text="item.name"
-              />
+              <p class="name" v-text="item.name" />
             </a>
           </li>
         </ul>
-        <loadmore
+        <Loadmore
           :auto="false"
           :loading="source[4].loading"
           :no-more="source[4].noMore"
@@ -301,8 +267,8 @@
           :error="source[4].error"
           :fetch="loadMoreData"
         />
-      </van-tab>
-    </van-tabs>
+      </VanTab>
+    </VanTabs>
   </div>
 </template>
 
@@ -314,8 +280,8 @@ import Loadmore from '@/components/Loadmore.vue'
 export default {
   name: 'App',
   components: {
-    'van-tab': Tab,
-    'van-tabs': Tabs,
+    VanTab: Tab,
+    VanTabs: Tabs,
     Loadmore
   },
   props: {},

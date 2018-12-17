@@ -6,7 +6,7 @@
 
   .avatar {
     float: left;
-    margin-right: 9px;
+    margin-right: 10px;
   }
 
   .content {
@@ -95,70 +95,36 @@
 </style>
 
 <template>
-  <div 
-    :id="`comment-${comment.id}`" 
-    class="comment-item">
-    <a 
-      :href="$alias.user(comment.from_user_zone)" 
-      class="avatar">
-      <v-img
-        :src="comment.from_user_avatar"
-        :avatar="true"
-        size="35"
-      />
-    </a>
+  <div :id="`comment-${comment.id}`" class="comment-item">
+    <div class="avatar"><UserAvatar :size="35" :user="computeFromUser" /></div>
     <div class="content">
       <div class="header">
-        <v-popover
+        <VPopover
           :actions="actions"
           :report-id="comment.id"
           :report-type="type + '_comment'"
         >
           <button class="tools-btn">···</button>
-        </v-popover>
-        <div class="user">
-          <a
-            :href="$alias.user(comment.from_user_zone)"
-            class="nickname oneline"
-          >
-            <span v-text="comment.from_user_name"/>
-            <span v-if="comment.is_owner">(楼主)</span>
-            <i
-              v-if="comment.is_leader"
-              class="iconfont icon-leader"
-            />
-            <i
-              v-else-if="comment.is_master"
-              class="iconfont icon-master"
-            />
-          </a>
-          <div class="info">
-            <span>第{{ comment.floor_count - 1 }}楼</span>
-            <span>·</span>
-            <v-time v-model="comment.created_at"/>
-          </div>
-        </div>
+        </VPopover>
+        <UserNickname :user="computeFromUser" />
       </div>
-      <div 
-        class="main" 
-        v-html="comment.content"/>
+      <div class="main" v-html="comment.content" />
       <div class="footer">
-        <sub-comment-list
-          :parent-comment="comment"
-          :type="type"
-        />
+        <div class="info">
+          <span>第{{ comment.floor_count - 1 }}楼</span> <span>·</span>
+          <VTime v-model="comment.created_at" />
+        </div>
+        <SubCommentList :parent-comment="comment" :type="type" />
         <div class="social">
           <button
-            :class="[ comment.liked ? 'reply-liked-btn' : 'reply-like-btn' ]"
+            :class="[comment.liked ? 'reply-liked-btn' : 'reply-like-btn']"
             @click="toggleLike"
           >
-            <i class="iconfont icon-icon_good"/>
+            <i class="iconfont icon-icon_good" />
             {{ comment.liked ? '已赞' : '赞' }}
             <span v-if="comment.like_count">({{ comment.like_count }})</span>
           </button>
-          <button 
-            class="reply-btn fr" 
-            @click="handleCommentBtnClick">
+          <button class="reply-btn fr" @click="handleCommentBtnClick">
             回复
           </button>
         </div>
@@ -170,12 +136,16 @@
 <script>
 import SubCommentList from './SubCommentList'
 import VPopover from '@/components/Popover'
+import UserNickname from '@/components/UserNickname'
+import UserAvatar from '@/components/UserAvatar'
 
 export default {
   name: 'CommentCommentItem',
   components: {
     VPopover,
-    SubCommentList
+    SubCommentList,
+    UserNickname,
+    UserAvatar
   },
   props: {
     comment: {
@@ -199,7 +169,15 @@ export default {
   },
   computed: {
     currentUserId() {
-      return this.$store.state.login ? this.$store.state.user.id : 0
+      return 0
+    },
+    computeFromUser() {
+      return {
+        id: this.comment.from_user_id,
+        avatar: this.comment.from_user_avatar,
+        nickname: this.comment.from_user_nickname,
+        zone: this.comment.from_user_zone
+      }
     },
     isMine() {
       return this.currentUserId === this.comment.from_user_id
@@ -240,6 +218,7 @@ export default {
           id: this.comment.id
         })
       } catch (e) {
+        // do nothing
       } finally {
         this.liking = false
       }

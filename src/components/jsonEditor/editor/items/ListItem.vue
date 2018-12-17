@@ -24,35 +24,20 @@
 </style>
 
 <template>
-  <common-item
-    :id="item.id"
-    class="list-item"
-  >
+  <CommonItem :id="item.id" class="list-item">
     <template slot="poster">
-      <i class="iconfont ic-list"/>
+      <i class="iconfont ic-list" />
     </template>
     <template slot="content">
       <template v-if="item.text">
         <ol v-if="item.sort === '1'">
-          <li
-            v-for="(li, index) in computeList(item.text)"
-            :key="index"
-          >
-            <span
-              class="oneline"
-              v-text="li"
-            />
+          <li v-for="(li, index) in computeList(item.text)" :key="index">
+            <span class="oneline" v-text="li" />
           </li>
         </ol>
         <ul v-else>
-          <li
-            v-for="(li, index) in computeList(item.text)"
-            :key="index"
-          >
-            <span
-              class="oneline"
-              v-text="li"
-            />
+          <li v-for="(li, index) in computeList(item.text)" :key="index">
+            <span class="oneline" v-text="li" />
           </li>
         </ul>
       </template>
@@ -60,7 +45,7 @@
         点击添加列表内容
       </template>
     </template>
-  </common-item>
+  </CommonItem>
 </template>
 
 <script>

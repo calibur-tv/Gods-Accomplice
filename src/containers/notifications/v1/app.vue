@@ -5,7 +5,7 @@
 </style>
 
 <template>
-  <mt-loadmore
+  <MtLoadmore
     id="notifications"
     ref="loadmore"
     :top-method="refreshPage"
@@ -14,19 +14,15 @@
     top-pull-text="下拉刷新"
     top-drop-text="松开并刷新"
   >
-    <common-item
-      v-for="item in list"
-      :key="item.id"
-      :item="item"
-    />
-    <v-loadmore
+    <CommonItem v-for="item in list" :key="item.id" :item="item" />
+    <VLoadmore
       :loading="loading"
       :no-more="noMore"
       :nothing="nothing"
       :error="error"
       :fetch="getData"
     />
-  </mt-loadmore>
+  </MtLoadmore>
 </template>
 
 <script>
@@ -40,7 +36,7 @@ export default {
   components: {
     CommonItem,
     VLoadmore,
-    'mt-loadmore': Loadmore
+    MtLoadmore: Loadmore
   },
   props: {},
   data() {

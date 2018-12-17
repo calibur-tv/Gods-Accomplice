@@ -1,11 +1,7 @@
 <template>
-  <v-common :item="item">
-    打赏回答
-    <a
-      href="javascript:;"
-      v-text="item.about.intro"
-    />
-  </v-common>
+  <VCommon :item="item">
+    打赏回答 <a href="javascript:;" v-text="item.about.intro" />
+  </VCommon>
 </template>
 
 <script>

@@ -81,37 +81,26 @@
       <!-- 标题 -->
       <div class="title">{{ title }}</div>
       <!-- 用户 -->
-      <div
-        v-if="user"
-        class="user"
-      >
+      <div v-if="user" class="user">
         <div class="total">{{ total }}分</div>
-        <user-avatar :user="user"/>
+        <UserAvatar :user="user" />
         <div class="info">
-          <user-nickname :user="user"/>
-          <v-time :datetime="created_at"/>
+          <UserNickname :user="user" />
+          <VTime v-model="created_at" />
         </div>
       </div>
     </header>
     <main>
       <section class="stars container">
-        <div
-          v-for="(item, index) in columns"
-          :key="index"
-          class="star-item"
-        >
+        <div v-for="(item, index) in columns" :key="index" class="star-item">
           <div
             class="label"
             v-text="`${labelMap[item]}：${info[item] * 2}分`"
           />
-          <v-rate
-            v-model="info[item]"
-            disabled
-            allow-half
-          />
+          <VRate v-model="info[item]" disabled allow-half />
         </div>
       </section>
-      <json-content :content="content"/>
+      <JsonContent :content="content" />
     </main>
   </div>
 </template>

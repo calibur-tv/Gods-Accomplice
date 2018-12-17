@@ -1,7 +1,5 @@
 <template>
-  <span class="stats-comp">
-    <slot/>
-  </span>
+  <span class="stats-comp"> <slot /> </span>
 </template>
 
 <script>
@@ -13,6 +11,10 @@ export default {
     once: {
       type: Boolean,
       default: true
+    },
+    scale: {
+      type: Number,
+      default: 1
     }
   },
   data() {
@@ -26,7 +28,7 @@ export default {
   methods: {
     checkViewed() {
       if (this.once) {
-        if (utils.checkInView(this.$el, 1)) {
+        if (utils.checkInView(this.$el, this.scale)) {
           this.$emit('enter')
         } else {
           const id = utils.on(
@@ -41,7 +43,7 @@ export default {
           )
         }
       } else {
-        if (utils.checkInView(this.$el, 1)) {
+        if (utils.checkInView(this.$el, this.scale)) {
           this.flag = true
           this.$emit('enter')
         } else {
@@ -51,7 +53,7 @@ export default {
           document,
           ['scroll'],
           utils.throttle(() => {
-            if (utils.checkInView(this.$el, 1)) {
+            if (utils.checkInView(this.$el, this.scale)) {
               if (!this.flag) {
                 this.flag = true
                 this.$emit('enter')

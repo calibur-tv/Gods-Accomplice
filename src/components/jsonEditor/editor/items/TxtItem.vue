@@ -7,40 +7,25 @@
 </style>
 
 <template>
-  <common-item
-    :id="item.id"
-    class="txt-item"
-  >
+  <CommonItem :id="item.id" class="txt-item">
     <template slot="poster">
-      <i class="iconfont ic-text"/>
+      <i class="iconfont ic-text" />
     </template>
     <template slot="content">
       <!-- title 和 text 之后要分开 -->
       <template v-if="item.text || item.title">
-        <p
-          v-if="item.text && !item.title"
-          v-html="item.text"
-        />
-        <h3
-          v-else-if="item.title && !item.text"
-          v-text="item.title"
-        />
+        <p v-if="item.text && !item.title" v-html="item.text" />
+        <h3 v-else-if="item.title && !item.text" v-text="item.title" />
         <template v-else>
-          <h3
-            class="oneline"
-            v-html="item.title"
-          />
-          <p
-            class="three-line"
-            v-html="item.text"
-          />
+          <h3 class="oneline" v-html="item.title" />
+          <p class="three-line" v-html="item.text" />
         </template>
       </template>
       <template v-else>
         点击添加文字
       </template>
     </template>
-  </common-item>
+  </CommonItem>
 </template>
 
 <script>

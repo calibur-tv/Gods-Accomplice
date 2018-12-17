@@ -67,16 +67,11 @@
 
 <template>
   <div class="trans-item">
-    <div
-      class="type"
-      v-text="item.action"
-    />
-    <div
-      :class="[ item.type ? 'plus' : 'minus' ]"
-      class="amount">{{ sign }}￥{{ item.count }}</div>
-    <div class="detail">
-      <slot/>
+    <div class="type" v-text="item.action" />
+    <div :class="[item.type ? 'plus' : 'minus']" class="amount">
+      {{ sign }}￥{{ item.count }}
     </div>
+    <div class="detail"><slot /></div>
     <div class="time">{{ item.created_at }}</div>
   </div>
 </template>

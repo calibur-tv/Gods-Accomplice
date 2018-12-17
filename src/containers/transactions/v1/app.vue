@@ -6,13 +6,13 @@
 
 <template>
   <div id="trans-list">
-    <component
+    <Component
+      :is="`Type-${item.action_type}`"
       v-for="(item, index) in list"
       :key="index"
       :item="item"
-      :is="`Type-${item.action_type}`"
     />
-    <loadmore
+    <Loadmore
       :loading="loading"
       :no-more="noMore"
       :nothing="!list.length"

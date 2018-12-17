@@ -1,11 +1,16 @@
 <template>
-  <stats-component @enter="init = true">
-    <slot v-if="init"/>
-  </stats-component>
+  <StatsComponent :scale="2" @enter="init = true">
+    <slot v-if="init" />
+  </StatsComponent>
 </template>
 
 <script>
 export default {
-  name: 'VLazy'
+  name: 'VLazy',
+  data() {
+    return {
+      init: false
+    }
+  }
 }
 </script>

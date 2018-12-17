@@ -43,17 +43,11 @@
 
 <template>
   <ul id="notice">
-    <li
-      v-for="(item, index) in list"
-      :key="index"
-    >
+    <li v-for="(item, index) in list" :key="index">
       <a>
-        <img :src="item.poster">
-        <p
-          class="title oneline"
-          v-text="item.title"
-        />
-        <span class="meta">活动时间：{{ item.time }}</span>
+        <img :src="item.poster" />
+        <p class="title oneline" v-text="item.title" />
+        <span class="meta"> 活动时间：{{ item.time }} </span>
       </a>
     </li>
   </ul>

@@ -29,18 +29,8 @@
 
 <template>
   <div class="user-nickname">
-    <div class="nickname">
-      <p
-        class="oneline"
-        v-text="user.nickname"
-      />
-    </div>
-    <span
-      v-if="showOwner"
-      class="badge owner-badge"
-    >
-      楼主
-    </span>
+    <div class="nickname"><p class="oneline" v-text="user.nickname" /></div>
+    <span v-if="showOwner" class="badge owner-badge"> 楼主 </span>
   </div>
 </template>
 
