@@ -70,6 +70,10 @@
         display: block;
         height: 20px;
 
+        &.is-active {
+          color: #ff6881;
+        }
+
         img {
           width: 20px;
           height: 20px;
@@ -115,10 +119,13 @@
           <VTime v-model="comment.created_at" />
         </div>
         <div class="social">
-          <button @click="toggleLike">
+          <button
+            :class="{ 'is-active': comment.liked }"
+            @click="toggleLike"
+          >
             <span v-if="comment.like_count">{{ comment.like_count }}</span>
-            <img v-if="comment.liked" src="./images/agree.png" />
-            <img v-else src="./images/agree.png" />
+            <img v-if="comment.liked" src="./images/like-active.png" />
+            <img v-else src="./images/like.png" />
           </button>
         </div>
       </div>
