@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueTimeago from 'vue-timeago'
 import UserAvatar from '@/components/UserAvatar.vue'
 import UserNickname from '@/components/UserNickname.vue'
+import StatsComponent from '@/components/StatsComponent.vue'
+import LazyComponent from '@/components/LazyComponent.vue'
 
 Vue.use(VueTimeago, {
   name: 'VTime',
@@ -14,3 +16,5 @@ Vue.use(VueTimeago, {
 })
 Vue.component(UserNickname.name, UserNickname)
 Vue.component(UserAvatar.name, UserAvatar)
+Vue.component(StatsComponent.name, StatsComponent)
+Vue.component(LazyComponent.name, LazyComponent)

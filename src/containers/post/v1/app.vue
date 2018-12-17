@@ -145,6 +145,13 @@
       }
     }
   }
+
+  .hr {
+    background-color: #edf1f4;
+    height: 10px;
+    margin-left: -$container-padding;
+    margin-right: -$container-padding;
+  }
 }
 </style>
 
@@ -240,6 +247,12 @@
         />
       </div>
     </footer>
+    <div class="hr"/>
+    <comment-main
+      :id="post.id"
+      :master-id="user.id"
+      type="post"
+    />
   </div>
 </template>
 
@@ -247,12 +260,14 @@
 import UserFollowBtn from '@/components/UserFollowBtn'
 import RewardBtn from '@/components/RewardBtn'
 import BubbleTag from '@/components/BubbleTag'
+import CommentMain from '@/components/comment/CommentMain'
 
 export default {
   name: 'App',
   components: {
     UserFollowBtn,
     BubbleTag,
+    CommentMain,
     RewardBtn
   },
   data() {

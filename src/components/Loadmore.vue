@@ -83,7 +83,7 @@
     </slot>
     <!-- 点击按钮 -->
     <slot
-      v-else
+      v-else-if="!auto"
       name="text"
     >
       <button

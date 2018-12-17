@@ -64,12 +64,10 @@ import ListItem from './items/ListItem.vue'
 import { ulid } from 'ulid'
 import './font.css'
 import CreateBtn from './CreateBtn.vue'
-import StatsComponent from '@/components/StatsComponent.vue'
 
 export default {
   name: 'JsonEditor',
   components: {
-    StatsComponent,
     CreateBtn,
     draggable,
     TxtItem,
