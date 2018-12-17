@@ -1,31 +1,74 @@
-<style lang="scss">
-.sub-comment-item {
-  padding: 2px 10px;
-  font-size: 14px;
-  line-height: 18px;
+<style lang="scss" module>
+.item {
+  position: relative;
+  padding-top: 15px;
+  padding-bottom: 15px;
 
-  .nickname {
-    color: $color-blue;
+  &:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: -$container-padding;
+    height: 1px;
+    background-color: #e5e5e5;
+    transform: scaleY(0.5);
   }
 
-  .comment-content {
-    margin-right: 6px;
-    word-break: break-all;
+  .avatar {
+    float: left;
+    margin-right: 8px;
+  }
+
+  .main {
+    overflow: hidden;
+
+    .header {
+      font-size: 16px;
+      margin-bottom: 7px;
+
+      span {
+        line-height: 15px;
+        display: inline-block;
+        vertical-align: top;
+      }
+
+      .nickname {
+        color: #22222b;
+        font-weight: 500;
+      }
+
+      .to-user {
+        color: #49689b;
+      }
+    }
+
+    .content {
+      line-height: 21px;
+      color: #22222b;
+      font-size: 15px;
+    }
   }
 }
 </style>
 
 <template>
-  <div class="sub-comment-item">
-    <div class="nickname" v-text="comment.from_user_name" />
-    <template v-if="comment.to_user_zone">
-      回复
-      <div class="nickname" v-text="comment.to_user_name" />
-    </template>
-    :
-    <span class="reply-btn comment-content" @click="handleSubCommentClick">
-      comment.content }}
-    </span>
+  <div :class="$style.item">
+    <div :class="$style.avatar">
+      <VImg :src="comment.from_user_avatar" :width="22" :height="22" />
+    </div>
+    <div :class="$style.main">
+      <div :class="$style.header">
+        <template v-if="comment.to_user_zone">
+          <span :class="$style.nickname">{{ comment.from_user_name }}:</span>
+          <span :class="$style.toUser">@{{ comment.to_user_name }}</span>
+        </template>
+        <span v-else :class="$style.nickname" v-text="comment.from_user_name" />
+      </div>
+      <div :class="$style.content" @click="handleSubCommentClick">
+        {{ comment.content }}
+      </div>
+    </div>
   </div>
 </template>
 
@@ -57,7 +100,7 @@ export default {
   },
   computed: {
     currentUserId() {
-      return this.$store.state.login ? this.$store.state.user.id : 0
+      return 0
     },
     isMine() {
       return this.currentUserId === this.comment.from_user_id

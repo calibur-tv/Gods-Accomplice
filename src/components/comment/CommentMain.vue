@@ -1,27 +1,18 @@
 <style lang="scss">
 #comment-wrap {
+  margin-right: -$container-padding;
+
   .sub-title {
-    margin-top: 15px;
-    margin-bottom: 15px;
+    margin-top: $container-padding;
+    margin-bottom: $container-padding;
+    font-size: 17px;
+    line-height: 24px;
 
-    .write-btn {
-      float: right;
-      font-weight: bold;
-      font-size: 13px;
+    span {
+      @include half-font(11px, top);
+      display: inline-block;
+      color: #a4a4ae;
     }
-  }
-
-  #comment-list-footer {
-    margin-left: -$container-padding;
-    margin-right: -$container-padding;
-  }
-
-  .no-content {
-    text-align: center;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    font-size: 12px;
-    color: #99a2aa;
   }
 }
 </style>
@@ -29,9 +20,9 @@
 <template>
   <div id="comment-wrap">
     <!-- 主列表的头部 -->
-    <slot name="header">
-      <h3 class="sub-title">评论{{ total ? `(${total})` : '' }}</h3>
-    </slot>
+    <h3 class="sub-title">
+      评论 <span v-if="total">{{ total }}</span>
+    </h3>
     <!-- 主列表的 list -->
     <template v-if="list.length">
       <div id="comment-list-wrap">

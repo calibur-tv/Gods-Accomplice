@@ -2,17 +2,30 @@
 .comment-item {
   position: relative;
   margin-top: $container-padding;
-  padding-bottom: $container-padding;
+
+  &:after {
+    content: '';
+    position: absolute;
+    left: -$container-padding;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background-color: #e5e5e5;
+    transform: scaleY(0.5);
+  }
 
   .avatar {
-    float: left;
     margin-right: 10px;
+    float: left;
   }
 
   .content {
     overflow: hidden;
+    padding-right: $container-padding;
 
     .header {
+      margin-bottom: 3px;
+
       .tools-btn {
         float: right;
         line-height: 16px;
@@ -22,71 +35,44 @@
         padding-left: 4px;
       }
 
-      .user {
-        .nickname {
-          font-size: 14px;
-          height: 20px;
-          line-height: 20px;
-          display: block;
-          color: #333;
-          margin-bottom: 1px;
-
-          span {
-            margin-right: 2px;
-          }
-
-          .icon-leader {
-            color: $color-pink;
-            font-size: 14px;
-          }
-
-          .icon-master {
-            color: $color-blue;
-            font-size: 13px;
-          }
-        }
-
-        .info {
-          color: #999;
-          line-height: 14px;
-          font-size: 12px;
-
-          span {
-            margin-right: 5px;
-          }
+      .user-nickname {
+        .oneline {
+          font-size: 16px;
+          color: #22222b;
+          line-height: 22px;
+          font-weight: 500;
         }
       }
     }
 
     .main {
-      font-size: 16px;
-      margin: 10px 0 4px;
-      color: #333;
-      line-height: 24px;
+      font-size: 15px;
+      color: #22222b;
+      line-height: 21px;
       min-height: 65px;
 
       .image-area {
         margin: 10px 0;
-
-        img {
-          width: 100%;
-          height: auto;
-        }
       }
     }
 
     .footer {
-      .social {
-        font-size: 12px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      font-size: 12px;
+      color: #a4a4ae;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
 
-        .reply-liked-btn {
-          color: $color-blue;
-        }
+      button {
+        display: block;
+        height: 20px;
 
-        button {
-          color: #666;
-          padding-left: 3px;
-          padding-top: 11px;
+        img {
+          width: 20px;
+          height: 20px;
         }
       }
     }
@@ -108,27 +94,35 @@
         </VPopover>
         <UserNickname :user="computeFromUser" />
       </div>
-      <div class="main" v-html="comment.content" />
+      <div class="main">
+        <div class="text-area" v-html="comment.content" />
+        <div v-if="comment.images.length" class="image-area">
+          <VImg
+            v-for="(item, index) in comment.images"
+            :key="index"
+            :src="item.url"
+            :size="item.size"
+            :type="item.type"
+            :width="item.width"
+            :height="item.height"
+            :full="true"
+          />
+        </div>
+      </div>
       <div class="footer">
         <div class="info">
-          <span>第{{ comment.floor_count - 1 }}楼</span> <span>·</span>
+          <span>{{ comment.floor_count - 1 }}楼</span>
           <VTime v-model="comment.created_at" />
         </div>
-        <SubCommentList :parent-comment="comment" :type="type" />
         <div class="social">
-          <button
-            :class="[comment.liked ? 'reply-liked-btn' : 'reply-like-btn']"
-            @click="toggleLike"
-          >
-            <i class="iconfont icon-icon_good" />
-            {{ comment.liked ? '已赞' : '赞' }}
-            <span v-if="comment.like_count">({{ comment.like_count }})</span>
-          </button>
-          <button class="reply-btn fr" @click="handleCommentBtnClick">
-            回复
+          <button @click="toggleLike">
+            <span v-if="comment.like_count">{{ comment.like_count }}</span>
+            <img v-if="comment.liked" src="./images/agree.png" />
+            <img v-else src="./images/agree.png" />
           </button>
         </div>
       </div>
+      <SubCommentList :parent-comment="comment" :type="type" />
     </div>
   </div>
 </template>
@@ -175,7 +169,7 @@ export default {
       return {
         id: this.comment.from_user_id,
         avatar: this.comment.from_user_avatar,
-        nickname: this.comment.from_user_nickname,
+        nickname: this.comment.from_user_name,
         zone: this.comment.from_user_zone
       }
     },
@@ -248,13 +242,6 @@ export default {
           }
           this.$toast.error(e)
         })
-    },
-    handleCommentBtnClick() {
-      this.$channel.$emit('reply-comment', {
-        id: this.comment.id,
-        targetUserId: this.comment.from_user_id,
-        targetUserName: this.comment.from_user_name
-      })
     }
   }
 }

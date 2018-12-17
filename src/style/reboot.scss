@@ -48,7 +48,7 @@ canvas {
   width: 100%;
 }
 
-span, i {
+span, i, time {
   vertical-align: middle;
 }
 
@@ -58,6 +58,7 @@ button {
   border: none;
   user-select: none;
   text-align: center;
+  color: inherit;
 }
 
 a {

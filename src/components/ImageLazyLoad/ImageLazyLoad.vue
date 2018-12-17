@@ -17,8 +17,7 @@ $placeholder-color: RGB(241, 243, 244);
   .image-wrap {
     width: 100%;
     height: 100%;
-    transition: 0.4s cubic-bezier(0.78, 0.14, 0.15, 0.86);
-    background-color: $placeholder-color;
+    transition: 0.4s linear;
   }
 }
 
@@ -57,7 +56,7 @@ $placeholder-color: RGB(241, 243, 244);
     top: 0;
     width: 100%;
     height: 100%;
-    transition: 0.4s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+    transition: 0.4s linear;
   }
 
   // 居中
@@ -114,15 +113,6 @@ $placeholder-color: RGB(241, 243, 244);
         height: 50px;
         border-top: solid 5px currentColor;
         border-bottom: solid 5px currentColor;
-      }
-    }
-
-    @include keyframes(rolling) {
-      from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(360deg);
       }
     }
 
