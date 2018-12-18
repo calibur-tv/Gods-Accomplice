@@ -81,26 +81,28 @@
     <!-- 正文 -->
     <main>
       <section v-if="images.length" class="images">
-        <VImg
+        <span
           v-for="(item, index) in images"
           :key="index"
-          :src="item.url"
-          :width="item.width"
-          :height="item.height"
-          :mime="item.type"
-          :blur="true"
-          :full="true"
-          class="image"
-        />
+          @click="handleImagePreview(index)"
+        >
+          <VImg
+            :src="item.url"
+            :width="item.width"
+            :height="item.height"
+            :mime="item.type"
+            :blur="true"
+            :full="true"
+            class="image"
+          />
+        </span>
       </section>
     </main>
     <!-- 番剧 -->
     <footer>
       <span v-if="bangumi" class="bangumi">来自：{{ bangumi.name }}</span>
     </footer>
-    <VLazy>
-      <CommentMain :id="id" :master-id="user.id" type="image" />
-    </VLazy>
+    <VLazy> <CommentMain :id="id" :master-id="user.id" type="image" /> </VLazy>
   </div>
 </template>
 
@@ -122,6 +124,14 @@ export default {
       user: null,
       name: '',
       created_at: ''
+    }
+  },
+  methods: {
+    handleImagePreview(index) {
+      M.invoker.previewImages({
+        index,
+        images: this.images
+      })
     }
   }
 }

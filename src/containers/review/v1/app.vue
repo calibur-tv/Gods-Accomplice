@@ -143,6 +143,31 @@ export default {
       })
       return result
     }
+  },
+  created() {
+    this.$channel.$on('json-editor-image-click', image => {
+      const images = this.content
+        .filter(_ => _.type === 'img')
+        .map(_ => {
+          return {
+            width: _.width,
+            height: _.height,
+            url: _.url,
+            size: _.size,
+            type: _.mime
+          }
+        })
+      let index = 0
+      images.forEach((item, i) => {
+        if (item.url === image.url) {
+          index = i
+        }
+      })
+      M.invoker.previewImages({
+        index,
+        images
+      })
+    })
   }
 }
 </script>

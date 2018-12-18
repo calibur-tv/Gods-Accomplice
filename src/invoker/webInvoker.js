@@ -14,6 +14,10 @@ export default class extends invokerInterface {
     this.JsCallApp('toNative', { page, params })
   }
 
+  previewImages({ images, index }) {
+    this.JsCallApp('previewImages', { images, index })
+  }
+
   JsCallApp(func, params, callback) {
     console.log(func, params, callback)
   }

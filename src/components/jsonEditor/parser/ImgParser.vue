@@ -21,14 +21,16 @@
 
 <template>
   <div class="json-content-img-parser">
-    <VImg
-      :src="item.url"
-      :width="item.width"
-      :height="item.height"
-      :mime="item.mime"
-      :blur="true"
-      :full="true"
-    />
+    <span @click="emitImagePreview">
+      <VImg
+        :src="item.url"
+        :width="item.width"
+        :height="item.height"
+        :mime="item.mime"
+        :blur="true"
+        :full="true"
+      />
+    </span>
     <p v-if="item.text" class="img-tip" v-text="item.text" />
   </div>
 </template>
@@ -40,6 +42,14 @@ export default {
     item: {
       type: Object,
       required: true
+    }
+  },
+  methods: {
+    emitImagePreview() {
+      if (/gif/.test(this.item.mime)) {
+        return
+      }
+      this.$channel.$emit('json-editor-image-click', this.item)
     }
   }
 }

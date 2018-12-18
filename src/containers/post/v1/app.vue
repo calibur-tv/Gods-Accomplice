@@ -142,17 +142,21 @@
     <main>
       <section class="content" v-html="post.content" />
       <section v-if="post.images.length" class="images">
-        <VImg
+        <span
           v-for="(item, index) in post.images"
           :key="index"
-          :src="item.url"
-          :width="item.width"
-          :height="item.height"
-          :mime="item.type"
-          :blur="true"
-          :full="true"
-          class="image"
-        />
+          @click="handleImagePreview(index)"
+        >
+          <VImg
+            :src="item.url"
+            :width="item.width"
+            :height="item.height"
+            :mime="item.type"
+            :blur="true"
+            :full="true"
+            class="image"
+          />
+        </span>
       </section>
     </main>
     <!-- 番剧 -->
@@ -231,6 +235,14 @@ export default {
         return []
       }
       return this.post.reward_users.list.slice(0, 4)
+    }
+  },
+  methods: {
+    handleImagePreview(index) {
+      M.invoker.previewImages({
+        index,
+        images: this.post.images
+      })
     }
   }
 }

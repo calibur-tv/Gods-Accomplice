@@ -19,7 +19,7 @@
         &:after {
           content: '';
           position: absolute;
-          background-color: #c8c7cc;
+          background-color: #e5e5e5;
           display: block;
           z-index: 15;
           top: auto;

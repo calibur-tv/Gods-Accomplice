@@ -169,8 +169,6 @@
 <script>
 import SubCommentList from './SubCommentList'
 import VPopover from '@/components/Popover'
-import UserNickname from '@/components/UserNickname'
-import UserAvatar from '@/components/UserAvatar'
 import UserFollowBtn from '@/components/UserFollowBtn'
 
 export default {
@@ -178,8 +176,6 @@ export default {
   components: {
     VPopover,
     SubCommentList,
-    UserNickname,
-    UserAvatar,
     UserFollowBtn
   },
   props: {
