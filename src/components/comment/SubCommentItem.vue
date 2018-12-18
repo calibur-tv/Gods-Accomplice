@@ -97,9 +97,11 @@
         </template>
         <span v-else :class="$style.nickname" v-text="comment.from_user_name" />
       </div>
-      <div :class="$style.content" @click="handleSubCommentClick">
-        {{ comment.content }}
-      </div>
+      <p
+        :class="$style.content"
+        v-text="comment.context"
+        @click="handleSubCommentClick"
+      />
     </div>
   </div>
 </template>

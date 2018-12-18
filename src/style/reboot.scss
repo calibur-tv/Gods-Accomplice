@@ -36,12 +36,18 @@ li {
   list-style-type: none;
 }
 
+p {
+  word-break: break-word !important;
+  word-break: break-all;
+}
+
 img {
   max-width: 100%;
   color: transparent;
   background-color: transparent;
   border: 0;
   display: inline-block;
+  -webkit-touch-callout: none;
 }
 
 canvas {

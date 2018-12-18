@@ -144,6 +144,8 @@
             :width="item.width"
             :height="item.height"
             :full="true"
+            :blur="true"
+            @click="handleImagePreview(index)"
           />
         </div>
       </div>
@@ -283,6 +285,12 @@ export default {
           }
           this.$toast.error(e)
         })
+    },
+    handleImagePreview(index) {
+      M.invoker.previewImages({
+        index,
+        images: this.comment.images
+      })
     }
   }
 }

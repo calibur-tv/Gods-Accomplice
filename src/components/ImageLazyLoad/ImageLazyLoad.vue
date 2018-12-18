@@ -32,6 +32,7 @@ $placeholder-color: RGB(241, 243, 244);
     width: 100%;
     height: 100%;
     display: block;
+    -webkit-touch-callout: default;
   }
 
   &.retry {
