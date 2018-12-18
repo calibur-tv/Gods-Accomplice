@@ -47,11 +47,12 @@
 
       .right-btn {
         .tool-btn {
-          line-height: 16px;
-          font-size: 12px;
-          color: #535353;
-          padding-top: 9px;
-          padding-left: 4px;
+          display: block;
+
+          img {
+            width: 20px;
+            height: 20px;
+          }
         }
 
         .user-follow-button {
@@ -127,7 +128,7 @@
             :report-id="comment.id"
             :report-type="type + '_comment'"
           >
-            <button class="tool-btn">···</button>
+            <button class="tool-btn"><img src="./images/dots.png" /></button>
           </VPopover>
         </div>
       </div>

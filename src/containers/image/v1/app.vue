@@ -9,36 +9,6 @@
       font-size: 18px;
       font-weight: 800;
       line-height: 24px;
-
-      .creator-badge {
-        display: inline-block;
-        background-color: orange;
-        color: #fff;
-        border-radius: 4px;
-        font-weight: 500;
-        font-size: 12px;
-        padding: 0 3px;
-        line-height: 17px;
-        margin-top: -3px;
-      }
-    }
-
-    .user {
-      @extend %clearfix;
-
-      .user-avatar {
-        float: left;
-        margin-right: 10px;
-      }
-
-      .info {
-        overflow: hidden;
-
-        time {
-          font-size: 12px;
-          color: $color-gray-text;
-        }
-      }
     }
   }
 
@@ -99,17 +69,14 @@
     <!-- 头部 -->
     <header>
       <!-- 标题 -->
-      <div class="title">
-        <span class="badge creator-badge"> 原创 </span> {{ name }}
-      </div>
+      <div class="title">{{ name }}</div>
       <!-- 用户 -->
-      <div v-if="user" class="user">
-        <UserAvatar :user="user" />
-        <div class="info">
-          <UserNickname :user="user" :show-owner="true" />
-          <VTime :datetime="created_at" />
-        </div>
-      </div>
+      <FlowHeaderUser
+        v-if="user"
+        :user="user"
+        :is-followed="false"
+        :time="created_at"
+      />
     </header>
     <!-- 正文 -->
     <main>
@@ -120,6 +87,8 @@
           :src="item.url"
           :width="item.width"
           :height="item.height"
+          :mime="item.type"
+          :blur="true"
           :full="true"
           class="image"
         />
@@ -127,16 +96,27 @@
     </main>
     <!-- 番剧 -->
     <footer>
-      <span v-if="bangumi" class="bangumi"> 来自：{{ bangumi.name }} </span>
+      <span v-if="bangumi" class="bangumi">来自：{{ bangumi.name }}</span>
     </footer>
+    <VLazy>
+      <CommentMain :id="id" :master-id="user.id" type="image" />
+    </VLazy>
   </div>
 </template>
 
 <script>
+import FlowHeaderUser from '@/components/FlowHeaderUser'
+import CommentMain from '@/components/comment/CommentMain'
+
 export default {
   name: 'App',
+  components: {
+    FlowHeaderUser,
+    CommentMain
+  },
   data() {
     return {
+      id: 0,
       images: [],
       bangumi: null,
       user: null,

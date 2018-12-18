@@ -76,8 +76,8 @@ export default {
   props: {},
   data() {
     return {
-      id: 0,
       model: '',
+      model_id: 0,
       comment_id: 0,
       reply_id: 0,
       comment: null,

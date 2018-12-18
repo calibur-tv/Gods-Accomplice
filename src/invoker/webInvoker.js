@@ -6,6 +6,14 @@ export default class extends invokerInterface {
     this.JsCallApp('getDeviceInfo', {}, callback)
   }
 
+  toWebview(page, params) {
+    this.JsCallApp('toWebview', { page, params })
+  }
+
+  toNative(page, params) {
+    this.JsCallApp('toNative', { page, params })
+  }
+
   JsCallApp(func, params, callback) {
     console.log(func, params, callback)
   }

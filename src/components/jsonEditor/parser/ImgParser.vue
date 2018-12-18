@@ -25,6 +25,8 @@
       :src="item.url"
       :width="item.width"
       :height="item.height"
+      :mime="item.mime"
+      :blur="true"
       :full="true"
     />
     <p v-if="item.text" class="img-tip" v-text="item.text" />

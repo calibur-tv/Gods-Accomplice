@@ -10,6 +10,110 @@ export default class extends invokerInterface {
     this.JsCallApp('getDeviceInfo', {}, callback)
   }
 
+  getUserInfo(callback) {
+    this.JsCallApp('getUserInfo', {}, callback)
+  }
+
+  setUserInfo(data) {
+    this.JsCallApp('setUserInfo', data)
+  }
+
+  toWebview(page, data = {}) {
+    this.JsCallApp('toWebviewPage', { page, data })
+  }
+
+  toNative(page, data = {}) {
+    this.JsCallApp('toNativePage', { page, data })
+  }
+
+  previewImages({ images, index }) {
+    this.JsCallApp('previewImages', { images, index })
+  }
+
+  createMainComment({ model_type, model_id }, callback) {
+    this.JsCallApp('createMainComment', { model_type, model_id }, callback)
+  }
+
+  createSubComment({ model_type, model_id, target_user_id }, callback) {
+    this.JsCallApp(
+      'createSubComment',
+      { model_type, model_id, target_user_id },
+      callback
+    )
+  }
+
+  toast({ type, text }) {
+    this.JsCallApp('showToast', { type, text })
+  }
+
+  alert({ title, message, buttonText } = {}, callback) {
+    const sendTitle = title || '提示'
+    const sendButtonText = buttonText || '确认'
+    this.JsCallApp(
+      'show-alert',
+      { title: sendTitle, message, buttonText: sendButtonText },
+      callback
+    )
+  }
+
+  confirm({
+    title,
+    message,
+    cancelButtonText,
+    submitButtonText,
+    callback
+  } = {}) {
+    const sendTitle = title || '提示'
+    const sendCancelButtonText = cancelButtonText || '取消'
+    const sendSubmitButtonText = submitButtonText || '确认'
+    this.JsCallApp(
+      'showConfirm',
+      {
+        title: sendTitle,
+        message,
+        cancelButtonText: sendCancelButtonText,
+        submitButtonText: sendSubmitButtonText
+      },
+      callback
+    )
+  }
+
+  prompt({
+    title,
+    message,
+    inputType,
+    maxLength,
+    cancelButtonText,
+    submitButtonText,
+    callback
+  } = {}) {
+    const sendTitle = title || '提示'
+    const sendMessage = message || ''
+    const sendCancelButtonText = cancelButtonText || '取消'
+    const sendSubmitButtonText = submitButtonText || '确认'
+    const sendInputType = inputType || 'text'
+    const sendMaxLength = maxLength || 0
+    this.JsCallApp(
+      'showPrompt',
+      {
+        title: sendTitle,
+        message: sendMessage,
+        maxLength: sendMaxLength,
+        inputType: sendInputType,
+        cancelButtonText: sendCancelButtonText,
+        submitButtonText: sendSubmitButtonText
+      },
+      callback
+    )
+  }
+
+  toggleClick({ type, id, result }) {
+    this.JsCallApp('eventChannel', {
+      func: 'toggleClick',
+      params: { type, id, result }
+    })
+  }
+
   /**
    * App 主动调用 JS 的函数
    * @param {JSON} jsonObj

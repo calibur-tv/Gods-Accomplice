@@ -32,7 +32,11 @@ export default (url, options = {}) => {
     return false
   }
 
-  const format = options.share ? '' : canUseWebP() ? '/format/webp' : ''
+  const format = options.format
+    ? `/format/${options.format}`
+    : canUseWebP()
+    ? '/format/webp'
+    : ''
   const mode = options.mode === undefined ? 1 : options.mode
 
   if ((mode === 1 && !options.width) || (!options.width && !options.height)) {

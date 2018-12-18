@@ -2,6 +2,12 @@
 #comment-wrap {
   margin-right: -$container-padding;
 
+  .main-hr {
+    background-color: #edf1f4;
+    height: 10px;
+    margin-left: -$container-padding;
+  }
+
   .sub-title {
     margin-top: $container-padding;
     margin-bottom: $container-padding;
@@ -20,6 +26,7 @@
 
 <template>
   <div id="comment-wrap">
+    <div class="main-hr" />
     <!-- 主列表的头部 -->
     <h3 class="sub-title">
       评论 <span v-if="total">{{ total }}</span>

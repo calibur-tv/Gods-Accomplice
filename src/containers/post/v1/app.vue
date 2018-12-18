@@ -21,38 +21,6 @@
         margin-top: -3px;
       }
     }
-
-    .user {
-      @extend %clearfix;
-      margin-bottom: 20px;
-
-      .user-avatar {
-        float: left;
-        margin-right: 10px;
-      }
-
-      button {
-        float: right;
-        margin-left: 10px;
-        margin-top: 6px;
-      }
-
-      .info {
-        height: 40px;
-        overflow: hidden;
-
-        .user-nickname {
-          margin-top: 2px;
-          margin-bottom: 1px;
-        }
-
-        time {
-          color: #a4a4ae;
-          @include half-font(10px, top);
-          line-height: 28px;
-        }
-      }
-    }
   }
 
   main {
@@ -153,13 +121,6 @@
       }
     }
   }
-
-  .hr {
-    background-color: #edf1f4;
-    height: 10px;
-    margin-left: -$container-padding;
-    margin-right: -$container-padding;
-  }
 }
 </style>
 
@@ -168,14 +129,12 @@
     <!-- 头部 -->
     <header v-if="post">
       <!-- 用户 -->
-      <div v-if="user" class="user">
-        <UserAvatar :user="user" />
-        <UserFollowBtn :user-id="user.id" :followed="false" />
-        <div class="info">
-          <UserNickname :user="user" />
-          <VTime v-model="post.created_at" />
-        </div>
-      </div>
+      <FlowHeaderUser
+        v-if="user"
+        :user="user"
+        :is-followed="false"
+        :time="post.created_at"
+      />
       <!-- 标题 -->
       <div class="title">{{ post.title }}</div>
     </header>
@@ -189,6 +148,8 @@
           :src="item.url"
           :width="item.width"
           :height="item.height"
+          :mime="item.type"
+          :blur="true"
           :full="true"
           class="image"
         />
@@ -237,7 +198,6 @@
         />
       </div>
     </footer>
-    <div class="hr" />
     <VLazy>
       <CommentMain :id="post.id" :master-id="user.id" type="post" />
     </VLazy>
@@ -245,18 +205,18 @@
 </template>
 
 <script>
-import UserFollowBtn from '@/components/UserFollowBtn'
 import RewardBtn from '@/components/RewardBtn'
 import BubbleTag from '@/components/BubbleTag'
 import CommentMain from '@/components/comment/CommentMain'
+import FlowHeaderUser from '@/components/FlowHeaderUser'
 
 export default {
   name: 'App',
   components: {
-    UserFollowBtn,
     BubbleTag,
     CommentMain,
-    RewardBtn
+    RewardBtn,
+    FlowHeaderUser
   },
   data() {
     return {

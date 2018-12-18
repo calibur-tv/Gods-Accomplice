@@ -2,7 +2,6 @@
 #review-show {
   header {
     margin-top: 20px;
-    margin-bottom: 15px;
 
     .title {
       margin-bottom: 20px;
@@ -10,46 +9,6 @@
       font-size: 18px;
       font-weight: 800;
       line-height: 24px;
-
-      .creator-badge {
-        display: inline-block;
-        background-color: orange;
-        color: #fff;
-        border-radius: 4px;
-        font-weight: 500;
-        font-size: 12px;
-        padding: 0 3px;
-        line-height: 17px;
-        margin-top: -3px;
-      }
-    }
-
-    .user {
-      @extend %clearfix;
-
-      .total {
-        float: right;
-        font-weight: bold;
-        font-size: 23px;
-        letter-spacing: 1px;
-        margin-left: 10px;
-        color: #ff9900;
-        line-height: 42px;
-      }
-
-      .user-avatar {
-        float: left;
-        margin-right: 10px;
-      }
-
-      .info {
-        overflow: hidden;
-
-        time {
-          font-size: 12px;
-          color: $color-gray-text;
-        }
-      }
     }
   }
 
@@ -71,6 +30,11 @@
       }
     }
   }
+
+  footer {
+    margin-left: $container-padding;
+    margin-right: $container-padding;
+  }
 }
 </style>
 
@@ -81,14 +45,12 @@
       <!-- 标题 -->
       <div class="title">{{ title }}</div>
       <!-- 用户 -->
-      <div v-if="user" class="user">
-        <div class="total">{{ total }}分</div>
-        <UserAvatar :user="user" />
-        <div class="info">
-          <UserNickname :user="user" />
-          <VTime v-model="created_at" />
-        </div>
-      </div>
+      <FlowHeaderUser
+        v-if="user"
+        :user="user"
+        :is-followed="false"
+        :time="created_at"
+      />
     </header>
     <main>
       <section class="stars container">
@@ -102,18 +64,27 @@
       </section>
       <JsonContent :content="content" />
     </main>
+    <footer>
+      <VLazy>
+        <CommentMain :id="id" :master-id="user.id" type="score" />
+      </VLazy>
+    </footer>
   </div>
 </template>
 
 <script>
 import { Rate } from 'element-ui'
 import JsonContent from '@/components/jsonEditor/parser/index.vue'
+import FlowHeaderUser from '@/components/FlowHeaderUser'
+import CommentMain from '@/components/comment/CommentMain'
 
 export default {
   name: 'App',
   components: {
     VRate: Rate,
-    JsonContent
+    JsonContent,
+    CommentMain,
+    FlowHeaderUser
   },
   props: {},
   data() {
@@ -172,10 +143,6 @@ export default {
       })
       return result
     }
-  },
-  watch: {},
-  created() {},
-  mounted() {},
-  methods: {}
+  }
 }
 </script>
