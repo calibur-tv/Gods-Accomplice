@@ -11,22 +11,10 @@ window.M = window.M || Object.create(null)
 const appVersion = document.querySelector('meta[name=app-version]').content
 const appName = document.querySelector('meta[name=app-name]').content
 const channel = new Vue()
-console.log(appVersion)
-console.log(appName)
+
 M.sentry = new Sentry({ appName, appVersion })
 M.invoker = new Invoker({ appName, appVersion })
 M.channel = channel
-
-const container = document.body
-const el = document.createElement('div')
-el.innerHTML =
-  container.children.length +
-  ':<br/>' +
-  'name：' +
-  appName +
-  'version：' +
-  appVersion + 'inviker' + JSON.stringify(M.invoker.jsFuncs)
-container.insertBefore(el, container.children[0])
 
 Vue.use({
   install(Vue) {
