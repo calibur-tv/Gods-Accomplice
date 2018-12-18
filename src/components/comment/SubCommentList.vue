@@ -35,7 +35,7 @@
         :type="type"
       />
       <button
-        v-if="!comments.noMore || comments.list.length > 2"
+        v-if="showCollapseBtn"
         class="load-all-comment"
         @click="loadAllComment"
       >
@@ -61,6 +61,10 @@ export default {
     type: {
       required: true,
       type: String
+    },
+    inDetail: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -72,6 +76,9 @@ export default {
     },
     hasComment() {
       return !!this.comments.list.length
+    },
+    showCollapseBtn() {
+      return !this.inDetail && (!this.comments.noMore || this.comments.list.length > 2)
     },
     filterComments() {
       return this.comments.list.slice(0, 2)

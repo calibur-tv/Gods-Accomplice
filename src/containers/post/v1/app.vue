@@ -134,9 +134,17 @@
           font-size: 13px;
         }
 
-        p {
-          font-size: 13px;
-          color: #797989;
+        .tip {
+          span {
+            font-size: 13px;
+            color: #797989;
+          }
+
+          img {
+            width: 20px;
+            height: 20px;
+            margin-left: -5px;
+          }
         }
       }
 
@@ -165,7 +173,7 @@
         <UserFollowBtn :user-id="user.id" :followed="false" />
         <div class="info">
           <UserNickname :user="user" />
-          <VTime :datetime="post.created_at" />
+          <VTime v-model="post.created_at" />
         </div>
       </div>
       <!-- 标题 -->
@@ -189,7 +197,9 @@
     <!-- 番剧 -->
     <footer>
       <div class="tag-wrap">
-        <BubbleTag v-if="bangumi" :text="bangumi.name" />
+        <BubbleTag v-if="bangumi" :text="bangumi.name">
+          <img slot="icon" src="../../../images/bangumi-icon.png" />
+        </BubbleTag>
         <template v-if="post && post.tags.length">
           <BubbleTag
             v-for="item in post.tags"
@@ -211,10 +221,13 @@
                 class="avatar"
               />
             </div>
-            <span class="count"> {{ post.reward_users.total }} </span>
-            <span class="tail"> 人投食 </span>
+            <span class="count">{{ post.reward_users.total }}</span>
+            <span class="tail">人投食</span>
           </template>
-          <p v-else>这是你唯一表达喜欢的方式</p>
+          <p v-else class="tip">
+            <span>这是你唯一表达喜欢的方式</span>
+            <img src="../../../images/to-reward.png" />
+          </p>
         </div>
         <RewardBtn
           :id="user.id"

@@ -11,6 +11,14 @@ export default class extends BaseApi {
     })
   }
 
+  getMainCommentItem({ type, comment_id, reply_id }) {
+    return this.http.get('comment/main/item', {
+      type,
+      comment_id,
+      reply_id
+    })
+  }
+
   getSubCommentList({ type, id, maxId }) {
     return this.http.get('comment/sub/list', { maxId, type, id })
   }

@@ -26,13 +26,16 @@
     .header {
       margin-bottom: 3px;
 
-      .tools-btn {
+      .right-btn {
         float: right;
-        line-height: 16px;
-        font-size: 12px;
-        color: #535353;
-        padding-top: 9px;
-        padding-left: 4px;
+
+        .tool-btn {
+          line-height: 16px;
+          font-size: 12px;
+          color: #535353;
+          padding-top: 9px;
+          padding-left: 4px;
+        }
       }
 
       .user-nickname {
@@ -89,13 +92,15 @@
     <div class="avatar"><UserAvatar :size="35" :user="computeFromUser" /></div>
     <div class="content">
       <div class="header">
-        <VPopover
-          :actions="actions"
-          :report-id="comment.id"
-          :report-type="type + '_comment'"
-        >
-          <button class="tools-btn">···</button>
-        </VPopover>
+        <div class="right-btn">
+          <VPopover
+            :actions="actions"
+            :report-id="comment.id"
+            :report-type="type + '_comment'"
+          >
+            <button class="tool-btn">···</button>
+          </VPopover>
+        </div>
         <UserNickname :user="computeFromUser" />
       </div>
       <div class="main">
@@ -113,23 +118,21 @@
           />
         </div>
       </div>
+      <slot name="extra" />
       <div class="footer">
         <div class="info">
           <span>{{ comment.floor_count - 1 }}楼</span>
           <VTime v-model="comment.created_at" />
         </div>
         <div class="social">
-          <button
-            :class="{ 'is-active': comment.liked }"
-            @click="toggleLike"
-          >
+          <button :class="{ 'is-active': comment.liked }" @click="toggleLike">
             <span v-if="comment.like_count">{{ comment.like_count }}</span>
             <img v-if="comment.liked" src="./images/like-active.png" />
             <img v-else src="./images/like.png" />
           </button>
         </div>
       </div>
-      <SubCommentList :parent-comment="comment" :type="type" />
+      <SubCommentList v-if="!inDetail" :parent-comment="comment" :type="type" />
     </div>
   </div>
 </template>
@@ -160,6 +163,10 @@ export default {
     type: {
       required: true,
       type: String
+    },
+    inDetail: {
+      type: Boolean,
+      default: false
     }
   },
   data() {

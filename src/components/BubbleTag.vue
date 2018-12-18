@@ -22,28 +22,24 @@
     border-bottom-color: #f6f7f7;
   }
 
-  i {
-    display: inline-block;
-    margin-right: 5px;
-    margin-left: -3px;
-    font-size: 13px;
-    color: #ff6881;
-    vertical-align: middle;
+  img {
+    width: 15px;
+    height: 15px;
+    margin-right: 2px;
+    margin-left: -2px;
   }
 
   span {
     display: inline-block;
     color: #484853;
     font-size: 13px;
-    vertical-align: middle;
   }
 }
 </style>
 
 <template>
   <button :class="$style.tag">
-    <i v-if="icon" :class="`ic-${icon}`" class="iconfont" />
-    <span v-text="text" />
+    <slot name="icon" /> <span v-text="text" />
   </button>
 </template>
 

@@ -2,6 +2,10 @@
 @import "mint-ui.css";
 @import "variables";
 
+html, body, #calibur, .container {
+  height:  100%;
+}
+
 .oneline {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -9,8 +13,8 @@
 }
 
 .container {
-  margin-left: $container-padding;
-  margin-right: $container-padding;
+  padding-left: $container-padding;
+  padding-right: $container-padding;
 }
 
 .clearfix {
