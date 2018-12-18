@@ -143,34 +143,42 @@ export default class extends invokerInterface {
    * @param {Function} callback
    */
   JsCallApp(func, params = {}, callback = null) {
-    this.setupWebViewJavascriptBridge(bridge => {
-      // Javascrit call Object-C
-      bridge.callHandler(
-        'mpWebBridge',
-        {
-          func: 'handleMessageFromJS',
-          params: JSON.stringify({ func, params })
-        },
-        function responseCallback(responseData) {
-          if (callback && typeof callback === 'function') {
-            callback(responseData)
+    try {
+      this.setupWebViewJavascriptBridge(bridge => {
+        // Javascrit call Object-C
+        bridge.callHandler(
+          'mpWebBridge',
+          {
+            func: 'handleMessageFromJS',
+            params: JSON.stringify({ func, params })
+          },
+          function responseCallback(responseData) {
+            if (callback && typeof callback === 'function') {
+              callback(responseData)
+            }
           }
-        }
-      )
-    })
+        )
+      })
+    } catch (e) {
+      M.sentry.captureException(e)
+    }
   }
 
   registerAppCallJsHnandler() {
-    this.setupWebViewJavascriptBridge(bridge => {
-      // Object-C call Javascript
-      bridge.registerHandler('mpWebBridge', (data, responseCallback) => {
-        const result = this.appCallJs(data)
-        if (result === undefined) {
-          return
-        }
-        responseCallback(JSON.stringify({ params: result }))
+    try {
+      this.setupWebViewJavascriptBridge(bridge => {
+        // Object-C call Javascript
+        bridge.registerHandler('mpWebBridge', (data, responseCallback) => {
+          const result = this.appCallJs(data)
+          if (result === undefined) {
+            return
+          }
+          responseCallback(JSON.stringify({ params: result }))
+        })
       })
-    })
+    } catch (e) {
+      M.sentry.captureException(e)
+    }
   }
 
   // Doc：https://github.com/marcuswestin/WebViewJavascriptBridge#usage

@@ -46,9 +46,6 @@ export default {
   },
   methods: {
     emitImagePreview() {
-      if (/gif/.test(this.item.mime)) {
-        return
-      }
       this.$channel.$emit('json-editor-image-click', this.item)
     }
   }

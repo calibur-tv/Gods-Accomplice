@@ -81,21 +81,18 @@
     <!-- 正文 -->
     <main>
       <section v-if="images.length" class="images">
-        <span
+        <VImg
           v-for="(item, index) in images"
           :key="index"
+          :src="item.url"
+          :width="item.width"
+          :height="item.height"
+          :mime="item.type"
+          :blur="true"
+          :full="true"
+          class="image"
           @click="handleImagePreview(index)"
-        >
-          <VImg
-            :src="item.url"
-            :width="item.width"
-            :height="item.height"
-            :mime="item.type"
-            :blur="true"
-            :full="true"
-            class="image"
-          />
-        </span>
+        />
       </section>
     </main>
     <!-- 番剧 -->

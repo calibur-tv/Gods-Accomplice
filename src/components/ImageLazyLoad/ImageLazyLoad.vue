@@ -171,6 +171,7 @@ $placeholder-color: RGB(241, 243, 244);
         "
         @error="handleImageLoadError"
         @load="handleImageLoadSuccess"
+        @click="emitClick"
       />
     </div>
     <span v-if="error" :class="$style.message" v-text="errorMessage" />
@@ -560,6 +561,12 @@ export default {
       }
       this.toggleClick = true
       this.loaded = true
+    },
+    emitClick() {
+      if (/gif/.test(this.mime) && this.displayGifMask) {
+        return
+      }
+      this.$emit('click')
     }
   }
 }

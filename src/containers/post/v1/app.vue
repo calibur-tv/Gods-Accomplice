@@ -140,24 +140,21 @@
     </header>
     <!-- 正文 -->
     <main>
-      <section class="content" v-html="post.content" />
       <section v-if="post.images.length" class="images">
-        <span
+        <VImg
           v-for="(item, index) in post.images"
           :key="index"
+          :src="item.url"
+          :width="item.width"
+          :height="item.height"
+          :mime="item.type"
+          :blur="true"
+          :full="true"
+          class="image"
           @click="handleImagePreview(index)"
-        >
-          <VImg
-            :src="item.url"
-            :width="item.width"
-            :height="item.height"
-            :mime="item.type"
-            :blur="true"
-            :full="true"
-            class="image"
-          />
-        </span>
+        />
       </section>
+      <section class="content" v-html="post.content" />
     </main>
     <!-- 番剧 -->
     <footer>
