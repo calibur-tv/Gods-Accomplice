@@ -46,12 +46,8 @@
     :class="{ 'in-detail': inDetail }"
     class="sub-comment-list-wrap"
   >
-    <h3
-      v-if="inDetail"
-      class="reply-title"
-    >
-      回复
-      <span>{{ total }}</span>
+    <h3 v-if="inDetail" class="reply-title">
+      回复 <span>{{ total }}</span>
     </h3>
     <div class="sub-comment-list">
       <SubCommentItem
@@ -107,7 +103,10 @@ export default {
       return this.comments.total
     },
     showCollapseBtn() {
-      return !this.inDetail && (!this.comments.noMore || this.comments.list.length > 2)
+      return (
+        !this.inDetail &&
+        (!this.comments.noMore || this.comments.list.length > 2)
+      )
     },
     filterComments() {
       return this.inDetail ? this.comments.list : this.comments.list.slice(0, 2)

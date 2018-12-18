@@ -14,6 +14,12 @@
     transform: scaleY(0.5);
   }
 
+  &.in-detail {
+    .content .header {
+      align-items: center;
+    }
+  }
+
   .avatar {
     margin-right: 10px;
     float: left;
@@ -25,10 +31,21 @@
 
     .header {
       margin-bottom: 3px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+
+      .user-nickname {
+        .oneline {
+          font-size: 16px;
+          line-height: 22px;
+          font-weight: 500;
+          color: #22222b;
+        }
+      }
 
       .right-btn {
-        float: right;
-
         .tool-btn {
           line-height: 16px;
           font-size: 12px;
@@ -36,14 +53,14 @@
           padding-top: 9px;
           padding-left: 4px;
         }
-      }
 
-      .user-nickname {
-        .oneline {
-          font-size: 16px;
-          color: #22222b;
-          line-height: 22px;
-          font-weight: 500;
+        .user-follow-button {
+          font-size: 12px;
+          height: 20px;
+          line-height: 18px;
+          border-radius: 10px;
+          padding-left: 12px;
+          padding-right: 12px;
         }
       }
     }
@@ -88,12 +105,24 @@
 </style>
 
 <template>
-  <div :id="`comment-${comment.id}`" class="comment-item">
+  <div
+    :id="`comment-${comment.id}`"
+    :class="{ 'in-detail': inDetail }"
+    class="comment-item"
+  >
     <div class="avatar"><UserAvatar :size="35" :user="computeFromUser" /></div>
     <div class="content">
       <div class="header">
+        <UserNickname :user="computeFromUser" />
         <div class="right-btn">
+          <UserFollowBtn
+            v-if="inDetail"
+            :user-id="computeFromUser.id"
+            :followed="false"
+            class="user-follow-button"
+          />
           <VPopover
+            v-else
             :actions="actions"
             :report-id="comment.id"
             :report-type="type + '_comment'"
@@ -101,7 +130,6 @@
             <button class="tool-btn">···</button>
           </VPopover>
         </div>
-        <UserNickname :user="computeFromUser" />
       </div>
       <div class="main">
         <div class="text-area" v-html="comment.content" />
@@ -142,6 +170,7 @@ import SubCommentList from './SubCommentList'
 import VPopover from '@/components/Popover'
 import UserNickname from '@/components/UserNickname'
 import UserAvatar from '@/components/UserAvatar'
+import UserFollowBtn from '@/components/UserFollowBtn'
 
 export default {
   name: 'CommentCommentItem',
@@ -149,7 +178,8 @@ export default {
     VPopover,
     SubCommentList,
     UserNickname,
-    UserAvatar
+    UserAvatar,
+    UserFollowBtn
   },
   props: {
     comment: {

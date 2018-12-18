@@ -126,12 +126,12 @@ export default {
         })
         const { total, list, noMore } = data
         this.total = total
-        const oldIds = this.list.map(_ => _.id)
-        const filterdList = list.filter(_ => oldIds.indexOf(_.id) === -1)
-        this.list = this.list.concat(filterdList)
         this.noMore = noMore
         this.nothing = !total
         if (list.length) {
+          const oldIds = this.list.map(_ => _.id)
+          const filterdList = list.filter(_ => oldIds.indexOf(_.id) === -1)
+          this.list = this.list.concat(filterdList)
           this.lastFetchId = list[list.length - 1].id
         }
       } catch (e) {

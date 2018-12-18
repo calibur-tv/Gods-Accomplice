@@ -4,6 +4,25 @@
   padding-top: 15px;
   padding-bottom: 15px;
 
+  &.in-detail {
+    &:first-child {
+      &:before {
+        content: none;
+      }
+    }
+    &:before {
+      left: -$container-padding;
+    }
+
+    .avatar {
+      margin-right: 10px;
+    }
+
+    .main .header {
+      margin-bottom: 3px;
+    }
+  }
+
   &:before {
     content: '';
     position: absolute;
@@ -53,9 +72,17 @@
 </style>
 
 <template>
-  <div :class="$style.item">
+  <div :class="[$style.item, { [$style.inDetail]: inDetail }]">
     <div :class="$style.avatar">
       <VImg
+        v-if="inDetail"
+        :src="comment.from_user_avatar"
+        :width="35"
+        :height="35"
+        :avatar="true"
+      />
+      <VImg
+        v-else
         :src="comment.from_user_avatar"
         :width="22"
         :height="22"
