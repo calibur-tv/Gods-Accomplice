@@ -55,7 +55,12 @@
 <template>
   <div :class="$style.item">
     <div :class="$style.avatar">
-      <VImg :src="comment.from_user_avatar" :width="22" :height="22" />
+      <VImg
+        :src="comment.from_user_avatar"
+        :width="22"
+        :height="22"
+        :avatar="true"
+      />
     </div>
     <div :class="$style.main">
       <div :class="$style.header">
@@ -91,6 +96,10 @@ export default {
     type: {
       required: true,
       type: String
+    },
+    inDetail: {
+      type: Boolean,
+      default: false
     }
   },
   data() {

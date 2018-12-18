@@ -12,6 +12,7 @@
       @include half-font(11px, top);
       display: inline-block;
       color: #a4a4ae;
+      margin: 1px 0 0 -2px;
     }
   }
 }

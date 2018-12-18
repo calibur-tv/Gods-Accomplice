@@ -1,5 +1,22 @@
 <style lang="scss">
 .sub-comment-list-wrap {
+  &.in-detail {
+    margin-right: $container-padding;
+  }
+
+  .reply-title {
+    margin-top: $container-padding;
+    font-size: 17px;
+    line-height: 24px;
+
+    span {
+      @include half-font(11px, top);
+      display: inline-block;
+      color: #a4a4ae;
+      margin: 1px 0 0 -2px;
+    }
+  }
+
   .load-all-comment {
     position: relative;
     height: 48px;
@@ -24,7 +41,18 @@
 </style>
 
 <template>
-  <div v-if="hasComment" class="sub-comment-list-wrap">
+  <div
+    v-if="total"
+    :class="{ 'in-detail': inDetail }"
+    class="sub-comment-list-wrap"
+  >
+    <h3
+      v-if="inDetail"
+      class="reply-title"
+    >
+      回复
+      <span>{{ total }}</span>
+    </h3>
     <div class="sub-comment-list">
       <SubCommentItem
         v-for="comment in filterComments"
@@ -33,6 +61,7 @@
         :parent-user-id="authorId"
         :parent-comment-id="parentComment.id"
         :type="type"
+        :in-detail="inDetail"
       />
       <button
         v-if="showCollapseBtn"
@@ -74,14 +103,14 @@ export default {
     authorId() {
       return this.parentComment.from_user_id
     },
-    hasComment() {
-      return !!this.comments.list.length
+    total() {
+      return this.comments.total
     },
     showCollapseBtn() {
       return !this.inDetail && (!this.comments.noMore || this.comments.list.length > 2)
     },
     filterComments() {
-      return this.comments.list.slice(0, 2)
+      return this.inDetail ? this.comments.list : this.comments.list.slice(0, 2)
     }
   },
   methods: {

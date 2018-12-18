@@ -49,7 +49,10 @@
         :fetch="loadSubComment"
       />
     </template>
-    <div class="init-block">
+    <div
+      v-else
+      class="init-block"
+    >
       <p>加载中...</p>
     </div>
   </div>
