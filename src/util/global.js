@@ -5,24 +5,28 @@ import utils from './func'
 import Sentry from './sentry'
 import Invoker from '@/invoker/index'
 import alias from './alias'
-import { MessageBox } from 'mint-ui'
 
 window.M = window.M || Object.create(null)
 
 const appVersion = document.querySelector('meta[name=app-version]').content
 const appName = document.querySelector('meta[name=app-name]').content
 const channel = new Vue()
-const { alert, confirm, prompt } = MessageBox
-
+console.log(appVersion)
+console.log(appName)
 M.sentry = new Sentry({ appName, appVersion })
 M.invoker = new Invoker({ appName, appVersion })
 M.channel = channel
-M.message = {
-  alert,
-  confirm,
-  prompt,
-  toast
-}
+
+const container = document.body
+const el = document.createElement('div')
+el.innerHTML =
+  container.children.length +
+  ':<br/>' +
+  'name：' +
+  appName +
+  'version：' +
+  appVersion + 'inviker' + JSON.stringify(M.invoker.jsFuncs)
+container.insertBefore(el, container.children[0])
 
 Vue.use({
   install(Vue) {
@@ -35,11 +39,5 @@ Vue.use({
     Vue.prototype.$channel = channel
 
     Vue.prototype.$resize = resizeImage
-
-    Vue.prototype.$alert = alert
-
-    Vue.prototype.$confirm = confirm
-
-    Vue.prototype.$prompt = prompt
   }
 })

@@ -1,4 +1,5 @@
 import invokerInterface from './invokerInterface'
+import func from './func'
 
 export default class extends invokerInterface {
   constructor(data) {
@@ -7,6 +8,7 @@ export default class extends invokerInterface {
   }
 
   getDeviceInfo(callback) {
+    func.log({ func: 'getDeviceInfo' })
     this.JsCallApp('getDeviceInfo', {}, callback)
   }
 
@@ -143,8 +145,10 @@ export default class extends invokerInterface {
    * @param {Function} callback
    */
   JsCallApp(func, params = {}, callback = null) {
+    func.log({ func: 'JsCallApp begin' })
     try {
       this.setupWebViewJavascriptBridge(bridge => {
+        func.log({ func: 'JsCallApp setup' })
         // Javascrit call Object-C
         bridge.callHandler(
           'mpWebBridge',
@@ -153,6 +157,10 @@ export default class extends invokerInterface {
             params: JSON.stringify({ func, params })
           },
           function responseCallback(responseData) {
+            func.log({
+              func: 'JsCallApp response',
+              data: responseData
+            })
             if (callback && typeof callback === 'function') {
               callback(responseData)
             }
