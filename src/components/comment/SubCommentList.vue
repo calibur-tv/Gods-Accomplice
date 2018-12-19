@@ -58,11 +58,12 @@
         :parent-comment-id="parentComment.id"
         :type="type"
         :in-detail="inDetail"
+        @delete="handleSubCommentDelete"
       />
       <button
         v-if="showCollapseBtn"
         class="load-all-comment"
-        @click="loadAllComment"
+        @click.stop="loadAllComment"
       >
         全部{{ comments.total }}条回复
       </button>
@@ -114,8 +115,19 @@ export default {
   },
   methods: {
     loadAllComment() {
-      this.$channel.$emit('load-all-sub-comment', {
-        id: this.parentComment.id
+      if (this.inDetail) {
+        return
+      }
+      this.$alias.comment({
+        model: this.type,
+        comment_id: this.parentComment.id
+      })
+    },
+    handleSubCommentDelete(id) {
+      this.comments.list.forEach((item, index) => {
+        if (item.id === id) {
+          this.comments.list.splice(index, 1)
+        }
       })
     }
   }

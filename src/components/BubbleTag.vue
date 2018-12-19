@@ -38,7 +38,7 @@
 </style>
 
 <template>
-  <button :class="$style.tag">
+  <button :class="$style.tag" @click="$emit('click')">
     <slot name="icon" /> <span v-text="text" />
   </button>
 </template>

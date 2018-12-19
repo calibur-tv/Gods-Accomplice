@@ -172,7 +172,7 @@ $placeholder-color: RGB(241, 243, 244);
         "
         @error="handleImageLoadError"
         @load="handleImageLoadSuccess"
-        @click="emitClick"
+        @click.stop="emitClick"
       />
     </div>
     <span v-if="error" :class="$style.message" v-text="errorMessage" />
@@ -181,7 +181,7 @@ $placeholder-color: RGB(241, 243, 244);
       <div
         v-if="displayGifMask"
         :class="$style.loadGif"
-        @click="clickToLoadGIF"
+        @click.stop="clickToLoadGIF"
       >
         <span :class="{ [$style.rolling]: toggleClick }"> GIF </span>
       </div>

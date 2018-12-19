@@ -45,7 +45,6 @@
         />
       </div>
     </template>
-    <p v-else-if="emptyText" class="no-content" v-text="emptyText" />
     <Loadmore
       :no-more="noMore"
       :nothing="nothing"
@@ -147,31 +146,6 @@ export default {
       } finally {
         this.loading = false
       }
-    },
-    async toggleFocusCommentLike() {
-      if (this.replyForm.liking) {
-        return
-      }
-      this.replyForm.liking = true
-      try {
-        await this.$store.dispatch('comment/toggleLikeMainComment', {
-          ctx: this,
-          type: this.type,
-          id: this.focusCommentId
-        })
-      } finally {
-        this.replyForm.liking = false
-      }
-    },
-    writeComment() {
-      this.$channel.$emit(`open-create-comment-drawer-${this.type}-${this.id}`)
-    },
-    closeCommentDrawer() {
-      // close
-    },
-    submitCommentCallback() {
-      // open
-      this.$emit('create-main-comment')
     },
     deleteCommentCallback() {
       this.$emit('delete-main-comment')

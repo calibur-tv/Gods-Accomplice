@@ -73,7 +73,10 @@
 
 <template>
   <div :class="[$style.item, { [$style.inDetail]: inDetail }]">
-    <div :class="$style.avatar">
+    <div
+      :class="$style.avatar"
+      @click.stop="$alias.user(comment.from_user_zone)"
+    >
       <VImg
         v-if="inDetail"
         :src="comment.from_user_avatar"
@@ -92,21 +95,38 @@
     <div :class="$style.main">
       <div :class="$style.header">
         <template v-if="comment.to_user_zone">
-          <span :class="$style.nickname">{{ comment.from_user_name }}:</span>
-          <span :class="$style.toUser">@{{ comment.to_user_name }}</span>
+          <span
+            :class="$style.nickname"
+            @click.stop="$alias.user(comment.from_user_zone)"
+            >{{ comment.from_user_name }}:</span
+          >
+          <span
+            :class="$style.toUser"
+            @click.stop="$alias.user(comment.to_user_zone)"
+            >@{{ comment.to_user_name }}</span
+          >
         </template>
-        <span v-else :class="$style.nickname" v-text="comment.from_user_name" />
+        <span
+          v-else
+          :class="$style.nickname"
+          @click.stop="$alias.user(comment.from_user_zone)"
+          v-text="comment.from_user_name"
+        />
       </div>
       <p
+        v-if="inDetail"
         :class="$style.content"
+        @click.stop="handleSubCommentClick"
         v-text="comment.context"
-        @click="handleSubCommentClick"
       />
+      <p v-else :class="$style.content" v-text="comment.context" />
     </div>
   </div>
 </template>
 
 <script>
+import Api from '@/api/v1/commentApi'
+
 export default {
   name: 'SubCommentItem',
   props: {
@@ -142,33 +162,25 @@ export default {
     },
     isMine() {
       return this.currentUserId === this.comment.from_user_id
-    },
-    canDelete() {
-      return this.isMine || this.currentUserId === this.parentUserId
     }
   },
   methods: {
     handleSubCommentClick() {
+      let targetUserId = this.comment.from_user_id
+      let targetUserName = this.comment.from_user_name
       if (this.isMine) {
+        targetUserName = ''
         this.deleteComment()
-        this.$nextTick(() => {
-          document.getElementById('reply-comment-textarea').style.display =
-            'none'
-        })
         return
       }
-      if (this.currentUserId) {
-        this.$channel.$emit('reply-comment', {
-          id: this.parentCommentId,
-          targetUserId: this.comment.from_user_id,
-          targetUserName: this.comment.from_user_name
-        })
-      }
+      M.invoker.createSubComment({
+        model_type: this.type,
+        parent_comment_id: this.parentCommentId,
+        target_user_id: targetUserId,
+        target_user_name: targetUserName
+      })
     },
     deleteComment() {
-      if (!this.canDelete) {
-        return
-      }
       if (this.deleting) {
         return
       }
@@ -179,19 +191,23 @@ export default {
         type: 'warning'
       })
         .then(() => {
-          this.$store.dispatch('comment/deleteSubComment', {
-            ctx: this,
-            type: this.type,
-            id: this.comment.id,
-            parentId: this.comment.parent_id
-          })
-        })
-        .catch(e => {
-          this.deleting = false
-          if (e === 'cancel') {
-            return
+          const api = new Api()
+          try {
+            api.deleteSubComment({
+              type: this.type,
+              id: this.comment.id
+            })
+            this.$emit('delete', {
+              id: this.comment.id
+            })
+          } catch (e) {
+            this.$toast.error(e)
+          } finally {
+            this.deleting = false
           }
-          this.$toast.error(e)
+        })
+        .catch(() => {
+          this.deleting = false
         })
     }
   }

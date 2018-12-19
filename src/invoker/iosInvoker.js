@@ -34,10 +34,13 @@ export default class extends invokerInterface {
     this.JsCallApp('createMainComment', { model_type, model_id }, callback)
   }
 
-  createSubComment({ model_type, model_id, target_user_id }, callback) {
+  createSubComment(
+    { model_type, parent_comment_id, target_user_id, target_user_name },
+    callback
+  ) {
     this.JsCallApp(
       'createSubComment',
-      { model_type, model_id, target_user_id },
+      { model_type, parent_comment_id, target_user_id, target_user_name },
       callback
     )
   }

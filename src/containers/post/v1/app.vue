@@ -49,10 +49,7 @@
     </main>
     <!-- 番剧 -->
     <footer>
-      <FlowTagList
-        :bangumi="bangumi"
-        :tags="post.tags"
-      />
+      <FlowTagList :bangumi="bangumi" :tags="post.tags" />
       <FlowRewardPanel
         v-if="post.is_creator"
         :reward-users="post.reward_users"

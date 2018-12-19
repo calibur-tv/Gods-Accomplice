@@ -45,12 +45,7 @@
             @click="handleImagePreview(index)"
           />
         </section>
-        <p
-          v-if="!images.image_count"
-          class="no-image"
-        >
-          还没有上传图片
-        </p>
+        <p v-if="!images.image_count" class="no-image">还没有上传图片</p>
       </template>
       <section v-else class="flow-images">
         <VImg
@@ -67,7 +62,7 @@
     </main>
     <!-- 番剧 -->
     <footer>
-      <FlowTagList :bangumi="bangumi"/>
+      <FlowTagList :bangumi="bangumi" />
       <FlowRewardPanel
         v-if="is_creator"
         :reward-users="reward_users"

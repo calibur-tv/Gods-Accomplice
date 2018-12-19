@@ -110,6 +110,7 @@
     :id="`comment-${comment.id}`"
     :class="{ 'in-detail': inDetail }"
     class="comment-item"
+    @click.stop="toDetailPage"
   >
     <div class="avatar"><UserAvatar :size="35" :user="computeFromUser" /></div>
     <div class="content">
@@ -122,14 +123,9 @@
             :followed="false"
             class="user-follow-button"
           />
-          <VPopover
-            v-else
-            :actions="actions"
-            :report-id="comment.id"
-            :report-type="type + '_comment'"
-          >
-            <button class="tool-btn"><img src="./images/dots.png" /></button>
-          </VPopover>
+          <button v-else class="tool-btn">
+            <img src="./images/dots.png" />
+          </button>
         </div>
       </div>
       <div class="main">
@@ -156,7 +152,10 @@
           <VTime v-model="comment.created_at" />
         </div>
         <div class="social">
-          <button :class="{ 'is-active': comment.liked }" @click="toggleLike">
+          <button
+            :class="{ 'is-active': comment.liked }"
+            @click.stop="toggleLike"
+          >
             <span v-if="comment.like_count">{{ comment.like_count }}</span>
             <img v-if="comment.liked" src="./images/like-active.png" />
             <img v-else src="./images/like.png" />
@@ -170,13 +169,13 @@
 
 <script>
 import SubCommentList from './SubCommentList'
-import VPopover from '@/components/Popover'
 import UserFollowBtn from '@/components/UserFollowBtn'
+import Api from '@/api/v1/commentApi'
 
+// TODO：删除主评论和举报主评论
 export default {
   name: 'CommentCommentItem',
   components: {
-    VPopover,
     SubCommentList,
     UserFollowBtn
   },
@@ -218,78 +217,42 @@ export default {
     },
     isMine() {
       return this.currentUserId === this.comment.from_user_id
-    },
-    canDelete() {
-      return this.isMine || this.currentUserId === this.masterId
-    },
-    actions() {
-      const result = []
-      if (this.canDelete) {
-        result.push({
-          name: '删除',
-          method: this.deleteComment
-        })
-      }
-      result.push({
-        name: this.comment.liked ? '取消赞' : '点赞',
-        method: this.toggleLike
-      })
-
-      return result
     }
   },
   methods: {
     async toggleLike() {
-      if (!this.currentUserId) {
-        this.$channel.$emit('sign-in')
-        return
-      }
       if (this.liking) {
         return
       }
       this.liking = true
       try {
-        await this.$store.dispatch('comment/toggleLikeMainComment', {
-          ctx: this,
+        const result = !this.this.comment.liked
+        this.comment.liked = result
+        this.comment.like_count = result
+          ? this.comment.like_count--
+          : this.comment.like_count++
+        const api = new Api()
+        await api.toggleLikeMainComment({
           type: this.type,
           id: this.comment.id
         })
-      } catch (e) {
-        // do nothing
       } finally {
         this.liking = false
       }
-    },
-    deleteComment() {
-      if (this.deleting) {
-        return
-      }
-      this.deleting = true
-      this.$confirm('删除后无法找回, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      })
-        .then(() => {
-          this.$store.dispatch('comment/deleteMainComment', {
-            ctx: this,
-            type: this.type,
-            id: this.comment.id
-          })
-          this.$emit('delete')
-        })
-        .catch(e => {
-          this.deleting = false
-          if (e === 'cancel') {
-            return
-          }
-          this.$toast.error(e)
-        })
     },
     handleImagePreview(index) {
       M.invoker.previewImages({
         index,
         images: this.comment.images
+      })
+    },
+    toDetailPage() {
+      if (this.inDetail) {
+        return
+      }
+      this.$alias.comment({
+        model: this.type,
+        comment_id: this.comment.id
       })
     }
   }

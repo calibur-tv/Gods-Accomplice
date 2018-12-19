@@ -90,12 +90,7 @@
         <img src="../images/to-reward.png" />
       </p>
     </div>
-    <RewardBtn
-      :id="userId"
-      :rewarded="rewarded"
-      type="user"
-      text="投食楼主"
-    />
+    <RewardBtn :id="userId" :rewarded="rewarded" type="user" text="投食楼主" />
   </div>
 </template>
 
@@ -128,6 +123,6 @@ export default {
       }
       return this.rewardUsers.list.slice(0, 4)
     }
-  },
+  }
 }
 </script>

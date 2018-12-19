@@ -26,9 +26,9 @@ export default {
   comment({ model, model_id, comment_id, reply_id }) {
     M.invoker.toWebview('comment', {
       model,
-      model_id,
       comment_id,
-      reply_id
+      model_id: model_id || 0,
+      reply_id: reply_id || 0
     })
   },
 

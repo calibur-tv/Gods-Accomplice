@@ -53,7 +53,7 @@
       <JsonContent :content="content" />
     </main>
     <footer>
-      <FlowTagList :bangumi="bangumi"/>
+      <FlowTagList :bangumi="bangumi" />
       <FlowRewardPanel
         v-if="is_creator"
         :reward-users="reward_users"
