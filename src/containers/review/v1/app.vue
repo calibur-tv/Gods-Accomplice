@@ -56,9 +56,11 @@
       <FlowTagList :bangumi="bangumi" />
       <FlowRewardPanel
         v-if="is_creator"
+        :id="id"
         :reward-users="reward_users"
         :rewarded="rewarded"
-        :user-id="user.id"
+        type="score"
+        @reward="handleReward"
       />
       <VLazy>
         <CommentMain :id="id" :master-id="user.id" type="score" />
@@ -167,6 +169,20 @@ export default {
         images
       })
     })
+  },
+  methods: {
+    handleReward() {
+      const currentUser = M.user
+      this.rewarded = true
+      this.reward_users.total++
+      this.reward_users.list.unshift({
+        id: currentUser.id,
+        zone: currentUser.zone,
+        avatar: currentUser.avatar,
+        nickname: currentUser.nickname,
+        created_at: parseInt(Date.now() / 1000)
+      })
+    }
   }
 }
 </script>

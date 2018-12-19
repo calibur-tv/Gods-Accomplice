@@ -46,8 +46,19 @@
       }
 
       .right-btn {
-        .tool-btn {
+        .tool-btn-wrap {
           display: block;
+          position: relative;
+          width: 20px;
+          height: 20px;
+
+          button {
+            position: absolute;
+            left: -10px;
+            top: -10px;
+            width: 40px;
+            height: 40px;
+          }
 
           img {
             width: 20px;
@@ -87,17 +98,71 @@
       justify-content: space-between;
       align-items: center;
 
-      button {
-        display: block;
+      .social {
+        position: relative;
+        width: 20px;
         height: 20px;
 
-        &.is-active {
-          color: #ff6881;
+        button {
+          display: block;
+          height: 40px;
+          width: 80px;
+          position: absolute;
+          left: -50px;
+          top: -10px;
+          padding: 10px;
+          text-align: right;
+
+          &.is-active {
+            color: #ff6881;
+          }
         }
 
         img {
           width: 20px;
           height: 20px;
+        }
+      }
+    }
+  }
+
+  .comment-tool {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 999;
+
+    .panel {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 120px;
+      background-color: #fff;
+      border-radius: 5px;
+      transform: translate(-50%, -50%);
+
+      div {
+        text-align: center;
+        position: relative;
+        font-size: 13px;
+        height: 40px;
+        line-height: 40px;
+        color: #484853;
+
+        &:not(:first-child) {
+          &:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 1px;
+            background-color: #e5e5e5;
+            transform: scaleY(0.5);
+          }
         }
       }
     }
@@ -123,9 +188,11 @@
             :followed="false"
             class="user-follow-button"
           />
-          <button v-else class="tool-btn">
-            <img src="./images/dots.png" />
-          </button>
+          <div v-else class="tool-btn-wrap">
+            <button @click.stop="showCommentTool = true">
+              <img src="./images/dots.png" />
+            </button>
+          </div>
         </div>
       </div>
       <div class="main">
@@ -156,13 +223,25 @@
             :class="{ 'is-active': comment.liked }"
             @click.stop="toggleLike"
           >
-            <span v-if="comment.like_count">{{ comment.like_count }}</span>
+            <span v-if="comment.like_count">{{
+              $utils.shortenNumber(comment.like_count)
+            }}</span>
             <img v-if="comment.liked" src="./images/like-active.png" />
             <img v-else src="./images/like.png" />
           </button>
         </div>
       </div>
       <SubCommentList v-if="!inDetail" :parent-comment="comment" :type="type" />
+    </div>
+    <div
+      v-if="showCommentTool"
+      class="comment-tool"
+      @click.stop="showCommentTool = false"
+    >
+      <div class="panel">
+        <div>举报</div>
+        <div v-if="canDelete" @click="deleteComment">删除</div>
+      </div>
     </div>
   </div>
 </template>
@@ -200,12 +279,13 @@ export default {
   data() {
     return {
       deleting: false,
-      liking: false
+      liking: false,
+      showCommentTool: false
     }
   },
   computed: {
     currentUserId() {
-      return 0
+      return M.user.id
     },
     computeFromUser() {
       return {
@@ -215,8 +295,14 @@ export default {
         zone: this.comment.from_user_zone
       }
     },
+    isMaster() {
+      return this.currentUserId === this.masterId
+    },
     isMine() {
       return this.currentUserId === this.comment.from_user_id
+    },
+    canDelete() {
+      return this.isMine || this.isMaster
     }
   },
   methods: {
@@ -226,11 +312,9 @@ export default {
       }
       this.liking = true
       try {
-        const result = !this.this.comment.liked
+        const result = !this.comment.liked
         this.comment.liked = result
-        this.comment.like_count = result
-          ? this.comment.like_count--
-          : this.comment.like_count++
+        this.comment.like_count += result ? 1 : -1
         const api = new Api()
         await api.toggleLikeMainComment({
           type: this.type,
@@ -239,6 +323,34 @@ export default {
       } finally {
         this.liking = false
       }
+    },
+    deleteComment() {
+      if (this.deleting) {
+        return
+      }
+      this.$confirm('删除后无法找回, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+        .then(async () => {
+          this.deleting = true
+          const api = new Api()
+          try {
+            await api.deleteMainComment({
+              type: this.type,
+              id: this.comment.id
+            })
+            this.$emit('delete', {
+              id: this.comment.id
+            })
+          } catch (e) {
+            this.$toast.error(e)
+          } finally {
+            this.deleting = false
+          }
+        })
+        .catch(() => {})
     },
     handleImagePreview(index) {
       M.invoker.previewImages({

@@ -117,9 +117,9 @@
         v-if="inDetail"
         :class="$style.content"
         @click.stop="handleSubCommentClick"
-        v-text="comment.context"
+        v-text="comment.content"
       />
-      <p v-else :class="$style.content" v-text="comment.context" />
+      <p v-else :class="$style.content" v-text="comment.content" />
     </div>
   </div>
 </template>
@@ -158,7 +158,7 @@ export default {
   },
   computed: {
     currentUserId() {
-      return 0
+      return M.user.id
     },
     isMine() {
       return this.currentUserId === this.comment.from_user_id
@@ -184,16 +184,16 @@ export default {
       if (this.deleting) {
         return
       }
-      this.deleting = true
       this.$confirm('删除后无法找回, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       })
-        .then(() => {
+        .then(async () => {
+          this.deleting = true
           const api = new Api()
           try {
-            api.deleteSubComment({
+            await api.deleteSubComment({
               type: this.type,
               id: this.comment.id
             })
@@ -206,9 +206,7 @@ export default {
             this.deleting = false
           }
         })
-        .catch(() => {
-          this.deleting = false
-        })
+        .catch(() => {})
     }
   }
 }

@@ -1,4 +1,5 @@
 import invokerInterface from './invokerInterface'
+import scheme from './scheme/ios'
 
 export default class extends invokerInterface {
   constructor(data) {
@@ -18,31 +19,42 @@ export default class extends invokerInterface {
     this.JsCallApp('setUserInfo', data)
   }
 
-  toWebview(page, data = {}) {
-    this.JsCallApp('toWebviewPage', { page, data })
+  toNative(page, data = null) {
+    let uri = scheme[page]
+    if (data) {
+      uri = `${uri}?`
+      Object.keys(data).forEach(key => {
+        uri += `${key}=${data[key]}&`
+      })
+      uri = uri.slice(0, -1)
+    }
+    this.JsCallApp('toNativePage', { uri })
   }
 
-  toNative(page, data = {}) {
-    this.JsCallApp('toNativePage', { page, data })
+  toggleClick({ model, type, id, result }) {
+    this.JsCallApp('toggleClick', { model, type, id, result })
   }
 
   previewImages({ images, index }) {
     this.JsCallApp('previewImages', { images, index })
   }
 
-  createMainComment({ model_type, model_id }, callback) {
-    this.JsCallApp('createMainComment', { model_type, model_id }, callback)
+  createMainComment({ model_type, model_id }) {
+    this.JsCallApp('createMainComment', { model_type, model_id })
   }
 
-  createSubComment(
-    { model_type, parent_comment_id, target_user_id, target_user_name },
-    callback
-  ) {
-    this.JsCallApp(
-      'createSubComment',
-      { model_type, parent_comment_id, target_user_id, target_user_name },
-      callback
-    )
+  createSubComment({
+    model_type,
+    parent_comment_id,
+    target_user_id,
+    target_user_name
+  }) {
+    this.JsCallApp('createSubComment', {
+      model_type,
+      parent_comment_id,
+      target_user_id,
+      target_user_name
+    })
   }
 
   toast({ type, text }) {
@@ -108,13 +120,6 @@ export default class extends invokerInterface {
       },
       callback
     )
-  }
-
-  toggleClick({ type, id, result }) {
-    this.JsCallApp('eventChannel', {
-      func: 'toggleClick',
-      params: { type, id, result }
-    })
   }
 
   /**

@@ -52,9 +52,11 @@
       <FlowTagList :bangumi="bangumi" :tags="post.tags" />
       <FlowRewardPanel
         v-if="post.is_creator"
+        :id="post.id"
         :reward-users="post.reward_users"
         :rewarded="post.rewarded"
-        :user-id="user.id"
+        type="post"
+        @reward="handleReward"
       />
     </footer>
     <VLazy>
@@ -89,6 +91,18 @@ export default {
       M.invoker.previewImages({
         index,
         images: this.post.images
+      })
+    },
+    handleReward() {
+      const currentUser = M.user
+      this.post.rewarded = true
+      this.post.reward_users.total++
+      this.post.reward_users.list.unshift({
+        id: currentUser.id,
+        zone: currentUser.zone,
+        avatar: currentUser.avatar,
+        nickname: currentUser.nickname,
+        created_at: parseInt(Date.now() / 1000)
       })
     }
   }

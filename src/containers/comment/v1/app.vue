@@ -91,6 +91,13 @@ export default {
   },
   created() {
     this.loadMainComment()
+    M.channel.$on('create-sub-comment', ({ data, exp, message }) => {
+      this.comment.comments.total++
+      this.comment.comments.list.push(data)
+      this.$toast.success(message)
+      this.$utils.updateUserExp(exp)
+      M.invoker.setUserInfo(M.user)
+    })
   },
   methods: {
     async loadSubComment() {

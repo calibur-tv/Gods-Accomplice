@@ -115,6 +115,13 @@ export default {
   },
   created() {
     this.getMainComments()
+    M.channel.$on('create-main-comment', ({ data, exp, message }) => {
+      this.total++
+      this.list.push(data)
+      this.$toast.success(message)
+      this.$utils.updateUserExp(exp)
+      M.invoker.setUserInfo(M.user)
+    })
   },
   methods: {
     async getMainComments() {
@@ -147,8 +154,13 @@ export default {
         this.loading = false
       }
     },
-    deleteCommentCallback() {
-      this.$emit('delete-main-comment')
+    deleteCommentCallback({ id }) {
+      this.list.forEach((item, index) => {
+        if (item.id === id) {
+          this.list.splice(index, 1)
+          this.total--
+        }
+      })
     }
   }
 }

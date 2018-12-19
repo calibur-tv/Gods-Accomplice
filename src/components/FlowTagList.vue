@@ -12,9 +12,7 @@
     <BubbleTag :text="bangumi.name" @click="$alias.bangumi(bangumi.id)">
       <img slot="icon" src="../images/bangumi-icon.png" />
     </BubbleTag>
-    <template v-if="post && tags.length">
-      <BubbleTag v-for="item in tags" :key="item.id" :text="item.name" />
-    </template>
+    <BubbleTag v-for="item in tags" :key="item.id" :text="item.name" />
   </div>
 </template>
 

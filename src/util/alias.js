@@ -7,24 +7,24 @@ export default {
     M.invoker.toNative('user', { zone })
   },
 
-  bangumi(id) {
-    M.invoker.toNative('bangumi', { id })
+  bangumi(bangumi_id) {
+    M.invoker.toNative('bangumi', { bangumi_id })
   },
 
-  post(id) {
-    M.invoker.toWebview('post', { id })
+  post(poster_id) {
+    M.invoker.toNative('post', { poster_id })
   },
 
-  image(id) {
-    M.invoker.toWebview('image', { id })
+  image(image_id) {
+    M.invoker.toNative('image', { image_id })
   },
 
   review(id) {
-    M.invoker.toWebview('review', { id })
+    M.invoker.toNative('review', { id })
   },
 
   comment({ model, model_id, comment_id, reply_id }) {
-    M.invoker.toWebview('comment', {
+    M.invoker.toNative('comment', {
       model,
       comment_id,
       model_id: model_id || 0,
@@ -33,22 +33,22 @@ export default {
   },
 
   home() {
-    M.invoker.toWebview('home')
+    M.invoker.toNative('home')
   },
 
   notice() {
-    M.invoker.toWebview('notice')
+    M.invoker.toNative('notice')
   },
 
-  bookmarks() {
-    M.invoker.toWebview('bookmarks')
+  bookmark() {
+    M.invoker.toNative('bookmark')
   },
 
-  transactions() {
-    M.invoker.toWebview('transactions')
+  transaction() {
+    M.invoker.toNative('transaction')
   },
 
-  notifications() {
-    M.invoker.toWebview('notifications')
+  notification() {
+    M.invoker.toNative('notification')
   }
 }

@@ -90,7 +90,13 @@
         <img src="../images/to-reward.png" />
       </p>
     </div>
-    <RewardBtn :id="userId" :rewarded="rewarded" type="user" text="投食楼主" />
+    <RewardBtn
+      :id="id"
+      :type="type"
+      :rewarded="rewarded"
+      :text="text"
+      @reward="$emit('reward')"
+    />
   </div>
 </template>
 
@@ -111,9 +117,17 @@ export default {
       type: Boolean,
       required: true
     },
-    userId: {
+    id: {
       type: Number,
       required: true
+    },
+    type: {
+      required: true,
+      type: String
+    },
+    text: {
+      type: String,
+      default: '向TA投食'
     }
   },
   computed: {

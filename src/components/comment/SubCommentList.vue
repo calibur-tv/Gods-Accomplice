@@ -123,10 +123,11 @@ export default {
         comment_id: this.parentComment.id
       })
     },
-    handleSubCommentDelete(id) {
+    handleSubCommentDelete({ id }) {
       this.comments.list.forEach((item, index) => {
         if (item.id === id) {
           this.comments.list.splice(index, 1)
+          this.comments.total--
         }
       })
     }

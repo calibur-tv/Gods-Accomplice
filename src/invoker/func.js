@@ -9,5 +9,13 @@ export default {
 
   channel({ func, params }) {
     M.channel.$emit(`app-invoker-${func}`, params)
+  },
+
+  createMainComment(data) {
+    M.channel.$emit('create-main-comment', data)
+  },
+
+  createSubComment(data) {
+    M.channel.$emit('create-sub-comment', data)
   }
 }
