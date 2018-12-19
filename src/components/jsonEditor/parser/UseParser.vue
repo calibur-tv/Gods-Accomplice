@@ -1,12 +1,12 @@
 <style lang="scss">
 .json-content-txt-parser {
   blockquote {
-    margin: 15px 15px 20px 13px;
+    margin: 15px 15px 20px 16px;
     padding-left: 12px;
-    color: #646464;
+    color: #22222b;
     border-left: 3px solid #d3d3d3;
-    font-size: 14px;
-    line-height: 27px;
+    font-size: 17px;
+    line-height: 30px;
     @extend %breakWord;
   }
 }

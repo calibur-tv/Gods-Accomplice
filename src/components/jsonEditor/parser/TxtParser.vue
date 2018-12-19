@@ -5,8 +5,8 @@
     margin-left: $container-padding;
     margin-right: $container-padding;
     font-weight: 400;
-    line-height: 1.7;
-    color: #2f2f2f;
+    line-height: 30px;
+    color: #22222b;
     @extend %breakWord;
   }
 
@@ -20,8 +20,8 @@
   p {
     font-weight: 400;
     margin-top: 1em;
-    margin-bottom: 1em;
-    font-size: 16px;
+    margin-bottom: 15px;
+    font-size: 17px;
   }
 }
 </style>

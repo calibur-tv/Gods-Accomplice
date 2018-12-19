@@ -1,65 +1,15 @@
 <style lang="scss">
 #image-show {
-  header {
-    margin-top: 20px;
-
-    .title {
-      margin-bottom: 20px;
-      color: #4c4c4c;
-      font-size: 18px;
-      font-weight: 800;
-      line-height: 24px;
-    }
-  }
-
-  main {
-    margin-top: 15px;
+  .flow-content {
     margin-left: -$container-padding;
     margin-right: -$container-padding;
-
-    .images {
-      .image {
-        margin-bottom: 10px;
-      }
-    }
   }
 
-  footer {
-    margin-bottom: 15px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-
-    .bangumi {
-      font-size: 12px;
-      color: #6d757a;
-      font-weight: bold;
-      margin-right: 20px;
-      line-height: 18px;
-      flex-shrink: 0;
-    }
-
-    .tags {
-      font-size: 0;
-      height: 18px;
-      overflow: hidden;
-      text-align: right;
-      @extend %breakWord;
-
-      span {
-        display: inline-block;
-        padding-left: 7px;
-        padding-right: 7px;
-        height: 18px;
-        font-size: 12px;
-        border-radius: 9px;
-        line-height: 18px;
-        background-color: #e5e9ef;
-        color: #6d757a;
-        margin-left: 5px;
-      }
-    }
+  .no-image {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    font-size: 12px;
   }
 }
 </style>
@@ -67,9 +17,7 @@
 <template>
   <div id="image-show" class="container">
     <!-- 头部 -->
-    <header>
-      <!-- 标题 -->
-      <div class="title">{{ name }}</div>
+    <header class="flow-header">
       <!-- 用户 -->
       <FlowHeaderUser
         v-if="user"
@@ -77,27 +25,55 @@
         :is-followed="false"
         :time="created_at"
       />
+      <!-- 标题 -->
+      <div class="title">{{ name }}</div>
     </header>
     <!-- 正文 -->
-    <main>
-      <section v-if="images.length" class="images">
+    <main class="flow-content">
+      <template v-if="is_album">
+        <section v-if="images.length" class="flow-images">
+          <VImg
+            v-for="(item, index) in images"
+            :key="index"
+            :src="item.url"
+            :width="item.width"
+            :height="item.height"
+            :mime="item.type"
+            :blur="true"
+            :full="true"
+            class="image"
+            @click="handleImagePreview(index)"
+          />
+        </section>
+        <p
+          v-if="!images.image_count"
+          class="no-image"
+        >
+          还没有上传图片
+        </p>
+      </template>
+      <section v-else class="flow-images">
         <VImg
-          v-for="(item, index) in images"
-          :key="index"
-          :src="item.url"
-          :width="item.width"
-          :height="item.height"
-          :mime="item.type"
+          :src="source.url"
+          :width="source.width"
+          :height="source.height"
+          :mime="source.type"
           :blur="true"
           :full="true"
           class="image"
-          @click="handleImagePreview(index)"
+          @click="handleImagePreview(0)"
         />
       </section>
     </main>
     <!-- 番剧 -->
     <footer>
-      <span v-if="bangumi" class="bangumi">来自：{{ bangumi.name }}</span>
+      <FlowTagList :bangumi="bangumi"/>
+      <FlowRewardPanel
+        v-if="is_creator"
+        :reward-users="reward_users"
+        :rewarded="rewarded"
+        :user-id="user.id"
+      />
     </footer>
     <VLazy> <CommentMain :id="id" :master-id="user.id" type="image" /> </VLazy>
   </div>
@@ -105,13 +81,17 @@
 
 <script>
 import FlowHeaderUser from '@/components/FlowHeaderUser'
+import FlowTagList from '@/components/FlowTagList'
+import FlowRewardPanel from '@/components/FlowRewardPanel'
 import CommentMain from '@/components/comment/CommentMain'
 
 export default {
   name: 'App',
   components: {
     FlowHeaderUser,
-    CommentMain
+    CommentMain,
+    FlowRewardPanel,
+    FlowTagList
   },
   data() {
     return {
@@ -120,6 +100,11 @@ export default {
       bangumi: null,
       user: null,
       name: '',
+      is_album: false,
+      is_creator: false,
+      rewarded: false,
+      reward_users: null,
+      source: null,
       created_at: ''
     }
   },
@@ -127,7 +112,7 @@ export default {
     handleImagePreview(index) {
       M.invoker.previewImages({
         index,
-        images: this.images
+        images: this.is_album ? this.images : [this.source]
       })
     }
   }

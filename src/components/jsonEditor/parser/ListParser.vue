@@ -2,8 +2,8 @@
 .json-content-list-parser {
   ul,
   ol {
-    margin: 15px 15px 18px 34px;
-    font-size: 14px;
+    margin: 15px 15px 20px 32px;
+    font-size: 17px;
   }
 
   ul li {
@@ -15,7 +15,7 @@
   }
 
   li {
-    line-height: 25px;
+    line-height: 30px;
     margin-bottom: 2px;
     @extend %breakWord;
   }

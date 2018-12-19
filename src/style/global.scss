@@ -30,3 +30,25 @@ html, body, #calibur, .container {
     display: table;
   }
 }
+
+.flow-header {
+  margin-top: 15px;
+
+  .title {
+    color: #22222b;
+    font-size: 23px;
+    line-height: 32px;
+    font-weight: 500;
+  }
+}
+
+.flow-content {
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+
+.flow-images {
+  .image {
+    margin-bottom: 15px;
+  }
+}

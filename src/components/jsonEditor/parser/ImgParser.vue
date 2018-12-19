@@ -1,6 +1,6 @@
 <style lang="scss">
 .json-content-img-parser {
-  margin-bottom: 25px;
+  margin-bottom: 20px;
   text-align: center;
 
   .img-tip {

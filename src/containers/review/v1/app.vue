@@ -1,17 +1,5 @@
 <style lang="scss">
 #review-show {
-  header {
-    margin-top: 20px;
-
-    .title {
-      margin-bottom: 20px;
-      color: #4c4c4c;
-      font-size: 18px;
-      font-weight: 800;
-      line-height: 24px;
-    }
-  }
-
   main {
     .stars {
       font-size: 0;
@@ -41,9 +29,7 @@
 <template>
   <div id="review-show">
     <!-- 头部 -->
-    <header class="container">
-      <!-- 标题 -->
-      <div class="title">{{ title }}</div>
+    <header class="flow-header container">
       <!-- 用户 -->
       <FlowHeaderUser
         v-if="user"
@@ -51,8 +37,10 @@
         :is-followed="false"
         :time="created_at"
       />
+      <!-- 标题 -->
+      <div class="title">{{ title }}</div>
     </header>
-    <main>
+    <main class="flow-content">
       <section class="stars container">
         <div v-for="(item, index) in columns" :key="index" class="star-item">
           <div
@@ -65,6 +53,13 @@
       <JsonContent :content="content" />
     </main>
     <footer>
+      <FlowTagList :bangumi="bangumi"/>
+      <FlowRewardPanel
+        v-if="is_creator"
+        :reward-users="reward_users"
+        :rewarded="rewarded"
+        :user-id="user.id"
+      />
       <VLazy>
         <CommentMain :id="id" :master-id="user.id" type="score" />
       </VLazy>
@@ -77,6 +72,8 @@ import { Rate } from 'element-ui'
 import JsonContent from '@/components/jsonEditor/parser/index.vue'
 import FlowHeaderUser from '@/components/FlowHeaderUser'
 import CommentMain from '@/components/comment/CommentMain'
+import FlowRewardPanel from '@/components/FlowRewardPanel'
+import FlowTagList from '@/components/FlowTagList'
 
 export default {
   name: 'App',
@@ -84,7 +81,9 @@ export default {
     VRate: Rate,
     JsonContent,
     CommentMain,
-    FlowHeaderUser
+    FlowHeaderUser,
+    FlowRewardPanel,
+    FlowTagList
   },
   props: {},
   data() {

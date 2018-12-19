@@ -171,15 +171,78 @@
     "reward_users": {
       "list": [
         {
-          "id": 1,
-          "zone": "bing-yu",
-          "avatar": "https://image.calibur.tv/user/1/avatar/0/1530281203832-e6c.jpeg",
-          "nickname": "冰淤",
-          "created_at": 1542183879
+          "id": 30237,
+          "zone": "yi-fang-tong-xing-6",
+          "avatar": "https://image.calibur.tv/user/30237/avatar/0/1537151367645-vg0.jpeg",
+          "nickname": "一方通行",
+          "created_at": 1540519985
+        },
+        {
+          "id": 20094,
+          "zone": "karlven",
+          "avatar": "https://image.calibur.tv/user/20094/avatar/0/1539177475680-pcz.jpeg",
+          "nickname": "Yukino",
+          "created_at": 1540374450
+        },
+        {
+          "id": 7836,
+          "zone": "xi-luan",
+          "avatar": "https://image.calibur.tv/user/7836/avatar/1540117513394/3535/.jpeg",
+          "nickname": "夕亂",
+          "created_at": 1540358346
+        },
+        {
+          "id": 32540,
+          "zone": "wuli-da-da",
+          "avatar": "https://image.calibur.tv/user/32540/avatar/1538812061441/5915/.jpeg",
+          "nickname": "wuli哒哒",
+          "created_at": 1540087409
+        },
+        {
+          "id": 5499,
+          "zone": "ni-kai-xin-jiu-hao",
+          "avatar": "https://image.calibur.tv/user/5499/avatar/1542803944576-cq9.jpeg",
+          "nickname": "rgzz",
+          "created_at": 1540030727
+        },
+        {
+          "id": 559,
+          "zone": "shuang-jian-hei-yue",
+          "avatar": "https://image.calibur.tv/user/559/avatar/1522903544688-aor",
+          "nickname": "霜简黑越",
+          "created_at": 1539908210
+        },
+        {
+          "id": 17074,
+          "zone": "wei-bai",
+          "avatar": "https://image.calibur.tv/user/17074/avatar/1541940730583.caliburImage1489.jpeg",
+          "nickname": "尾白",
+          "created_at": 1539875333
+        },
+        {
+          "id": 6963,
+          "zone": "yu-xiao-jiang",
+          "avatar": "https://image.calibur.tv/user/6963/avatar/0/1530923085577-yg3.jpeg",
+          "nickname": "库巴亚西康娜",
+          "created_at": 1539872978
+        },
+        {
+          "id": 22985,
+          "zone": "gan-ga",
+          "avatar": "https://image.calibur.tv/user/22985/avatar/1536145693994/1419/.jpeg",
+          "nickname": "unravel",
+          "created_at": 1539869870
+        },
+        {
+          "id": 28973,
+          "zone": "qun-long-zai-tian",
+          "avatar": "https://image.calibur.tv/user/28973/avatar/1536766631023/1025/.jpeg",
+          "nickname": "群龙在天",
+          "created_at": 1539869694
         }
       ],
-      "total": 1,
-      "noMore": true
+      "total": 11,
+      "noMore": false
     },
     "is_nice": false,
     "is_creator": true,
