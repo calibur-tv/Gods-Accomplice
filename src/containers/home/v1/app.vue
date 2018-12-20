@@ -110,9 +110,10 @@
     background-color: #edf1f4;
   }
 
-  .content {
+  .main-menu {
     margin-left: 15px;
     margin-right: 15px;
+    margin-bottom: 30px;
 
     .item {
       @extend %clearfix;
@@ -162,7 +163,7 @@
 <template>
   <div id="home">
     <div class="panel">
-      <header>
+      <header @click="$alias.user(zone)">
         <img :src="$resize(avatar, { width: 130 })" class="avatar" />
         <img src="../icon/link.png" class="link" />
         <div class="content">
@@ -174,41 +175,41 @@
         </div>
       </header>
       <main>
-        <DaySignBtn :signed="daySign" />
+        <DaySignBtn
+          :signed="daySign"
+          @signed="handleSigned"
+        />
         <div class="meta">
           <div class="item">
             <p class="oneline" v-text="$utils.shortenNumber(power)" />
-            <span> 战斗力 </span>
+            <span>战斗力</span>
           </div>
           <div class="item">
             <p class="oneline" v-text="exp.level" />
-            <span> 等级 </span>
+            <span>等级</span>
           </div>
           <div class="item">
             <p class="oneline" v-text="$utils.shortenNumber(coin)" />
-            <span> 团子 </span>
+            <span>团子</span>
           </div>
         </div>
       </main>
     </div>
     <div class="hr" />
-    <div class="content">
+    <div class="main-menu">
       <div class="item">
         <img src="../icon/post.png" class="icon" />
         <div class="tail"><img src="../icon/link.png" /></div>
-
         <p class="text oneline">帖子</p>
       </div>
       <div class="item">
         <img src="../icon/comment.png" class="icon" />
         <div class="tail"><img src="../icon/link.png" /></div>
-
         <p class="text oneline">评论</p>
       </div>
       <div class="item">
         <img src="../icon/history.png" class="icon" />
         <div class="tail"><img src="../icon/link.png" /></div>
-
         <p class="text oneline">浏览历史</p>
       </div>
       <div class="item">
@@ -228,13 +229,11 @@
       <div class="item">
         <img src="../icon/feedback.png" class="icon" />
         <div class="tail"><img src="../icon/link.png" /></div>
-
         <p class="text oneline">意见反馈</p>
       </div>
       <div class="item">
         <img src="../icon/setting.png" class="icon" />
         <div class="tail"><img src="../icon/link.png" /></div>
-
         <p class="text oneline">设置</p>
       </div>
     </div>
@@ -268,6 +267,18 @@ export default {
       sex: 0,
       sexSecret: false,
       signature: ''
+    }
+  },
+  methods: {
+    handleSigned({ exp, message }) {
+      this.daySign = true
+      this.coin++
+      this.$toast.success(message)
+      this.$utils.updateUserExp(exp)
+      const user = M.user
+      this.exp = user.exp
+      user.coin++
+      M.invoker.setUserInfo(user)
     }
   }
 }

@@ -12,16 +12,43 @@
 </style>
 
 <template>
-  <button :class="$style.btn">{{ signed ? '已签到' : '签到' }}</button>
+  <button
+    :class="$style.btn"
+    @click.stop="handleDaySign"
+  >{{ signed ? '已签到' : '签到' }}</button>
 </template>
 
 <script>
+import Api from '@/api/v1/selfApi'
+
 export default {
   name: 'DaySignBtn',
   props: {
     signed: {
       type: Boolean,
       default: false
+    }
+  },
+  data() {
+    return {
+      loading: false
+    }
+  },
+  methods: {
+    async handleDaySign() {
+      if (this.signed || this.loading) {
+        return
+      }
+      this.loading = true
+      const api = new Api()
+      try {
+        const result = await api.daySign()
+        this.$emit('signed', result)
+      } catch (e) {
+        this.$toast.error(e)
+      } finally {
+        this.loading = false
+      }
     }
   }
 }

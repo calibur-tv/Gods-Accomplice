@@ -15,4 +15,8 @@ export default class extends BaseApi {
   getBookmarks({ page, take, type }) {
     return this.http.get('user/bookmarks', { page, take, type })
   }
+
+  daySign() {
+    return this.http.post('user/daySign')
+  }
 }
