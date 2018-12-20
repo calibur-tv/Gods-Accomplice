@@ -38,11 +38,13 @@
         color: $color-text-light;
         font-size: 12px;
         line-height: 17px;
-        margin-bottom: 8px;
         display: block;
       }
 
       span {
+        position: absolute;
+        right: 15px;
+        bottom: 20px;
         display: block;
         font-size: 13px;
         color: #fff;

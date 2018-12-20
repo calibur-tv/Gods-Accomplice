@@ -2,19 +2,45 @@
 #notifications {
   height: 100%;
 
-  h1 {
-    color: $color-text-normal;
-    font-size: 23px;
-    line-height: 33px;
-    margin-bottom: 8px;
-    margin-left: 20px;
+  header {
+    button {
+      float: right;
+      height: 33px;
+      line-height: 33px;
+      margin-right: 15px;
+
+      span {
+        font-size: 15px;
+        color: #797989;
+      }
+
+      img {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    h1 {
+      color: $color-text-normal;
+      font-size: 23px;
+      line-height: 33px;
+      margin-bottom: 8px;
+      margin-left: 20px;
+      overflow: hidden;
+    }
   }
 }
 </style>
 
 <template>
   <div id="notifications">
-    <h1>消息</h1>
+    <header>
+      <button @click.stop="clearNotification">
+        <img src="../../../images/notification.png">
+        <span>全部已读</span>
+      </button>
+      <h1>消息</h1>
+    </header>
     <MtLoadmore
       ref="loadmore"
       :top-method="refreshPage"
@@ -100,6 +126,19 @@ export default {
             count: 1
           })
         }
+      })
+    },
+    clearNotification() {
+      if (!this.list.filter(_ => !_.checked).length) {
+        return
+      }
+      const api = new Api()
+      api.readAllMessage()
+      this.list.forEach(item => {
+        item.checked = true
+      })
+      M.invoker.readNotification({
+        count: -1
       })
     }
   }

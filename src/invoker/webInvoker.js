@@ -69,6 +69,10 @@ export default class extends invokerInterface {
     this.JsCallApp('createMainComment', { model_type, model_id })
   }
 
+  readNotification({ count }) {
+    this.JsCallApp('readNotification', { count })
+  }
+
   JsCallApp(func, params, callback) {
     console.log(func, params, callback)
   }
