@@ -12,7 +12,7 @@
     span {
       @include half-font(11px, top);
       display: inline-block;
-      color: #a4a4ae;
+      color: $color-text-light;
       margin: 1px 0 0 -2px;
     }
   }
@@ -22,7 +22,7 @@
     height: 48px;
     line-height: 48px;
     font-size: 14px;
-    color: #49689b;
+    color: $color-link;
     width: 100%;
     text-align: left;
 
@@ -33,7 +33,7 @@
       top: 0;
       right: -20px;
       height: 1px;
-      background-color: #e5e5e5;
+      background-color: $color-line;
       transform: scaleY(0.5);
     }
   }

@@ -30,7 +30,7 @@
     top: 0;
     right: -20px;
     height: 1px;
-    background-color: #e5e5e5;
+    background-color: $color-line;
     transform: scaleY(0.5);
   }
 
@@ -53,18 +53,18 @@
       }
 
       .nickname {
-        color: #22222b;
+        color: $color-text-normal;
         font-weight: 500;
       }
 
       .to-user {
-        color: #49689b;
+        color: $color-link;
       }
     }
 
     .content {
       line-height: 21px;
-      color: #22222b;
+      color: $color-text-normal;
       font-size: 15px;
     }
   }

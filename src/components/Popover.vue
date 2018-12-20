@@ -19,7 +19,7 @@
         &:after {
           content: '';
           position: absolute;
-          background-color: #e5e5e5;
+          background-color: $color-line;
           display: block;
           z-index: 15;
           top: auto;

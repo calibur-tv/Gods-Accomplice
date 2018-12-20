@@ -1,4 +1,5 @@
 <style lang="scss" module>
+$height: 50px;
 .loadmore {
   text-align: center;
 
@@ -16,7 +17,7 @@
   }
 
   .rolling {
-    height: 50px;
+    height: $height;
     line-height: 48px;
 
     div {
@@ -25,18 +26,27 @@
       width: 20px;
       height: 20px;
       border-radius: 20px;
-      border: 2px solid #ccd0d7;
+      border: 2px solid $color-red;
       border-bottom-color: transparent;
       vertical-align: middle;
       animation: rolling 0.8s infinite linear;
     }
   }
 
+  .no-more {
+    height: $height;
+    line-height: $height;
+  }
+
+  .shim {
+    height: $height;
+  }
+
   .btn {
     width: 100%;
     display: block;
-    height: 50px;
-    line-height: 50px;
+    height: $height;
+    line-height: $height;
     font-size: 15px;
   }
 }
@@ -60,14 +70,17 @@
       </div>
     </slot>
     <!-- noMore -->
-    <slot v-else-if="noMore" name="no-more"> 没有更多了~ </slot>
+    <slot v-else-if="noMore" name="no-more">
+      <p :class="$style.noMore">没有更多了~</p>
+    </slot>
     <!-- error -->
     <slot v-else-if="error" name="text">
       <button :class="$style.btn" @click="fetch" v-text="'点击重试'" />
     </slot>
     <!-- 点击按钮 -->
-    <slot v-else-if="!auto" name="text">
-      <button :class="$style.btn" @click="fetch" v-text="text" />
+    <slot v-else name="text">
+      <div v-if="auto" :class="$style.shim" />
+      <button v-else :class="$style.btn" @click="fetch" v-text="text" />
     </slot>
   </div>
 </template>

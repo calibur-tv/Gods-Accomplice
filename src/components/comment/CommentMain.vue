@@ -3,7 +3,7 @@
   margin-right: -$container-padding;
 
   .main-hr {
-    background-color: #edf1f4;
+    background-color: $color-background;
     height: 10px;
     margin-left: -$container-padding;
   }
@@ -17,7 +17,7 @@
     span {
       @include half-font(11px, top);
       display: inline-block;
-      color: #a4a4ae;
+      color: $color-text-light;
       margin: 1px 0 0 -2px;
     }
   }

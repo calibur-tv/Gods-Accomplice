@@ -10,7 +10,7 @@
     right: 0;
     bottom: 0;
     height: 1px;
-    background-color: #e5e5e5;
+    background-color: $color-line;
     transform: scaleY(0.5);
   }
 
@@ -33,7 +33,7 @@
           font-size: 16px;
           line-height: 20px;
           font-weight: 500;
-          color: #22222b;
+          color: $color-text-gray;
         }
       }
 
@@ -74,7 +74,7 @@
 
     .main {
       font-size: 15px;
-      color: #22222b;
+      color: $color-text-normal;
       line-height: 21px;
       min-height: 65px;
 
@@ -123,7 +123,7 @@
       margin-top: 10px;
       margin-bottom: 10px;
       font-size: 12px;
-      color: #a4a4ae;
+      color: $color-text-light;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -145,7 +145,7 @@
           text-align: right;
 
           &.is-active {
-            color: #ff6881;
+            color: $color-red;
           }
         }
 

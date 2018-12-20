@@ -65,6 +65,10 @@ export default class extends invokerInterface {
     this.JsCallApp('toggleClick', { type, model, id, result })
   }
 
+  createMainComment({ model_type, model_id }) {
+    this.JsCallApp('createMainComment', { model_type, model_id })
+  }
+
   JsCallApp(func, params, callback) {
     console.log(func, params, callback)
   }

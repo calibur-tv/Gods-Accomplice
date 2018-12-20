@@ -23,6 +23,10 @@ export default {
     M.invoker.toNative('review', { id })
   },
 
+  video(video_id) {
+    M.invoker.toNative('video', { video_id })
+  },
+
   comment({ model, model_id, comment_id, reply_id }) {
     M.invoker.toNative('comment', {
       model,

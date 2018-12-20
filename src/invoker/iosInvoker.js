@@ -35,6 +35,10 @@ export default class extends invokerInterface {
     this.JsCallApp('toggleClick', { model, type, id, result })
   }
 
+  readNotification({ count }) {
+    this.JsCallApp('readNotification', { count })
+  }
+
   previewImages({ images, index }) {
     this.JsCallApp('previewImages', { images, index })
   }

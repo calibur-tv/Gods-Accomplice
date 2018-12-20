@@ -3,7 +3,7 @@
   width: 78px;
   height: 36px;
   border-radius: 18px;
-  background-color: #ff6881;
+  background-color: $color-red;
   color: #fff;
   font-size: 14px;
   text-align: center;
@@ -12,10 +12,9 @@
 </style>
 
 <template>
-  <button
-    :class="$style.btn"
-    @click.stop="handleDaySign"
-  >{{ signed ? '已签到' : '签到' }}</button>
+  <button :class="$style.btn" @click.stop="handleDaySign">
+    {{ signed ? '已签到' : '签到' }}
+  </button>
 </template>
 
 <script>

@@ -16,8 +16,8 @@
   }
 
   .master-badge {
-    border: 1px solid #ff6881;
-    color: #ff6881;
+    border: 1px solid $color-red;
+    color: $color-red;
     border-radius: 10px;
     width: 34px;
     height: 20px;

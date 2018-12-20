@@ -1,7 +1,7 @@
 <style lang="scss" module>
 .btn {
-  border: 1px solid #ff6881;
-  color: #ff6881;
+  border: 1px solid $color-red;
+  color: $color-red;
   font-size: 13px;
   padding-left: 20px;
   padding-right: 20px;

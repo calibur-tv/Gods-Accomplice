@@ -19,4 +19,12 @@ export default class extends BaseApi {
   daySign() {
     return this.http.post('user/daySign')
   }
+
+  readMessage(id) {
+    return this.http.post('user/notification/read', { id })
+  }
+
+  readAllMessage() {
+    return this.http.post('user/notification/clear')
+  }
 }

@@ -28,7 +28,7 @@
 
       .iconfont {
         display: block;
-        color: $color-gray-text;
+        color: $color-text-light;
         margin-bottom: 15px;
       }
     }

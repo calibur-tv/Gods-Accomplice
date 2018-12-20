@@ -16,13 +16,13 @@
   }
 
   .to-parent {
-    color: #49689b;
+    color: $color-link;
     font-size: 14px;
     margin-top: 10px;
   }
 
   .hr {
-    background-color: #edf1f4;
+    background-color: $color-background;
     height: 10px;
     margin-left: -$container-padding;
   }

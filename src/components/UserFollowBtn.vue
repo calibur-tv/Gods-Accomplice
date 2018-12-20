@@ -1,7 +1,7 @@
 <style lang="scss" module>
 .btn {
-  background-color: #ff6881;
-  border: 1px solid #ff6881;
+  background-color: $color-red;
+  border: 1px solid $color-red;
   color: #fff;
   font-size: 13px;
   height: 28px;
@@ -12,7 +12,7 @@
   text-align: center;
 
   &.followed {
-    color: #ff6881;
+    color: $color-red;
     background-color: transparent;
   }
 }

@@ -24,7 +24,7 @@
     }
 
     time {
-      color: #a4a4ae;
+      color: $color-text-light;
       @include half-font(10px, top);
       line-height: 28px;
     }

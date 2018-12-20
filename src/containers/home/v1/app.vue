@@ -3,10 +3,13 @@
   background-color: transparent;
 
   .panel {
-    height: 140px;
-    margin-left: 15px;
-    margin-right: 15px;
-    padding-top: 5px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 150px;
+    padding: 15px $container-padding 0;
+    background-color: #fff;
 
     header {
       margin-bottom: 18px;
@@ -34,7 +37,7 @@
           .nickname {
             overflow: hidden;
             margin-right: 6px;
-            color: #22222b;
+            color: $color-text-normal;
             font-size: 23px;
             font-weight: 500;
           }
@@ -56,7 +59,7 @@
         }
 
         .intro {
-          color: #a4a4ae;
+          color: $color-text-light;
           font-size: 13px;
           line-height: 18px;
         }
@@ -90,7 +93,7 @@
           }
 
           p {
-            color: #22222b;
+            color: $color-text-normal;
             font-size: 18px;
             line-height: 20px;
             font-weight: 500;
@@ -105,21 +108,29 @@
     }
   }
 
+  .shim {
+    height: 150px;
+    width: 100%;
+    background-color: #fff;
+  }
+
   .hr {
     height: 10px;
-    background-color: #edf1f4;
+    background-color: $color-background;
   }
 
   .main-menu {
-    margin-left: 15px;
-    margin-right: 15px;
-    margin-bottom: 30px;
+    padding-bottom: 30px;
 
     .item {
       @extend %clearfix;
-      height: 25px;
-      margin-top: 18px;
-      margin-bottom: 30px;
+      height: 45px;
+      margin-top: 8px;
+      margin-bottom: 2px;
+      padding-left: $container-padding;
+      padding-right: $container-padding;
+      padding-bottom: 10px;
+      padding-top: 10px;
 
       .icon {
         width: 25px;
@@ -129,7 +140,7 @@
       }
 
       .text {
-        color: #22222b;
+        color: $color-text-normal;
         font-size: 16px;
         overflow: hidden;
         line-height: 25px;
@@ -150,10 +161,14 @@
         }
 
         span {
-          color: #a4a4ae;
+          color: $color-text-light;
           font-size: 12px;
           margin-right: 5px;
         }
+      }
+
+      &:active {
+        background-color: $color-press-active;
       }
     }
   }
@@ -175,10 +190,7 @@
         </div>
       </header>
       <main>
-        <DaySignBtn
-          :signed="daySign"
-          @signed="handleSigned"
-        />
+        <DaySignBtn :signed="daySign" @signed="handleSigned" />
         <div class="meta">
           <div class="item">
             <p class="oneline" v-text="$utils.shortenNumber(power)" />
@@ -195,6 +207,7 @@
         </div>
       </main>
     </div>
+    <div class="shim" />
     <div class="hr" />
     <div class="main-menu">
       <div class="item">

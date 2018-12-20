@@ -6,7 +6,7 @@
     margin-right: $container-padding;
     font-weight: 400;
     line-height: 30px;
-    color: #22222b;
+    color: $color-text-normal;
     @extend %breakWord;
   }
 

@@ -3,7 +3,7 @@
   blockquote {
     margin: 15px 15px 20px 16px;
     padding-left: 12px;
-    color: #22222b;
+    color: $color-text-normal;
     border-left: 3px solid #d3d3d3;
     font-size: 17px;
     line-height: 30px;

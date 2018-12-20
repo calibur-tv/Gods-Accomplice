@@ -12,7 +12,7 @@
   &:before {
     content: '';
     position: absolute;
-    background-color: #e5e5e5;
+    background-color: $color-line;
     top: 0;
     left: 0;
     height: 1px;
@@ -39,7 +39,7 @@
 
     .count {
       font-size: 15px;
-      color: #ff6881;
+      color: $color-red;
       margin-right: 3px;
     }
 
