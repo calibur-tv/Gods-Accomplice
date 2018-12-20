@@ -214,6 +214,7 @@ $placeholder-color: RGB(241, 243, 244);
         "
         :style="inlineImageStyle"
         @error="handleImageLoadError"
+        @click.stop="emitClick"
       />
     </div>
   </span>
@@ -564,6 +565,9 @@ export default {
       this.loaded = true
     },
     emitClick() {
+      if (!this.full && /^\d+$/.test(this.width) && /^\d+$/.test(this.height)) {
+        return
+      }
       if (/gif/.test(this.mime) && this.displayGifMask) {
         return
       }

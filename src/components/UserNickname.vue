@@ -15,14 +15,21 @@
     flex-shrink: 0;
   }
 
-  .owner-badge {
-    border: 1px solid #e867ff;
-    color: #e867ff;
-    font-size: 12px;
-    border-radius: 4px;
-    background-color: rgba(#e867ff, 0.05);
-    padding: 0 3px;
-    margin: 0 7px;
+  .master-badge {
+    border: 1px solid #ff6881;
+    color: #ff6881;
+    border-radius: 10px;
+    width: 34px;
+    height: 20px;
+    margin-left: 5px;
+
+    span {
+      @include half-font(11px, top);
+      width: 200%;
+      text-align: center;
+      height: 200%;
+      line-height: 36px;
+    }
   }
 }
 </style>
@@ -30,7 +37,7 @@
 <template>
   <div class="user-nickname" @click.stop="$alias.user(user.zone)">
     <div class="nickname"><p class="oneline" v-text="user.nickname" /></div>
-    <span v-if="showOwner" class="badge owner-badge"> 楼主 </span>
+    <span v-if="isMaster" class="badge master-badge"><span>楼主</span></span>
   </div>
 </template>
 
@@ -42,7 +49,7 @@ export default {
       type: Object,
       required: true
     },
-    showOwner: {
+    isMaster: {
       type: Boolean,
       default: false
     }

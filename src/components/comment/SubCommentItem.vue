@@ -28,7 +28,7 @@
     position: absolute;
     left: 0;
     top: 0;
-    right: -$container-padding;
+    right: -20px;
     height: 1px;
     background-color: #e5e5e5;
     transform: scaleY(0.5);
@@ -93,8 +93,8 @@
       />
     </div>
     <div :class="$style.main">
-      <div :class="$style.header">
-        <template v-if="comment.to_user_zone">
+      <div :class="$style.header" class="oneline">
+        <template v-if="showToUser">
           <span
             :class="$style.nickname"
             @click.stop="$alias.user(comment.from_user_zone)"
@@ -162,6 +162,11 @@ export default {
     },
     isMine() {
       return this.currentUserId === this.comment.from_user_id
+    },
+    showToUser() {
+      return (
+        this.comment.to_user_id && this.comment.to_user_id !== this.parentUserId
+      )
     }
   },
   methods: {

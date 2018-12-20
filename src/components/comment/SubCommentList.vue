@@ -1,7 +1,7 @@
 <style lang="scss">
 .sub-comment-list-wrap {
   &.in-detail {
-    margin-right: $container-padding;
+    margin-right: 20px;
   }
 
   .reply-title {
@@ -31,7 +31,7 @@
       position: absolute;
       left: 0;
       top: 0;
-      right: -$container-padding;
+      right: -20px;
       height: 1px;
       background-color: #e5e5e5;
       transform: scaleY(0.5);

@@ -14,12 +14,6 @@
     transform: scaleY(0.5);
   }
 
-  &.in-detail {
-    .content .header {
-      align-items: center;
-    }
-  }
-
   .avatar {
     margin-right: 10px;
     float: left;
@@ -27,25 +21,26 @@
 
   .content {
     overflow: hidden;
-    padding-right: $container-padding;
+    padding-right: 20px;
 
     .header {
-      margin-bottom: 3px;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: flex-start;
+      margin-bottom: 5px;
 
       .user-nickname {
+        overflow: hidden;
+
         .oneline {
           font-size: 16px;
-          line-height: 22px;
+          line-height: 20px;
           font-weight: 500;
           color: #22222b;
         }
       }
 
       .right-btn {
+        float: right;
+        margin-left: 15px;
+
         .tool-btn-wrap {
           display: block;
           position: relative;
@@ -85,6 +80,42 @@
 
       .image-area {
         margin: 10px 0;
+        position: relative;
+
+        .image {
+          border-radius: 2px;
+
+          &:not(:nth-child(3n)) {
+            margin-right: 2%;
+          }
+
+          &:nth-child(n + 4) {
+            margin-top: 2%;
+          }
+        }
+
+        .mask {
+          position: absolute;
+          right: 0;
+          top: 0;
+          height: 100%;
+          width: 32%;
+          border-radius: 2px;
+          background-color: rgba(#2f2f2f, 0.6);
+          overflow: hidden;
+          pointer-events: none;
+
+          span {
+            font-size: 15px;
+            color: #fff;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            text-align: center;
+          }
+        }
       }
     }
 
@@ -125,48 +156,6 @@
       }
     }
   }
-
-  .comment-tool {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.3);
-    z-index: 999;
-
-    .panel {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      width: 120px;
-      background-color: #fff;
-      border-radius: 5px;
-      transform: translate(-50%, -50%);
-
-      div {
-        text-align: center;
-        position: relative;
-        font-size: 13px;
-        height: 40px;
-        line-height: 40px;
-        color: #484853;
-
-        &:not(:first-child) {
-          &:before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 1px;
-            background-color: #e5e5e5;
-            transform: scaleY(0.5);
-          }
-        }
-      }
-    }
-  }
 }
 </style>
 
@@ -180,7 +169,6 @@
     <div class="avatar"><UserAvatar :size="35" :user="computeFromUser" /></div>
     <div class="content">
       <div class="header">
-        <UserNickname :user="computeFromUser" />
         <div class="right-btn">
           <UserFollowBtn
             v-if="inDetail"
@@ -188,28 +176,49 @@
             :followed="false"
             class="user-follow-button"
           />
-          <div v-else class="tool-btn-wrap">
-            <button @click.stop="showCommentTool = true">
+          <div v-else-if="canDelete" class="tool-btn-wrap">
+            <button @click.stop="deleteComment">
               <img src="./images/dots.png" />
             </button>
           </div>
         </div>
+        <UserNickname :user="computeFromUser" :is-master="isMaster" />
       </div>
       <div class="main">
         <div class="text-area" v-html="comment.content" />
-        <div v-if="comment.images.length" class="image-area">
-          <VImg
-            v-for="(item, index) in comment.images"
-            :key="index"
-            :src="item.url"
-            :size="item.size"
-            :type="item.type"
-            :width="item.width"
-            :height="item.height"
-            :full="true"
-            :blur="true"
-            @click="handleImagePreview(index)"
-          />
+        <div v-if="imageCount" class="image-area">
+          <div v-if="imageCount === 1">
+            <VImg
+              v-for="(item, index) in comment.images"
+              :key="index"
+              :src="item.url"
+              :size="item.size"
+              :type="item.type"
+              :blur="true"
+              :height="98"
+              width="auto"
+              class="image"
+              @click="handleImagePreview(index)"
+            />
+          </div>
+          <div v-else>
+            <div>
+              <VImg
+                v-for="(item, index) in filterImages"
+                :key="index"
+                :src="item.url"
+                :size="item.size"
+                :type="item.type"
+                :blur="true"
+                width="32%"
+                class="image"
+                @click="handleImagePreview(index)"
+              />
+            </div>
+            <div v-if="imageCount > 3 && !inDetail" class="mask">
+              <span>共{{ imageCount }}张图片</span>
+            </div>
+          </div>
         </div>
       </div>
       <slot name="extra" />
@@ -232,16 +241,6 @@
         </div>
       </div>
       <SubCommentList v-if="!inDetail" :parent-comment="comment" :type="type" />
-    </div>
-    <div
-      v-if="showCommentTool"
-      class="comment-tool"
-      @click.stop="showCommentTool = false"
-    >
-      <div class="panel">
-        <div>举报</div>
-        <div v-if="canDelete" @click="deleteComment">删除</div>
-      </div>
     </div>
   </div>
 </template>
@@ -279,8 +278,7 @@ export default {
   data() {
     return {
       deleting: false,
-      liking: false,
-      showCommentTool: false
+      liking: false
     }
   },
   computed: {
@@ -302,7 +300,15 @@ export default {
       return this.currentUserId === this.comment.from_user_id
     },
     canDelete() {
-      return this.isMine || this.isMaster
+      return this.isMine || this.isMaster || M.user.is_admin
+    },
+    imageCount() {
+      return this.comment.images.length
+    },
+    filterImages() {
+      return this.inDetail
+        ? this.comment.images
+        : this.comment.images.slice(0, 3)
     }
   },
   methods: {
