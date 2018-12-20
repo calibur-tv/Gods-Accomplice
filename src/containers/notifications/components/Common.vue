@@ -38,7 +38,7 @@
         color: $color-text-light;
         font-size: 12px;
         line-height: 17px;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
         display: block;
       }
 
@@ -53,6 +53,7 @@
         height: 17px;
         line-height: 17px;
         float: right;
+        text-indent: -1px;
       }
     }
 
