@@ -107,15 +107,16 @@ export default {
   mounted() {},
   methods: {
     handleDelete({ id }) {
-      this.$confirm('确定删除当前文章段落?')
-        .then(() => {
+      this.$confirm({
+        message: '确定删除当前文章段落?',
+        callback: () => {
           this.content.forEach((item, index) => {
             if (item.id === id) {
               this.content.splice(index, 1)
             }
           })
-        })
-        .catch(() => {})
+        }
+      })
     },
     handleCreate({ id, type }) {
       console.log('id', id) // eslint-disable-line

@@ -1,5 +1,6 @@
 /* eslint-disable */
 import invokerInterface from './invokerInterface'
+import { MessageBox } from 'mint-ui'
 
 export default class extends invokerInterface {
   getDeviceInfo(callback) {
@@ -63,6 +64,26 @@ export default class extends invokerInterface {
 
   toggleClick({ type, model, id, result }) {
     this.JsCallApp('toggleClick', { type, model, id, result })
+  }
+
+  confirm({
+      title,
+      message,
+      cancelButtonText,
+      submitButtonText,
+      callback
+    } = {}) {
+    const sendTitle = title || '提示'
+    const sendMessage = message || ''
+    const sendCancelButtonText = cancelButtonText || '取消'
+    const sendSubmitButtonText = submitButtonText || '确认'
+    MessageBox.confirm(sendMessage, sendTitle, {
+      confirmButtonText: sendSubmitButtonText,
+      cancelButtonText: sendCancelButtonText,
+      type: 'warning'
+    })
+      .then(callback)
+      .catch(() => {})
   }
 
   createMainComment({ model_type, model_id }) {

@@ -83,17 +83,22 @@ export default class extends invokerInterface {
     callback
   } = {}) {
     const sendTitle = title || '提示'
+    const sendMessage = message || ''
     const sendCancelButtonText = cancelButtonText || '取消'
     const sendSubmitButtonText = submitButtonText || '确认'
     this.JsCallApp(
       'showConfirm',
       {
         title: sendTitle,
-        message,
+        message: sendMessage,
         cancelButtonText: sendCancelButtonText,
         submitButtonText: sendSubmitButtonText
       },
-      callback
+      result => {
+        if (result && typeof callback === 'function') {
+          callback()
+        }
+      }
     )
   }
 

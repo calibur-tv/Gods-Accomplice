@@ -57,12 +57,9 @@ export default {
       if (this.loading || this.rewarded) {
         return
       }
-      this.$confirm('投食会消耗你1个团子, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      })
-        .then(async () => {
+      this.$confirm({
+        message: '投食会消耗你1个团子, 是否继续?',
+        callback: async () => {
           this.loading = true
           const api = new Api()
           try {
@@ -84,8 +81,8 @@ export default {
           } finally {
             this.loading = false
           }
-        })
-        .catch(() => {})
+        }
+      })
     }
   }
 }

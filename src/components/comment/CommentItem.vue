@@ -334,12 +334,9 @@ export default {
       if (this.deleting) {
         return
       }
-      this.$confirm('删除后无法找回, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      })
-        .then(async () => {
+      this.$confirm({
+        message: '删除后无法找回, 是否继续?',
+        callback: async () => {
           this.deleting = true
           const api = new Api()
           try {
@@ -355,8 +352,8 @@ export default {
           } finally {
             this.deleting = false
           }
-        })
-        .catch(() => {})
+        }
+      })
     },
     handleImagePreview(index) {
       M.invoker.previewImages({

@@ -59,6 +59,7 @@
         @reward="handleReward"
       />
     </footer>
+    <button @click="handleTestConfirm">【测试 confirm】</button>
     <VLazy>
       <CommentMain :id="post.id" :master-id="user.id" type="post" />
     </VLazy>
@@ -109,6 +110,17 @@ export default {
       M.invoker.createMainComment({
         model_type: 'post',
         model_id: this.post.id
+      })
+    },
+    handleTestConfirm() {
+      this.$confirm({
+        title: '测试标题',
+        message: "测试文本，很长的那种，测测测测测测额！",
+        confirmButtonText: '确定文本',
+        cancelButtonText: '取消文本',
+        callback: () => {
+          this.$toast.success('点确定才会走callback')
+        }
       })
     }
   }
