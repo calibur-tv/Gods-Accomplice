@@ -1,6 +1,7 @@
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin')
+const MinifyPlugin = require('babel-minify-webpack-plugin')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const TemplateHashPlugin = require('./plugin/TemplateHashPlugin')
@@ -30,15 +31,12 @@ module.exports = (env = {}) => {
 
     plugins: [
       new HtmlWebpackInlineSourcePlugin(),
-      new webpack.optimize.UglifyJsPlugin({
-        uglifyOptions: {
-          compress: {
-            warnings: false
-          }
-        },
-        sourceMap: true,
-        parallel: true
-      }),
+      new MinifyPlugin(
+        {},
+        {
+          sourceMap: false
+        }
+      ),
       new CompressionWebpackPlugin({
         asset: '[path].gz[query]',
         algorithm: 'gzip',

@@ -95,7 +95,7 @@ export default class extends invokerInterface {
         submitButtonText: sendSubmitButtonText
       },
       result => {
-        if (result && typeof callback === 'function') {
+        if (result === 'true' && typeof callback === 'function') {
           callback()
         }
       }

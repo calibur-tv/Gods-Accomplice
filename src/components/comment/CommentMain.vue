@@ -135,7 +135,7 @@ export default {
           id: this.id,
           type: this.type,
           fetchId: this.lastFetchId,
-          onlySeeMaster: this.onlySeeMaster
+          onlySeeMaster: this.onlySeeMaster ? '1' : '0'
         })
         const { total, list, noMore } = data
         this.total = total

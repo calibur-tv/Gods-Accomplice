@@ -110,17 +110,6 @@ export default {
         model_type: 'post',
         model_id: this.post.id
       })
-    },
-    handleTestConfirm() {
-      M.invoker.confirm({
-        title: '测试标题',
-        message: "测试文本，很长的那种，测测测测测测额！",
-        confirmButtonText: '确定文本',
-        cancelButtonText: '取消文本',
-        callback: () => {
-          this.$toast.success('点确定才会走callback')
-        }
-      })
     }
   }
 }

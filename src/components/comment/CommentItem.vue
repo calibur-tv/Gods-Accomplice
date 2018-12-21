@@ -250,7 +250,6 @@ import SubCommentList from './SubCommentList'
 import UserFollowBtn from '@/components/UserFollowBtn'
 import Api from '@/api/v1/commentApi'
 
-// TODO：删除主评论和举报主评论
 export default {
   name: 'CommentCommentItem',
   components: {
