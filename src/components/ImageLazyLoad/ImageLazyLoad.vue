@@ -12,6 +12,7 @@ $placeholder-color: RGB(241, 243, 244);
 
   &.avatar {
     border-radius: 50%;
+    border: 1px solid $color-avatar-border;
   }
 
   .image-wrap {

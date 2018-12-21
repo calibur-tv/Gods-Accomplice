@@ -36,8 +36,7 @@
   <div id="notifications">
     <header>
       <button @click.stop="clearNotification">
-        <img src="../../../images/notification.png">
-        <span>全部已读</span>
+        <img src="../../../images/notification.png" /> <span>全部已读</span>
       </button>
       <h1>消息</h1>
     </header>

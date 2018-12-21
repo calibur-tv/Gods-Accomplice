@@ -1,9 +1,8 @@
 <style lang="scss">
 .user-avatar {
-  width: 42px;
-  height: 42px;
   border-radius: 50%;
   overflow: hidden;
+  border: 1px solid $color-avatar-border;
 
   img {
     display: block;

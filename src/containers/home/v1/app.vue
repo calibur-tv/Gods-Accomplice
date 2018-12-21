@@ -22,6 +22,7 @@
         float: left;
         border-radius: 50%;
         margin-right: 14px;
+        border: 1px solid $color-avatar-border;
       }
 
       .content {
@@ -123,7 +124,6 @@
     padding-bottom: 30px;
 
     .item {
-      @extend %clearfix;
       height: 45px;
       margin-top: 8px;
       margin-bottom: 2px;
@@ -218,12 +218,12 @@
       <div class="item">
         <img src="../icon/comment.png" class="icon" />
         <div class="tail"><img src="../icon/link.png" /></div>
-        <p class="text oneline">评论</p>
+        <p class="text oneline">漫评</p>
       </div>
       <div class="item">
-        <img src="../icon/history.png" class="icon" />
+        <img src="../icon/bookmark.png" class="icon" />
         <div class="tail"><img src="../icon/link.png" /></div>
-        <p class="text oneline">浏览历史</p>
+        <p class="text oneline">我的收藏</p>
       </div>
       <div class="item">
         <img src="../icon/invite.png" class="icon" />

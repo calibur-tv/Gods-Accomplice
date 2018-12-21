@@ -59,7 +59,6 @@
         @reward="handleReward"
       />
     </footer>
-    <button @click="createMainComment">【测试唤醒发评论】</button>
     <VLazy>
       <CommentMain :id="post.id" :master-id="user.id" type="post" />
     </VLazy>
