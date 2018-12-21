@@ -34,8 +34,6 @@ Vue.use({
 
     Vue.prototype.$alert = MessageBox.alert
 
-    Vue.prototype.$confirm = M.invoker.confirm
-
     Vue.prototype.$prompt = MessageBox.prompt
   }
 })

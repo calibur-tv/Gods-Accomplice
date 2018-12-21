@@ -334,7 +334,7 @@ export default {
       if (this.deleting) {
         return
       }
-      this.$confirm({
+      M.invoker.confirm({
         message: '删除后无法找回, 是否继续?',
         callback: async () => {
           this.deleting = true
@@ -367,6 +367,7 @@ export default {
       }
       this.$alias.comment({
         model: this.type,
+        model_id: this.comment.modal_id,
         comment_id: this.comment.id
       })
     }

@@ -37,6 +37,10 @@
   .avatar {
     float: left;
     margin-right: 8px;
+
+    img {
+      pointer-events: none;
+    }
   }
 
   .main {
@@ -189,7 +193,7 @@ export default {
       if (this.deleting) {
         return
       }
-      this.$confirm({
+      M.invoker.confirm({
         message: '删除后无法找回, 是否继续?',
         callback: async () => {
           this.deleting = true

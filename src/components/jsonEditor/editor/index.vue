@@ -107,7 +107,7 @@ export default {
   mounted() {},
   methods: {
     handleDelete({ id }) {
-      this.$confirm({
+      M.invoker.confirm({
         message: '确定删除当前文章段落?',
         callback: () => {
           this.content.forEach((item, index) => {

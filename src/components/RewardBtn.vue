@@ -57,7 +57,7 @@ export default {
       if (this.loading || this.rewarded) {
         return
       }
-      this.$confirm({
+      M.invoker.confirm({
         message: '投食会消耗你1个团子, 是否继续?',
         callback: async () => {
           this.loading = true
