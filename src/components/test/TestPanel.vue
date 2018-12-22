@@ -65,9 +65,15 @@
       <button @click="testUpdateUserEXP">[setUserInfo]：点击经验 + 10</button>
       <button @click="testToggleClick">[toggleClick]：测试打赏传值</button>
       <button @click="testShowConfirm">[showConfirm]：打开一个confirm</button>
-      <button @click="testGetDeviceInfo">[getDeviceInfo]：获取当前设备信息</button>
-      <button @click="testPreviewImages">[previewImages]：点击测试图片预览</button>
-      <button @click="testReadNotification">[readNotification]：点击清除已读消息</button>
+      <button @click="testGetDeviceInfo">
+        [getDeviceInfo]：获取当前设备信息
+      </button>
+      <button @click="testPreviewImages">
+        [previewImages]：点击测试图片预览
+      </button>
+      <button @click="testReadNotification">
+        [readNotification]：点击清除已读消息
+      </button>
     </div>
     <h3>getUserInfo 获取当前用户</h3>
     <ul v-if="user">

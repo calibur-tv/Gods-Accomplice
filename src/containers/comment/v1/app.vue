@@ -2,19 +2,6 @@
 #comment-detail {
   padding-right: 0;
 
-  .init-block {
-    width: 100%;
-    height: 100%;
-    position: relative;
-
-    p {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-    }
-  }
-
   .to-parent {
     color: $color-link;
     font-size: 14px;
@@ -31,32 +18,29 @@
 
 <template>
   <div id="comment-detail" class="container">
-    <template v-if="comment">
-      <CommentItem
-        :comment="comment"
-        :in-detail="true"
-        :type="model"
-        :master-id="-1"
-      >
-        <button v-if="reply_id" slot="extra" class="to-parent">
-          查看原帖子
-        </button>
-      </CommentItem>
-      <div class="hr" />
-      <SubCommentList
-        :parent-comment="comment"
-        :in-detail="true"
-        :type="model"
-      />
-      <Loadmore
-        :loading="loadingSubComment"
-        :nothing="nothing"
-        :no-more="noMore"
-        :error="error"
-        :fetch="loadSubComment"
-      />
-    </template>
-    <div v-else class="init-block"><p>加载中...</p></div>
+    <CommentItem
+      :comment="comment"
+      :in-detail="true"
+      :type="modal_type"
+      :master-id="-1"
+    >
+      <button v-if="reply_id" slot="extra" class="to-parent">
+        查看原帖子
+      </button>
+    </CommentItem>
+    <div class="hr" />
+    <SubCommentList
+      :parent-comment="comment"
+      :in-detail="true"
+      :type="modal_type"
+    />
+    <Loadmore
+      :loading="loading"
+      :nothing="nothing"
+      :no-more="noMore"
+      :error="error"
+      :fetch="loadSubComment"
+    />
   </div>
 </template>
 
@@ -73,27 +57,48 @@ export default {
     SubCommentList,
     Loadmore
   },
-  props: {},
   data() {
     return {
-      model: '',
-      model_id: 0,
-      comment_id: 0,
+      id: 0,
+      content: '',
+      images: [],
+      modal_id: 1,
+      created_at: '',
+      floor_count: 0,
+      to_user_id: 0,
+      from_user_id: 0,
+      from_user_name: '',
+      from_user_zone: '',
+      from_user_avatar: '',
+      is_owner: true,
+      is_master: false,
+      is_leader: false,
+      comments: {
+        list: [],
+        total: 0,
+        noMore: false
+      },
+      modal_type: '',
+      liked: false,
+      like_count: 0,
       reply_id: 0,
-      comment: null,
-      loadingMainComment: false,
-      loadingSubComment: false,
+      loading: false,
       noMore: false,
       nothing: false,
       error: false,
       lastFetchSubCommentId: 0
     }
   },
+  computed: {
+    comment() {
+      return this
+    }
+  },
   created() {
-    this.loadMainComment()
+    this.lastFetchSubCommentId = this.comments.total ? this.comments.list[this.comments.list.length - 1].id : 0
     M.channel.$on('create-sub-comment', ({ data, exp, message }) => {
-      this.comment.comments.total++
-      this.comment.comments.list.push(data)
+      this.comments.total++
+      this.comments.list.push(data)
       this.$toast.success(message)
       this.$utils.updateUserExp(exp)
       M.invoker.setUserInfo(M.user)
@@ -101,29 +106,25 @@ export default {
   },
   methods: {
     async loadSubComment() {
-      if (
-        this.loadingSubComment ||
-        this.noMore ||
-        !this.lastFetchSubCommentId
-      ) {
+      if (this.loading || this.noMore || !this.lastFetchSubCommentId) {
         return
       }
-      this.loadingSubComment = true
+      this.loading = true
       const api = new Api()
       try {
         const data = await api.getSubCommentList({
-          type: this.model,
-          id: this.comment_id,
+          type: this.modal_type,
+          id: this.id,
           maxId: this.lastFetchSubCommentId
         })
         const { total, list, noMore } = data
-        this.comment.comments.total = total
-        this.comment.comments.noMore = noMore
+        this.comments.total = total
+        this.comments.noMore = noMore
         this.noMore = noMore
         if (list.length) {
-          const oldIds = this.comment.comments.list.map(_ => _.id)
+          const oldIds = this.comments.list.map(_ => _.id)
           const filterdList = list.filter(_ => oldIds.indexOf(_.id) === -1)
-          this.comment.comments.list = this.comment.comments.list.concat(
+          this.comments.list = this.comments.list.concat(
             filterdList
           )
           this.lastFetchSubCommentId = list[list.length - 1].id
@@ -132,32 +133,7 @@ export default {
         this.error = true
         this.$toast.error(e)
       } finally {
-        this.loadingSubComment = false
-      }
-    },
-    async loadMainComment() {
-      if (this.loadingMainComment || this.comment) {
-        return
-      }
-      this.loadingMainComment = true
-      const api = new Api()
-      try {
-        const data = await api.getMainCommentItem({
-          type: this.model,
-          comment_id: this.comment_id,
-          reply_id: this.reply_id
-        })
-        this.comment = data
-        if (data.comments.total) {
-          this.lastFetchSubCommentId =
-            data.comments.list[data.comments.list.length - 1].id
-        } else {
-          this.nothing = true
-        }
-      } catch (e) {
-        this.$toast.error(e)
-      } finally {
-        this.loadingMainComment = false
+        this.loading = false
       }
     }
   }

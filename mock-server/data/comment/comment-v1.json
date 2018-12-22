@@ -1,6 +1,124 @@
 {
-  "model": "post",
-  "model_id": 215,
-  "comment_id": 630,
-  "reply_id": 0
+  "id": 2,
+  "content": "<p>自说自话的测试</p>",
+  "images": [
+    {
+      "url": "https://image.calibur.tv/user/1//post/215/1545230888175-uyk.jpeg",
+      "width": 1920,
+      "height": 1080,
+      "size": 195963,
+      "type": "image/jpeg"
+    },
+    {
+      "url": "https://image.calibur.tv/user/1//post/215/1545230888179-6av.jpeg",
+      "width": 1080,
+      "height": 754,
+      "size": 90809,
+      "type": "image/jpeg"
+    },
+    {
+      "url": "https://image.calibur.tv/user/1//post/215/1545230888182-bys.jpeg",
+      "width": 575,
+      "height": 800,
+      "size": 60292,
+      "type": "image/jpeg"
+    },
+    {
+      "url": "https://image.calibur.tv/user/1//post/215/1545230896209-y6i.jpeg",
+      "width": 1280,
+      "height": 751,
+      "size": 152467,
+      "type": "image/jpeg"
+    }
+  ],
+  "modal_id": 1,
+  "created_at": "2018-02-08 17:40:36",
+  "floor_count": 2,
+  "to_user_id": 0,
+  "from_user_id": 1,
+  "from_user_name": "冰淤",
+  "from_user_zone": "bing-yu",
+  "from_user_avatar": "https://image.calibur.tv/user/1/avatar/0/1530281203832-e6c.jpeg",
+  "is_owner": true,
+  "is_master": false,
+  "is_leader": false,
+  "comments": {
+    "list": [
+      {
+        "id": 1531,
+        "content": "一起来玩吧！",
+        "created_at": "2018-02-08 17:41:16",
+        "parent_id": 2,
+        "from_user_id": 1,
+        "from_user_name": "冰淤",
+        "from_user_zone": "bing-yu",
+        "from_user_avatar": "https://image.calibur.tv/user/1/avatar/0/1530281203832-e6c.jpeg",
+        "to_user_id": 0,
+        "to_user_name": "",
+        "to_user_zone": "",
+        "to_user_avatar": ""
+      },
+      {
+        "id": 1532,
+        "content": "明天也要努力！",
+        "created_at": "2018-02-09 23:27:47",
+        "parent_id": 2,
+        "from_user_id": 1,
+        "from_user_name": "冰淤",
+        "from_user_zone": "bing-yu",
+        "from_user_avatar": "https://image.calibur.tv/user/1/avatar/0/1530281203832-e6c.jpeg",
+        "to_user_id": 0,
+        "to_user_name": "",
+        "to_user_zone": "",
+        "to_user_avatar": ""
+      },
+      {
+        "id": 1533,
+        "content": "有bug",
+        "created_at": "2018-02-16 00:03:49",
+        "parent_id": 2,
+        "from_user_id": 8,
+        "from_user_name": "骑着乌龟过马路",
+        "from_user_zone": "qi-zhe-wu-gui-guo-ma-lu",
+        "from_user_avatar": "https://image.calibur.tv/default/user-avatar",
+        "to_user_id": 1,
+        "to_user_name": "冰淤",
+        "to_user_zone": "bing-yu",
+        "to_user_avatar": "https://image.calibur.tv/user/1/avatar/0/1530281203832-e6c.jpeg"
+      },
+      {
+        "id": 1534,
+        "content": "没有金币🙁",
+        "created_at": "2018-02-16 00:19:32",
+        "parent_id": 2,
+        "from_user_id": 9,
+        "from_user_name": "Sunshine",
+        "from_user_zone": "sunshine-1",
+        "from_user_avatar": "https://image.calibur.tv/default/user-avatar",
+        "to_user_id": 1,
+        "to_user_name": "冰淤",
+        "to_user_zone": "bing-yu",
+        "to_user_avatar": "https://image.calibur.tv/user/1/avatar/0/1530281203832-e6c.jpeg"
+      },
+      {
+        "id": 1535,
+        "content": "去签到呀，签到就有了~",
+        "created_at": "2018-02-16 08:10:55",
+        "parent_id": 2,
+        "from_user_id": 1,
+        "from_user_name": "冰淤",
+        "from_user_zone": "bing-yu",
+        "from_user_avatar": "https://image.calibur.tv/user/1/avatar/0/1530281203832-e6c.jpeg",
+        "to_user_id": 9,
+        "to_user_name": "Sunshine",
+        "to_user_zone": "sunshine-1",
+        "to_user_avatar": "https://image.calibur.tv/default/user-avatar"
+      }
+    ],
+    "total": 11,
+    "noMore": false
+  },
+  "modal_type": "post",
+  "liked": false,
+  "like_count": 10
 }
