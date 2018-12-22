@@ -67,12 +67,12 @@ export default class extends invokerInterface {
   }
 
   confirm({
-      title,
-      message,
-      cancelButtonText,
-      submitButtonText,
-      callback
-    } = {}) {
+    title,
+    message,
+    cancelButtonText,
+    submitButtonText,
+    callback
+  } = {}) {
     const sendTitle = title || '提示'
     const sendMessage = message || ''
     const sendCancelButtonText = cancelButtonText || '取消'

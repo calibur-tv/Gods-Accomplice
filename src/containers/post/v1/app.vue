@@ -16,7 +16,7 @@
 </style>
 
 <template>
-  <div id="post-show" class="container">
+  <div v-if="post" id="post-show" class="container">
     <!-- 头部 -->
     <header class="flow-header">
       <!-- 用户 -->

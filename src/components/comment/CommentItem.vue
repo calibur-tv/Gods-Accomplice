@@ -161,7 +161,6 @@
 
 <template>
   <div
-    :id="`comment-${comment.id}`"
     :class="{ 'in-detail': inDetail }"
     class="comment-item"
     @click.stop="toDetailPage"
