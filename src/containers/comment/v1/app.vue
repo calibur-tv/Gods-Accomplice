@@ -24,9 +24,7 @@
       :type="modal_type"
       :master-id="-1"
     >
-      <button v-if="reply_id" slot="extra" class="to-parent">
-        查看原帖子
-      </button>
+      <button v-if="reply_id" slot="extra" class="to-parent">查看原帖子</button>
     </CommentItem>
     <div class="hr" />
     <SubCommentList
@@ -95,7 +93,9 @@ export default {
     }
   },
   created() {
-    this.lastFetchSubCommentId = this.comments.total ? this.comments.list[this.comments.list.length - 1].id : 0
+    this.lastFetchSubCommentId = this.comments.total
+      ? this.comments.list[this.comments.list.length - 1].id
+      : 0
     M.channel.$on('create-sub-comment', ({ data, exp, message }) => {
       this.comments.total++
       this.comments.list.push(data)
@@ -124,9 +124,7 @@ export default {
         if (list.length) {
           const oldIds = this.comments.list.map(_ => _.id)
           const filterdList = list.filter(_ => oldIds.indexOf(_.id) === -1)
-          this.comments.list = this.comments.list.concat(
-            filterdList
-          )
+          this.comments.list = this.comments.list.concat(filterdList)
           this.lastFetchSubCommentId = list[list.length - 1].id
         }
       } catch (e) {
