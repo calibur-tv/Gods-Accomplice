@@ -1,9 +1,131 @@
 import invokerInterface from './invokerInterface'
+import scheme from './scheme/android'
 
 export default class extends invokerInterface {
   getDeviceInfo(callback) {
     this.JsCallApp('getDeviceInfo', {}, callback)
   }
+
+  getUserInfo(callback) {
+    this.JsCallApp('getUserInfo', {}, callback)
+  }
+
+  setUserInfo(data) {
+    this.JsCallApp('setUserInfo', data)
+  }
+
+  toNative(page, data = null) {
+    let uri = scheme[page]
+    if (data) {
+      uri = `${uri}?`
+      Object.keys(data).forEach(key => {
+        uri += `${key}=${data[key]}&`
+      })
+      uri = uri.slice(0, -1)
+    }
+    this.JsCallApp('toNativePage', { uri })
+  }
+
+  toggleClick({ model, type, id, result }) {
+    this.JsCallApp('toggleClick', { model, type, id, result })
+  }
+
+  readNotification({ count }) {
+    this.JsCallApp('readNotification', { count })
+  }
+
+  previewImages({ images, index }) {
+    this.JsCallApp('previewImages', { images, index })
+  }
+
+  createMainComment({ model_type, model_id }) {
+    this.JsCallApp('createMainComment', { model_type, model_id })
+  }
+
+  createSubComment({
+    model_type,
+    parent_comment_id,
+    target_user_id,
+    target_user_name
+  }) {
+    this.JsCallApp('createSubComment', {
+      model_type,
+      parent_comment_id,
+      target_user_id,
+      target_user_name
+    })
+  }
+
+  toast({ type, text }) {
+    this.JsCallApp('showToast', { type, text })
+  }
+
+  alert({ title, message, buttonText } = {}, callback) {
+    const sendTitle = title || '提示'
+    const sendButtonText = buttonText || '确认'
+    this.JsCallApp(
+      'show-alert',
+      { title: sendTitle, message, buttonText: sendButtonText },
+      callback
+    )
+  }
+
+  confirm({
+    title,
+    message,
+    cancelButtonText,
+    submitButtonText,
+    callback
+  } = {}) {
+    const sendTitle = title || '提示'
+    const sendMessage = message || ''
+    const sendCancelButtonText = cancelButtonText || '取消'
+    const sendSubmitButtonText = submitButtonText || '确认'
+    this.JsCallApp(
+      'showConfirm',
+      {
+        title: sendTitle,
+        message: sendMessage,
+        cancelButtonText: sendCancelButtonText,
+        submitButtonText: sendSubmitButtonText
+      },
+      result => {
+        if (result === 'true' && typeof callback === 'function') {
+          callback()
+        }
+      }
+    )
+  }
+
+  prompt({
+    title,
+    message,
+    inputType,
+    maxLength,
+    cancelButtonText,
+    submitButtonText,
+    callback
+  } = {}) {
+    const sendTitle = title || '提示'
+    const sendMessage = message || ''
+    const sendCancelButtonText = cancelButtonText || '取消'
+    const sendSubmitButtonText = submitButtonText || '确认'
+    const sendInputType = inputType || 'text'
+    const sendMaxLength = maxLength || 0
+    this.JsCallApp(
+      'showPrompt',
+      {
+        title: sendTitle,
+        message: sendMessage,
+        maxLength: sendMaxLength,
+        inputType: sendInputType,
+        cancelButtonText: sendCancelButtonText,
+        submitButtonText: sendSubmitButtonText
+      },
+      callback
+    )
+  }
+
   /**
    * App 主动调用 JS 的函数
    * @param {JSON} jsonObj

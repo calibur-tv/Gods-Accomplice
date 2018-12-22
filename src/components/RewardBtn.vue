@@ -13,7 +13,7 @@
 
 <template>
   <button :class="$style.btn" @click.stop="handleReward">
-    {{ rewarded ? '已投过食' : text }}
+    {{ rewarded ? rewardedText : text }}
   </button>
 </template>
 
@@ -35,9 +35,17 @@ export default {
       type: String,
       default: '为TA投食'
     },
+    rewardedText: {
+      type: String,
+      default: '已投过食'
+    },
     rewarded: {
       type: Boolean,
       required: true
+    },
+    confirm: {
+      type: Boolean,
+      default: true
     }
   },
   data() {
@@ -57,32 +65,36 @@ export default {
       if (this.loading || this.rewarded) {
         return
       }
+      if (!this.confirm) {
+        this.submit()
+      }
       M.invoker.confirm({
         message: '投食会消耗你1个团子, 是否继续?',
-        callback: async () => {
-          this.loading = true
-          const api = new Api()
-          try {
-            await api.reward({
-              type: this.type,
-              id: this.id
-            })
-            this.$emit('reward')
-            M.invoker.toggleClick({
-              type: 'reward',
-              model: this.type,
-              id: this.id,
-              result: {
-                rewarded: true
-              }
-            })
-          } catch (e) {
-            this.$toast.error(e)
-          } finally {
-            this.loading = false
-          }
-        }
+        callback: this.submit()
       })
+    },
+    async submit() {
+      this.loading = true
+      const api = new Api()
+      try {
+        await api.reward({
+          type: this.type,
+          id: this.id
+        })
+        this.$emit('reward')
+        M.invoker.toggleClick({
+          type: 'reward',
+          model: this.type,
+          id: this.id,
+          result: {
+            rewarded: true
+          }
+        })
+      } catch (e) {
+        this.$toast.error(e)
+      } finally {
+        this.loading = false
+      }
     }
   }
 }
