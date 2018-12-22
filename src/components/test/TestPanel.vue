@@ -46,12 +46,6 @@
         <p>userToken：{{ token }}</p>
       </li>
     </ul>
-    <h3>getUserInfo 获取当前用户</h3>
-    <ul v-if="user">
-      <li v-for="(value, key) in user" :key="key">
-        <p>{{ key }}: {{ value }}</p>
-      </li>
-    </ul>
     <h3>跳转到另一个页面</h3>
     <div>
       <button @click="$alias.post(1)">帖子</button>
@@ -67,7 +61,7 @@
     </div>
     <h3>其它交互测试</h3>
     <div>
-      <button @click="testGetUserInfo">[getUserInfo]：点击经验 + 10</button>
+      <button @click="testGetUserInfo">[getUserInfo]：点击获取当前用户</button>
       <button @click="testUpdateUserEXP">[setUserInfo]：点击经验 + 10</button>
       <button @click="testToggleClick">[toggleClick]：测试打赏传值</button>
       <button @click="testShowConfirm">[showConfirm]：打开一个confirm</button>
@@ -75,6 +69,12 @@
       <button @click="testPreviewImages">[previewImages]：点击测试图片预览</button>
       <button @click="testReadNotification">[readNotification]：点击清除已读消息</button>
     </div>
+    <h3>getUserInfo 获取当前用户</h3>
+    <ul v-if="user">
+      <li v-for="(value, key) in user" :key="key">
+        <p>{{ key }}: {{ value }}</p>
+      </li>
+    </ul>
   </div>
 </template>
 

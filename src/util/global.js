@@ -16,6 +16,7 @@ const channel = new Vue()
 M.sentry = new Sentry({ appName, appVersion })
 M.invoker = new Invoker({ appName, appVersion })
 M.channel = channel
+M.user = {}
 M.invoker.getUserInfo(data => {
   M.user = data
 })
