@@ -45,14 +45,14 @@ export default {
   },
 
   bookmark() {
-    M.invoker.toNative('bookmark')
+    M.invoker.toNative('bookmarks')
   },
 
   transaction() {
-    M.invoker.toNative('transaction')
+    M.invoker.toNative('transactions')
   },
 
   notification() {
-    M.invoker.toNative('notification')
+    M.invoker.toNative('notifications')
   }
 }

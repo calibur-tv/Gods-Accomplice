@@ -1,0 +1,74 @@
+#calibur {
+  .mint-msgbox {
+    border-radius: 13px;
+    background-color: rgba(255, 255, 255, 0.95);
+
+    &-message {
+      line-height: 24px;
+      font-size: 14px;
+      color: #22222b;
+
+      span {
+        display: block;
+        text-align: left;
+        font-size: 14px;
+        text-indent: 2em;
+        word-break: break-all;
+      }
+
+      p {
+        line-height: 36px;
+      }
+    }
+
+    &-title {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    &-btn {
+      background-color: transparent;
+      font-size: 17px;
+      color: #ff6881 !important;
+    }
+  }
+
+  .van-tabs {
+    &__line {
+      background-color: $color-red;
+      height: 4px;
+      border-radius: 2px;
+    }
+
+    &__warp {
+      position: relative;
+      z-index: 1;
+    }
+
+    &__content {
+      position: relative;
+      min-height: 100vh;
+      margin-top: -44px;
+      padding-top: 44px;
+      z-index: 0;
+    }
+
+    .van-tab__pane {
+      padding-left: $container-padding;
+      padding-right: $container-padding;
+    }
+  }
+
+  .van-tab {
+    color: #797989;
+    font-size: 16px;
+
+    &--active {
+      color: #222222;
+    }
+
+    .van-hairline--top-bottom:after {
+      border-color: $color-line;
+    }
+  }
+}
