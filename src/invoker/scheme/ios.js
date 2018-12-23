@@ -5,5 +5,6 @@ export default {
   notice: 'calibur://user/bulletin',
   bangumi: 'calibur://bangumi/detail',
   post: 'calibur://poster/detail',
-  image: 'calibur://image/detail'
+  image: 'calibur://image/detail',
+  comment: 'calibur://comment/detail'
 }
