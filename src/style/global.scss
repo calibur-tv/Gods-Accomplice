@@ -53,3 +53,12 @@ html, body, #calibur, .container {
     margin-bottom: 15px;
   }
 }
+
+#error-box {
+  li {
+    margin-left: 30px;
+    margin-top: 10px;
+    margin-right: 10px;
+    list-style-type: disc;
+  }
+}
