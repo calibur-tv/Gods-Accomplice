@@ -364,8 +364,7 @@ export default {
         return
       }
       this.$alias.comment({
-        model: this.type,
-        model_id: this.comment.modal_id,
+        type: this.type,
         comment_id: this.comment.id
       })
     }

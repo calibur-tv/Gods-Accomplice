@@ -356,8 +356,7 @@ export default {
         return {
           name: 'comment',
           params: {
-            model: 'post',
-            model_id: modelId,
+            type: 'post',
             comment_id: commentId,
             reply_id: replyId
           }
@@ -373,8 +372,7 @@ export default {
         return {
           name: 'comment',
           params: {
-            model: 'image',
-            model_id: modelId,
+            type: 'image',
             comment_id: commentId,
             reply_id: replyId
           }
@@ -390,8 +388,7 @@ export default {
         return {
           name: 'comment',
           params: {
-            model: 'review',
-            model_id: modelId,
+            type: 'review',
             comment_id: commentId,
             reply_id: replyId
           }
@@ -407,8 +404,7 @@ export default {
         return {
           name: 'comment',
           params: {
-            model: 'video',
-            model_id: modelId,
+            type: 'video',
             comment_id: commentId,
             reply_id: replyId
           }
@@ -424,8 +420,7 @@ export default {
         return {
           name: 'comment',
           params: {
-            model: 'question',
-            model_id: modelId,
+            type: 'question',
             comment_id: commentId,
             reply_id: replyId
           }
@@ -441,8 +436,7 @@ export default {
         return {
           name: 'comment',
           params: {
-            model: 'question',
-            model_id: modelId,
+            type: 'question',
             comment_id: commentId,
             reply_id: replyId
           }

@@ -18,7 +18,7 @@ M.invoker = new Invoker({ appName, appVersion })
 M.channel = channel
 M.user = {}
 M.invoker.getUserInfo(data => {
-  M.user = data
+  M.user = JSON.parse(data)
 })
 
 Vue.use({

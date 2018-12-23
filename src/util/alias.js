@@ -27,11 +27,10 @@ export default {
     M.invoker.toNative('video', { video_id })
   },
 
-  comment({ model, model_id, comment_id, reply_id }) {
+  comment({ type, comment_id, reply_id }) {
     M.invoker.toNative('comment', {
-      model,
+      type,
       comment_id,
-      model_id: model_id || 0,
       reply_id: reply_id || 0
     })
   },

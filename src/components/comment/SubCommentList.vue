@@ -119,7 +119,7 @@ export default {
         return
       }
       this.$alias.comment({
-        model: this.type,
+        type: this.type,
         comment_id: this.parentComment.id
       })
     },

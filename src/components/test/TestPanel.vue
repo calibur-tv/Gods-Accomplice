@@ -107,7 +107,7 @@ export default {
   mounted() {},
   methods: {
     testGetUserInfo() {
-      M.invoker.getUserInfo(user => (this.user = user))
+      M.invoker.getUserInfo(user => (this.user = JSON.parse(user)))
       this.$toast.info('getUserInfo')
     },
     testUpdateUserEXP() {

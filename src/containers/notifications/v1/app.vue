@@ -101,7 +101,7 @@ export default {
         const data = await api.getNotifications({
           minId: refresh ? 0 : len ? this.list[len - 1].id : 0
         })
-        this.list = this.list.concat(data.list)
+        this.list = refresh ? data.list : this.list.concat(data.list)
         this.noMore = data.noMore
         this.nothing = !this.list.length
       } catch (e) {
