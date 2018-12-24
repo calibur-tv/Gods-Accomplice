@@ -2,7 +2,17 @@
 #notifications {
   height: 100%;
 
-  header {
+  .header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding-top: 18px;
+    padding-bottom: 12px;
+    height: 71px;
+    background-color: #fff;
+    z-index: 2;
+
     button {
       float: right;
       height: 33px;
@@ -29,6 +39,12 @@
       overflow: hidden;
     }
   }
+
+  .list {
+    margin-top: 59px;
+    position: relative;
+    z-index: 1;
+  }
 }
 </style>
 
@@ -42,18 +58,20 @@
       top-pull-text="下拉刷新"
       top-drop-text="松开并刷新"
     >
-      <header>
+      <header class="header">
         <button @click.stop="clearNotification">
           <img src="../../../images/notification.png" /> <span>全部已读</span>
         </button>
         <h1>消息</h1>
       </header>
-      <CommonItem
-        v-for="item in list"
-        :key="item.id"
-        :item="item"
-        @read="handleMessageRead"
-      />
+      <div class="list">
+        <CommonItem
+          v-for="item in list"
+          :key="item.id"
+          :item="item"
+          @read="handleMessageRead"
+        />
+      </div>
     </MtLoadmore>
     <VLoadmore
       :loading="loading"

@@ -18,7 +18,6 @@ $placeholder-color: RGB(241, 243, 244);
   .image-wrap {
     width: 100%;
     height: 100%;
-    transition: 0.4s linear;
   }
 }
 
@@ -194,8 +193,6 @@ $placeholder-color: RGB(241, 243, 244);
     :class="[
       $style.inline,
       {
-        [$style.cssFade]: !loaded && !blur, // 如果未加载，并且是默认（fade）动画
-        [$style.cssBlur]: !loaded && blur, // 如果未加载，并且是 blur 动画
         [$style.avatar]: avatar, // 如果图片类型是头像，就添加样式为圆形
         [$style.poster]: poster
       }

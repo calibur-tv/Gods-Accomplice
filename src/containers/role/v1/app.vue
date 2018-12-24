@@ -171,17 +171,17 @@
 
       .fans {
         display: inline-block;
-        margin-bottom: $container-padding;
+        margin-top: $container-padding;
         margin-left: 9px;
         margin-right: 9px;
         width: 55px;
 
         .nickname {
+          @include mutiline(19px);
           font-size: 13px;
           color: #484853;
-          @include mutiline(19px);
-          height: 38px;
           text-align: center;
+          height: 38px;
         }
       }
     }

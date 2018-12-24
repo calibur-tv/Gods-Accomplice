@@ -49,6 +49,7 @@
       </template>
       <section v-else class="flow-images">
         <VImg
+          v-if="source"
           :src="source.url"
           :width="source.width"
           :height="source.height"
@@ -58,6 +59,7 @@
           class="image"
           @click="handleImagePreview(0)"
         />
+        <p v-else class="no-image">还没有上传图片</p>
       </section>
     </main>
     <!-- 番剧 -->
