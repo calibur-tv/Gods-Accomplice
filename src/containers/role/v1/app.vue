@@ -170,11 +170,15 @@
       margin-right: -9px;
 
       .fans {
-        display: inline-block;
         margin-top: $container-padding;
         margin-left: 9px;
         margin-right: 9px;
         width: 55px;
+        height: 93px;
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
 
         .nickname {
           @include mutiline(19px);
@@ -182,6 +186,7 @@
           color: #484853;
           text-align: center;
           height: 38px;
+          width: 100%;
         }
       }
     }

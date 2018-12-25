@@ -1,7 +1,5 @@
 <style lang="scss">
 #notifications {
-  height: 100%;
-
   .header {
     position: fixed;
     left: 0;
@@ -40,8 +38,11 @@
     }
   }
 
+  .shim {
+    height: 59px;
+  }
+
   .list {
-    margin-top: 59px;
     position: relative;
     z-index: 1;
   }
@@ -50,6 +51,13 @@
 
 <template>
   <div id="notifications">
+    <header class="header">
+      <button @click.stop="clearNotification">
+        <img src="../../../images/notification.png" /> <span>全部已读</span>
+      </button>
+      <h1>消息</h1>
+    </header>
+    <div class="shim"/>
     <MtLoadmore
       ref="loadmore"
       :top-method="refreshPage"
@@ -58,12 +66,6 @@
       top-pull-text="下拉刷新"
       top-drop-text="松开并刷新"
     >
-      <header class="header">
-        <button @click.stop="clearNotification">
-          <img src="../../../images/notification.png" /> <span>全部已读</span>
-        </button>
-        <h1>消息</h1>
-      </header>
       <div class="list">
         <CommonItem
           v-for="item in list"
