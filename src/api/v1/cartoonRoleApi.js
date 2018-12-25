@@ -7,7 +7,9 @@ export default class extends BaseApi {
 
   fans({ roleId, seenIds, minId, sort }) {
     return this.http.get(`/cartoon_role/${roleId}/fans`, {
-      seenIds, minId, sort
+      seenIds,
+      minId,
+      sort
     })
   }
 }

@@ -57,7 +57,7 @@
       </button>
       <h1>消息</h1>
     </header>
-    <div class="shim"/>
+    <div class="shim" />
     <MtLoadmore
       ref="loadmore"
       :top-method="refreshPage"

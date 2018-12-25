@@ -216,7 +216,7 @@
         <div class="content">
           <div class="meta">
             <div class="item">
-              <p>1</p>
+              <p>{{ data.trending || '无' }}</p>
               <span>排名</span>
             </div>
             <div class="item">
