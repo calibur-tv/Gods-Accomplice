@@ -87,8 +87,6 @@
 <script>
 export default {
   name: 'TestPanel',
-  components: {},
-  props: {},
   data() {
     return {
       appVersion: document.querySelector('meta[name=app-version]').content,
@@ -99,12 +97,6 @@ export default {
       user: null
     }
   },
-  computed: {},
-  watch: {},
-  created() {
-    this.testGetUserInfo()
-  },
-  mounted() {},
   methods: {
     testGetUserInfo() {
       M.invoker.getUserInfo(user => (this.user = JSON.parse(user)))

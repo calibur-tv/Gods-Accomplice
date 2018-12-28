@@ -18,7 +18,7 @@
 
   a,
   button {
-    color: $color-blue;
+    color: $color-link;
   }
 
   .type {
@@ -34,11 +34,11 @@
   }
 
   .minus {
-    color: $color-pink;
+    color: $color-red;
   }
 
   .plus {
-    color: $color-blue;
+    color: $color-link;
   }
 
   .detail {

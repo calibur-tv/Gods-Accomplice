@@ -3,7 +3,7 @@
   height: 24px;
   padding: 2px;
   border-radius: 22px;
-  background-color: #f6f7f7;
+  background-color: $color-background-tag;
   display: inline-block;
   font-size: 0;
 

@@ -7,12 +7,20 @@
   color: #fff;
   font-size: 14px;
   text-align: center;
-  line-height: 36px;
+  line-height: 34px;
+  border: 1px solid;
+  border-color: $color-red;
+
+  &.active {
+    background-color: #fff;
+    color: $color-text-light;
+    border-color: $color-line;
+  }
 }
 </style>
 
 <template>
-  <button :class="$style.btn" @click.stop="handleDaySign">
+  <button :class="[$style.btn, { [$style.active]: signed }]" @click.stop="handleDaySign">
     {{ signed ? '已签到' : '签到' }}
   </button>
 </template>

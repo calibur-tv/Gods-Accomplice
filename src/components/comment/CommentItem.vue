@@ -338,10 +338,17 @@ export default {
           this.deleting = true
           const api = new Api()
           try {
-            await api.deleteMainComment({
-              type: this.type,
-              id: this.comment.id
-            })
+            if (this.isMine) {
+              await api.deleteMainComment({
+                type: this.type,
+                id: this.comment.id
+              })
+            } else {
+              await api.reportComment({
+                id: this.comment.id,
+                model: `${this.type}_comment`
+              })
+            }
             this.$emit('delete', {
               id: this.comment.id
             })

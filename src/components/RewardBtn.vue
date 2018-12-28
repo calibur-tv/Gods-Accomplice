@@ -8,11 +8,16 @@
   height: 36px;
   line-height: 34px;
   border-radius: 18px;
+
+  &.active {
+    color: $color-text-light;
+    border-color: $color-line;
+  }
 }
 </style>
 
 <template>
-  <button :class="$style.btn" @click.stop="handleReward">
+  <button :class="[$style.btn, { [$style.active]: rewarded }]" @click.stop="handleReward">
     {{ rewarded ? rewardedText : text }}
   </button>
 </template>
@@ -65,13 +70,14 @@ export default {
       if (this.loading || this.rewarded) {
         return
       }
-      if (!this.confirm) {
+      if (this.confirm) {
+        M.invoker.confirm({
+          message: '投食会消耗你1个团子, 是否继续?',
+          callback: this.submit
+        })
+      } else {
         this.submit()
       }
-      M.invoker.confirm({
-        message: '投食会消耗你1个团子, 是否继续?',
-        callback: this.submit()
-      })
     },
     async submit() {
       this.loading = true

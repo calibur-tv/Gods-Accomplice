@@ -9,7 +9,7 @@
   }
 
   .hr {
-    background-color: $color-background;
+    background-color: $color-background-container;
     height: 10px;
     margin-left: -$container-padding;
   }

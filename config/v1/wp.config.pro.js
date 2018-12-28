@@ -37,6 +37,7 @@ module.exports = (env = {}) => {
           sourceMap: false
         }
       ),
+      /*
       new CompressionWebpackPlugin({
         asset: '[path].gz[query]',
         algorithm: 'gzip',
@@ -44,6 +45,7 @@ module.exports = (env = {}) => {
         threshold: 10240,
         minRatio: 0.8
       }),
+      */
       new webpack.LoaderOptionsPlugin({
         minimize: true,
         debug: false

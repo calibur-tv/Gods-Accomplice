@@ -19,7 +19,7 @@
 
       span {
         font-size: 15px;
-        color: #797989;
+        color: $color-text-light;
       }
 
       img {

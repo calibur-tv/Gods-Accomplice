@@ -68,4 +68,12 @@ export default class extends BaseApi {
       id
     })
   }
+
+  reportComment({ id, model }) {
+    return this.http.post('report/send', {
+      id,
+      type: 0,
+      model
+    })
+  }
 }

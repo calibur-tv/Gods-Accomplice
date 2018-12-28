@@ -87,7 +87,7 @@
 
   .hr {
     height: 10px;
-    background-color: $color-background;
+    background-color: $color-background-container;
   }
 
   main {

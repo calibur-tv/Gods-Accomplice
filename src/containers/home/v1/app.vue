@@ -102,7 +102,7 @@
 
           span {
             font-size: 13px;
-            color: #797989;
+            color: $color-text-light;
           }
         }
       }
@@ -117,7 +117,7 @@
 
   .hr {
     height: 10px;
-    background-color: $color-background;
+    background-color: $color-background-container;
   }
 
   .main-menu {

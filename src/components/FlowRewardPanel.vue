@@ -44,14 +44,14 @@
     }
 
     .tail {
-      color: #797989;
+      color: $color-text-light;
       font-size: 13px;
     }
 
     .tip {
       span {
         font-size: 13px;
-        color: #797989;
+        color: $color-text-light;
       }
 
       img {

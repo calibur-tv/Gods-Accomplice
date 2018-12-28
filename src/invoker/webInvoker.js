@@ -59,6 +59,20 @@ export default class extends invokerInterface {
     this.JsCallApp('createMainComment', { model_type, model_id })
   }
 
+  createSubComment({
+    model_type,
+    parent_comment_id,
+    target_user_id,
+    target_user_name
+  }) {
+    this.JsCallApp('createSubComment', {
+      model_type,
+      parent_comment_id,
+      target_user_id,
+      target_user_name
+    })
+  }
+
   readNotification({ count }) {
     this.JsCallApp('readNotification', { count })
   }

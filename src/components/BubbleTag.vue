@@ -3,7 +3,7 @@
   position: relative;
   height: 25px;
   line-height: 25px;
-  background-color: #f6f7f7;
+  background-color: $color-background-tag;
   padding: 0 10px;
   margin-right: 10px;
   border-radius: 0 4px 0 4px;
@@ -19,7 +19,7 @@
     height: 0;
     border: 5px solid;
     border-color: transparent;
-    border-bottom-color: #f6f7f7;
+    border-bottom-color: $color-background-tag;
   }
 
   img {
