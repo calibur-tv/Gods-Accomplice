@@ -2,9 +2,12 @@
 export default {
   trasaction: 'calibur://user/trasaction/record',
   user: 'calibur://user/column',
+  bookmark: 'calibur://user/bookmark',
   notice: 'calibur://user/bulletin',
   bangumi: 'calibur://bangumi/detail',
   post: 'calibur://poster/detail',
   image: 'calibur://image/detail',
-  comment: 'calibur://comment/detail'
+  comment: 'calibur://comment/detail',
+  review: 'calibur://score/detail',
+  role: 'calibur://idol/detail'
 }

@@ -19,8 +19,12 @@ export default {
     M.invoker.toNative('image', { image_id })
   },
 
-  review(id) {
-    M.invoker.toNative('review', { id })
+  review(cid) {
+    M.invoker.toNative('review', { cid })
+  },
+
+  role(role_id) {
+    M.invoker.toNative('role', { role_id })
   },
 
   video(video_id) {
