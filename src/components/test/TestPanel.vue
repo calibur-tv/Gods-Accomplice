@@ -51,7 +51,7 @@
       <button @click="$alias.post(1)">帖子</button>
       <button @click="$alias.image(1)">相册</button>
       <button @click="$alias.review(1)">漫评</button>
-      <button @click="$alias.user('bingyu')">用户</button>
+      <button @click="$alias.user('bing-yu')">用户</button>
       <button @click="$alias.bangumi(834)">番剧</button>
       <button @click="$alias.video(1)">视频</button>
       <button @click="$alias.notice()">系统公告</button>
