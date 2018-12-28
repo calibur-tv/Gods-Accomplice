@@ -186,7 +186,7 @@
             <div class="nickname"><p class="oneline" v-text="nickname" /></div>
             <div class="badge level">LV{{ exp.level }}</div>
           </div>
-          <p class="intro">查看或编辑资料</p>
+          <p class="intro">邀请码 {{ id }}</p>
         </div>
       </header>
       <main>
@@ -210,36 +210,36 @@
     <div class="shim" />
     <div class="hr" />
     <div class="main-menu">
-      <div class="item">
+      <div class="item" @click="$alias.user(zone)">
         <img src="../icon/post.png" class="icon" />
         <div class="tail"><img src="../icon/link.png" /></div>
-        <p class="text oneline">帖子</p>
+        <p class="text oneline">我的主页</p>
       </div>
-      <div class="item">
-        <img src="../icon/comment.png" class="icon" />
+      <div class="item" @click="$alias.transaction()">
+        <img src="../icon/transaction.png" class="icon" />
         <div class="tail"><img src="../icon/link.png" /></div>
-        <p class="text oneline">漫评</p>
+        <p class="text oneline">交易记录</p>
       </div>
-      <div class="item">
+      <div class="item" @click="$alias.bookmark()">
         <img src="../icon/bookmark.png" class="icon" />
         <div class="tail"><img src="../icon/link.png" /></div>
         <p class="text oneline">我的收藏</p>
       </div>
-      <div class="item">
+      <div class="item" @click="$alias.open('invite')">
         <img src="../icon/invite.png" class="icon" />
         <div class="tail">
           <span>邀请送团子</span> <img src="../icon/link.png" />
         </div>
         <p class="text oneline">我的邀请码</p>
       </div>
-      <div class="item">
+      <div class="item" @click="$alias.open('handbook')">
         <img src="../icon/help.png" class="icon" />
         <div class="tail">
           <span>玩转C站</span> <img src="../icon/link.png" />
         </div>
         <p class="text oneline">帮助</p>
       </div>
-      <div class="item">
+      <div class="item" @click="$alias.open('feedback')">
         <img src="../icon/feedback.png" class="icon" />
         <div class="tail"><img src="../icon/link.png" /></div>
         <p class="text oneline">意见反馈</p>

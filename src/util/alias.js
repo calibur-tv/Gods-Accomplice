@@ -3,6 +3,10 @@ export default {
     M.invoker.toNative('index')
   },
 
+  open(url) {
+    M.invoker.toNative('browser', { url: `https://m.calibur.tv/app/${url}` })
+  },
+
   user(zone) {
     M.invoker.toNative('user', { zone })
   },

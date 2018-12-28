@@ -9,5 +9,6 @@ export default {
   image: 'calibur://image/detail',
   comment: 'calibur://comment/detail',
   review: 'calibur://score/detail',
-  role: 'calibur://idol/detail'
+  role: 'calibur://idol/detail',
+  browser: 'uri:calibur://browser/base'
 }
