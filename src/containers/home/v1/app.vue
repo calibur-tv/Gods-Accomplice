@@ -244,11 +244,13 @@
         <div class="tail"><img src="../icon/link.png" /></div>
         <p class="text oneline">意见反馈</p>
       </div>
+      <!--
       <div class="item">
         <img src="../icon/setting.png" class="icon" />
         <div class="tail"><img src="../icon/link.png" /></div>
         <p class="text oneline">设置</p>
       </div>
+      -->
     </div>
   </div>
 </template>

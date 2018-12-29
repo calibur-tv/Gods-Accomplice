@@ -133,13 +133,7 @@ export default class extends invokerInterface {
    */
   appCallJs(jsonObj) {
     try {
-      let paramsObj
-      try {
-        paramsObj = JSON.parse(jsonObj)
-      } catch (e) {
-        paramsObj = {}
-      }
-
+      const paramsObj = JSON.parse(jsonObj)
       const func = paramsObj.func
       const params = paramsObj.params || {}
       const callbackId = paramsObj.callbackId
@@ -155,6 +149,13 @@ export default class extends invokerInterface {
         this.appCallJsCallback(callbackId, data)
       }
     } catch (e) {
+      funcList.log({
+        message: 'JsCallAppCallback error',
+        func_type: typeof func,
+        params_type: typeof params,
+        callbackId_type: typeof callbackId,
+        error: e
+      })
       M.sentry.captureException(e)
     }
   }
@@ -166,30 +167,16 @@ export default class extends invokerInterface {
    * @param {Function} callback
    */
   JsCallApp(func, params = {}, callback = null) {
-    funcList.log({
-      message: 'type of JsCallAppCallback',
-      type: typeof M.invoker.JsCallAppCallback
-    })
-    // 生成 callback, callbackId 对应关系并返回 callbackId
-    let callbackId = ''
-    if (callback !== null && typeof callback === 'function') {
-      callbackId = this.registerCallbackId(callback)
-    }
-    funcList.log({ func, params, callbackId })
-    const data = JSON.stringify({ func, params, callbackId })
     try {
-      const result = window.__AndroidBridge.handleMessageFromJS(data)
-      funcList.log({
-        message: 'JsCallApp success',
-        result
-      })
+      // 生成 callback, callbackId 对应关系并返回 callbackId
+      let callbackId = ''
+      if (callback !== null && typeof callback === 'function') {
+        callbackId = this.registerCallbackId(callback)
+      }
+      const data = JSON.stringify({ func, params, callbackId })
+      window.__AndroidBridge.handleMessageFromJS(data)
     } catch (e) {
       M.sentry.captureException(e)
-      funcList.log({
-        message: 'JsCallApp error',
-        error: e
-      })
-      return null
     }
   }
 
@@ -211,23 +198,10 @@ export default class extends invokerInterface {
    */
   JsCallAppCallback(jsonObj) {
     try {
-      funcList.log({
-        message: 'JsCallAppCallback entry',
-        args: jsonObj
-      })
-      let paramsObj
-      try {
-        paramsObj = JSON.parse(jsonObj)
-      } catch (e) {
-        paramsObj = {}
-      }
-
+      const paramsObj = JSON.parse(jsonObj)
       const callbackId = paramsObj.callbackId
       const params = paramsObj.params || {}
-      funcList.log({
-        message: 'JsCallAppCallback params',
-        type: typeof params
-      })
+
       if (!callbackId) {
         return
       }
@@ -238,10 +212,6 @@ export default class extends invokerInterface {
       }
     } catch (e) {
       M.sentry.captureException(e)
-      funcList.log({
-        message: 'JsCallAppCallback error',
-        error: e
-      })
     }
   }
 
