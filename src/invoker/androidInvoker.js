@@ -1,5 +1,6 @@
 import invokerInterface from './invokerInterface'
 import scheme from './scheme/android'
+import funcList from './func'
 
 export default class extends invokerInterface {
   getDeviceInfo(callback) {
@@ -89,8 +90,8 @@ export default class extends invokerInterface {
         cancelButtonText: sendCancelButtonText,
         submitButtonText: sendSubmitButtonText
       },
-      result => {
-        if (result === 'true' && typeof callback === 'function') {
+      res => {
+        if (res.result && typeof callback === 'function') {
           callback()
         }
       }
@@ -131,26 +132,30 @@ export default class extends invokerInterface {
    * @param {JSON} jsonObj
    */
   appCallJs(jsonObj) {
-    let paramsObj
     try {
-      paramsObj = JSON.parse(jsonObj)
+      let paramsObj
+      try {
+        paramsObj = JSON.parse(jsonObj)
+      } catch (e) {
+        paramsObj = {}
+      }
+
+      const func = paramsObj.func
+      const params = paramsObj.params || {}
+      const callbackId = paramsObj.callbackId
+      const jsFunction = this.jsFuncs[func]
+
+      if (!jsFunction || typeof jsFunction !== 'function') {
+        return
+      }
+
+      const data = jsFunction.call(this, params)
+      // 请求回调
+      if (callbackId) {
+        this.appCallJsCallback(callbackId, data)
+      }
     } catch (e) {
-      paramsObj = {}
-    }
-
-    const func = paramsObj.func
-    const params = paramsObj.params || {}
-    const callbackId = paramsObj.callbackId
-    const jsFunction = this.jsFuncs[func]
-
-    if (!jsFunction || typeof jsFunction !== 'function') {
-      return
-    }
-
-    const data = jsFunction.call(this, params)
-    // 请求回调
-    if (callbackId) {
-      this.appCallJsCallback(callbackId, data)
+      M.sentry.captureException(e)
     }
   }
 
@@ -161,17 +166,30 @@ export default class extends invokerInterface {
    * @param {Function} callback
    */
   JsCallApp(func, params = {}, callback = null) {
+    funcList.log({
+      message: 'type of JsCallAppCallback',
+      type: typeof M.invoker.JsCallAppCallback
+    })
     // 生成 callback, callbackId 对应关系并返回 callbackId
     let callbackId = ''
     if (callback !== null && typeof callback === 'function') {
       callbackId = this.registerCallbackId(callback)
     }
-
+    funcList.log({ func, params, callbackId })
     const data = JSON.stringify({ func, params, callbackId })
     try {
-      window.__AndroidBridge.handleMessageFromJS(data)
+      const result = window.__AndroidBridge.handleMessageFromJS(data)
+      funcList.log({
+        message: 'JsCallApp success',
+        result
+      })
     } catch (e) {
       M.sentry.captureException(e)
+      funcList.log({
+        message: 'JsCallApp error',
+        error: e
+      })
+      return null
     }
   }
 
@@ -192,23 +210,38 @@ export default class extends invokerInterface {
    * @param {JSON} jsonObj
    */
   JsCallAppCallback(jsonObj) {
-    let paramsObj
     try {
-      paramsObj = JSON.parse(jsonObj)
+      funcList.log({
+        message: 'JsCallAppCallback entry',
+        args: jsonObj
+      })
+      let paramsObj
+      try {
+        paramsObj = JSON.parse(jsonObj)
+      } catch (e) {
+        paramsObj = {}
+      }
+
+      const callbackId = paramsObj.callbackId
+      const params = paramsObj.params || {}
+      funcList.log({
+        message: 'JsCallAppCallback params',
+        type: typeof params
+      })
+      if (!callbackId) {
+        return
+      }
+
+      const callbackFunc = this.handler[callbackId]
+      if (!!callbackFunc && typeof callbackFunc === 'function') {
+        callbackFunc(params)
+      }
     } catch (e) {
-      paramsObj = {}
-    }
-
-    const callbackId = paramsObj.callbackId
-    const params = paramsObj.params || {}
-
-    if (!callbackId) {
-      return
-    }
-
-    const callbackFunc = this.handler[callbackId]
-    if (!!callbackFunc && typeof callbackFunc === 'function') {
-      callbackFunc(params)
+      M.sentry.captureException(e)
+      funcList.log({
+        message: 'JsCallAppCallback error',
+        error: e
+      })
     }
   }
 
@@ -218,8 +251,12 @@ export default class extends invokerInterface {
    * @param {Object} params
    */
   appCallJsCallback(callbackId, params) {
-    return window.__AndroidBridge.handleCallbackFromJS(
-      JSON.stringify({ callbackId, params })
-    )
+    try {
+      return window.__AndroidBridge.handleCallbackFromJS(
+        JSON.stringify({ callbackId, params })
+      )
+    } catch (e) {
+      M.sentry.captureException(e)
+    }
   }
 }

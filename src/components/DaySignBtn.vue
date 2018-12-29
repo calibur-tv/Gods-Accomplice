@@ -20,7 +20,10 @@
 </style>
 
 <template>
-  <button :class="[$style.btn, { [$style.active]: signed }]" @click.stop="handleDaySign">
+  <button
+    :class="[$style.btn, { [$style.active]: signed }]"
+    @click.stop="handleDaySign"
+  >
     {{ signed ? '已签到' : '签到' }}
   </button>
 </template>

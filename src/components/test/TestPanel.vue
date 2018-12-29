@@ -61,7 +61,7 @@
     </div>
     <h3>其它交互测试</h3>
     <div>
-      <button @click="testGetUserInfo">[getUserInfo]：点击获取当前用户</button>
+      <button @click="testGetUserInfo">[getUserInfo]：获取当前用户信息</button>
       <button @click="testUpdateUserEXP">[setUserInfo]：点击经验 + 10</button>
       <button @click="testToggleClick">[toggleClick]：测试打赏传值</button>
       <button @click="testShowConfirm">[showConfirm]：打开一个confirm</button>
@@ -99,7 +99,7 @@ export default {
   },
   methods: {
     testGetUserInfo() {
-      M.invoker.getUserInfo(user => (this.user = JSON.parse(user)))
+      M.invoker.getUserInfo(user => (this.user = user))
       this.$toast.info('getUserInfo')
     },
     testUpdateUserEXP() {

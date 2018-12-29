@@ -17,7 +17,10 @@
 </style>
 
 <template>
-  <button :class="[$style.btn, { [$style.active]: rewarded }]" @click.stop="handleReward">
+  <button
+    :class="[$style.btn, { [$style.active]: rewarded }]"
+    @click.stop="handleReward"
+  >
     {{ rewarded ? rewardedText : text }}
   </button>
 </template>

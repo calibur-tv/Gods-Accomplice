@@ -94,8 +94,8 @@ export default class extends invokerInterface {
         cancelButtonText: sendCancelButtonText,
         submitButtonText: sendSubmitButtonText
       },
-      result => {
-        if (result === 'true' && typeof callback === 'function') {
+      res => {
+        if (res.result && typeof callback === 'function') {
           callback()
         }
       }
@@ -171,7 +171,7 @@ export default class extends invokerInterface {
           },
           function responseCallback(responseData) {
             if (callback && typeof callback === 'function') {
-              callback(responseData)
+              callback(JSON.parse(responseData))
             }
           }
         )
