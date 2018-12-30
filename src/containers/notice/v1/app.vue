@@ -1,41 +1,82 @@
 <style lang="scss">
 #notice {
-  height: 100vh;
+  min-height: 100vh;
   -webkit-overflow-scrolling: touch;
-  padding-top: 15px;
-  background-color: #fafafa;
+  padding-top: 12px;
+  padding-bottom: 30px;
+  background-color: $color-background-container;
 
   li {
     list-style-type: none;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     display: block;
-    margin-left: 15px;
-    margin-right: 15px;
-    border-radius: 4px;
+    margin-left: 12px;
+    margin-right: 12px;
+    border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 2px 2px rgba(#989898, 0.2);
     background-color: #fff;
+    padding: 12px;
 
-    img {
-      width: 100%;
-      height: auto;
-      display: block;
+    header {
+      margin-bottom: 15px;
+
+      .user {
+        overflow: hidden;
+        font-size: 14px;
+        color: $color-text-normal;
+
+        .avatar {
+          border-radius: 50%;
+          margin-right: 2px;
+        }
+      }
+
+      time {
+        float: right;
+        font-size: 12px;
+        color: $color-text-light;
+      }
     }
 
-    .title {
-      margin: 15px 15px 9px;
-      line-height: 15px;
-      font-size: 15px;
-      color: #333;
+    main {
+      background-color: $color-background-tag;
+      height: 80px;
+      border-radius: 10px;
+      padding: 15px 12px;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      margin-bottom: 15px;
+
+      .banner {
+        width: 50px;
+        height: 50px;
+        border-radius: 4px;
+        margin-right: 12px;
+      }
+
+      .title {
+        overflow: hidden;
+        font-size: 17px;
+        color: $color-text-normal;
+        font-weight: 500;
+        @include mutiline(22px);
+      }
     }
 
-    .meta {
-      display: block;
-      font-size: 12px;
-      line-height: 12px;
-      margin-left: 15px;
-      padding-bottom: 15px;
-      color: #666666;
+    footer {
+      button {
+        width: 100%;
+        text-align: center;
+        font-size: 15px;
+        color: $color-red;
+
+        img {
+          width: 15px;
+          height: 15px;
+        }
+      }
     }
   }
 }
@@ -43,52 +84,75 @@
 
 <template>
   <ul id="notice">
-    <li v-for="(item, index) in list" :key="index">
-      <a>
-        <img :src="item.poster" />
-        <p class="title oneline" v-text="item.title" />
-        <span class="meta"> 活动时间：{{ item.time }} </span>
-      </a>
+    <li
+      v-for="(item, index) in list"
+      :key="index"
+      @click="$alias.open(`notice/${item.id}`)"
+    >
+      <header>
+        <VTime v-model="item.created_at" />
+        <div class="user">
+          <img :src="$resize(item.user.avatar, { width: 20 })" class="avatar" />
+          <span class="nickname" v-text="item.user.nickname" />
+          <span>发了新通知</span>
+        </div>
+      </header>
+      <main>
+        <img :src="$resize(item.banner, { width: 100 })" class="banner" />
+        <div class="title" v-text="item.title" />
+      </main>
+      <footer>
+        <button>
+          <span>查看详情</span> <img src="../../../images/link-red.png" />
+        </button>
+      </footer>
     </li>
+    <Loadmore
+      :loading="loading"
+      :no-more="noMore"
+      :nothing="nothing"
+      :error="error"
+      :fetch="getData"
+    />
   </ul>
 </template>
 
 <script>
-import hangjuPoster from '@/images/hangju.jpg'
-import morningMessagePoster from '@/images/morning-message.jpg'
-import newbiePoster from '@/images/newbie.jpg'
-import dailyWork from '@/images/daily-work.jpg'
+import Api from '@/api/v1/selfApi'
+import Loadmore from '@/components/Loadmore.vue'
 
 export default {
   name: 'App',
+  components: {
+    Loadmore
+  },
   data() {
     return {
-      list: [
-        {
-          url: 'https://www.jianshu.com/p/b866164607e5',
-          title: '“行距杯”年度征文大赛',
-          time: '2018年8月31日 - 2019年1月31日',
-          poster: hangjuPoster
-        },
-        {
-          url: 'https://www.jianshu.com/mobile/campaign/morning_diary',
-          poster: morningMessagePoster,
-          title: '晨间日记',
-          time: '长期有效'
-        },
-        {
-          url: 'https://www.jianshu.com/mobile/campaign/day_by_day/join',
-          poster: dailyWork,
-          title: '日更挑战',
-          time: '长期有效'
-        },
-        {
-          url: 'https://www.jianshu.com/p/5ede51702c42',
-          poster: newbiePoster,
-          title: '简书新青年栏目有偿征稿，寻找有趣有料的简书青年',
-          time: '长期有效'
+      loading: false,
+      error: false,
+      nothing: false,
+      noMore: false,
+      list: []
+    }
+  },
+  methods: {
+    async getData() {
+      if (this.loading) {
+        return
+      }
+      this.loading = true
+      const api = new Api()
+      try {
+        const data = await api.systemNotice()
+        this.list = data
+        if (!data.length) {
+          this.nothing = true
         }
-      ]
+      } finally {
+        // 只有一页
+        this.noMore = true
+        this.loading = false
+      }
     }
   }
 }

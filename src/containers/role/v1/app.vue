@@ -2,7 +2,7 @@
 #role-show {
   header {
     position: relative;
-    height: 210px;
+    height: 160px;
     overflow: hidden;
 
     .bg {
@@ -30,7 +30,7 @@
     }
 
     .container {
-      margin-top: 82px;
+      margin-top: 33px;
       height: 128px;
 
       .avatar {

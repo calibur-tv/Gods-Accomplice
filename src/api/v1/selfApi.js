@@ -24,7 +24,15 @@ export default class extends BaseApi {
     return this.http.post('user/notification/read', { id })
   }
 
+  readNotice(id) {
+    return this.http.post('user/notice/mark', { id })
+  }
+
   readAllMessage() {
     return this.http.post('user/notification/clear')
+  }
+
+  systemNotice() {
+    return this.http.get('user/notice/list')
   }
 }

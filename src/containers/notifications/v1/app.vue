@@ -5,9 +5,8 @@
     left: 0;
     top: 0;
     width: 100%;
-    padding-top: 18px;
-    padding-bottom: 12px;
-    height: 71px;
+    padding-top: 35px;
+    height: 76px;
     background-color: #fff;
     z-index: 2;
 
@@ -39,12 +38,107 @@
   }
 
   .shim {
-    height: 59px;
+    height: 76px;
   }
 
   .list {
     position: relative;
     z-index: 1;
+  }
+
+  .system-notice {
+    @extend %clearfix;
+    padding-top: 12px;
+    padding-left: $container-padding;
+
+    &:active {
+      background-color: $color-press-active;
+    }
+
+    .avatar {
+      float: left;
+      margin-right: $container-padding;
+
+      img {
+        width: 58px;
+        height: 58px;
+      }
+    }
+
+    .content {
+      overflow: hidden;
+      padding-right: $container-padding;
+      position: relative;
+
+      &:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        height: 1px;
+        background-color: $color-line;
+        transform: scaleY(0.5);
+      }
+
+      .meta {
+        float: right;
+        margin-left: 10px;
+        margin-top: 9px;
+
+        time {
+          color: $color-text-light;
+          font-size: 12px;
+          line-height: 17px;
+          display: block;
+        }
+
+        span {
+          position: absolute;
+          right: 15px;
+          bottom: 20px;
+          display: block;
+          font-size: 13px;
+          color: #fff;
+          border-radius: 50%;
+          background-color: $color-red;
+          text-align: center;
+          width: 17px;
+          height: 17px;
+          line-height: 17px;
+          float: right;
+          text-indent: -1px;
+        }
+      }
+
+      .body {
+        overflow: hidden;
+
+        header {
+          margin-top: 8px;
+          margin-bottom: 2px;
+          font-size: 16px;
+
+          .nickname {
+            color: $color-link;
+            line-height: 23px;
+            font-weight: 500;
+          }
+
+          .intro {
+            color: $color-text-normal;
+            line-height: 23px;
+          }
+        }
+
+        .about {
+          font-size: 13px;
+          line-height: 19px;
+          color: $color-text-light;
+          margin-bottom: 19px;
+        }
+      }
+    }
   }
 }
 </style>
@@ -67,6 +161,26 @@
       top-drop-text="松开并刷新"
     >
       <div class="list">
+        <div v-if="fetched" class="system-notice noti-item" @click="goToNotice">
+          <div class="avatar">
+            <img src="../../../images/system_notice.png" />
+          </div>
+          <div class="content">
+            <div
+              v-if="systemNotice.count"
+              class="meta"
+            >
+              <VTime v-model="systemNotice.created_at" />
+              <span>{{ systemNotice.count }}</span>
+            </div>
+            <div class="body">
+              <header>系统通知</header>
+              <p class="about oneline">
+                {{ systemNotice.count ? systemNotice.title : '暂无新消息通知' }}
+              </p>
+            </div>
+          </div>
+        </div>
         <CommonItem
           v-for="item in list"
           :key="item.id"
@@ -98,7 +212,6 @@ export default {
     VLoadmore,
     MtLoadmore: Loadmore
   },
-  props: {},
   data() {
     return {
       list: [],
@@ -106,7 +219,14 @@ export default {
       noMore: false,
       nothing: false,
       loading: false,
-      error: false
+      error: false,
+      fetched: false,
+      systemNotice: {
+        count: 0,
+        id: 0,
+        title: '',
+        created_at: ''
+      }
     }
   },
   methods: {
@@ -118,12 +238,17 @@ export default {
       const api = new Api()
       const len = this.list.length
       try {
-        const data = await api.getNotifications({
-          minId: refresh ? 0 : len ? this.list[len - 1].id : 0
-        })
+        const minId = refresh ? 0 : len ? this.list[len - 1].id : 0
+        const data = await api.getNotifications({ minId })
         this.list = refresh ? data.list : this.list.concat(data.list)
         this.noMore = data.noMore
         this.nothing = !this.list.length
+        if (!minId && data.system_count) {
+          this.systemNotice.count = data.system_count
+          this.systemNotice.id = data.lastest_notice.id
+          this.systemNotice.title = data.lastest_notice.title
+          this.systemNotice.created_at = data.lastest_notice.created_at
+        }
       } catch (e) {
         this.$toast.error(e)
         this.error = true
@@ -131,6 +256,7 @@ export default {
         if (refresh) {
           this.$refs.loadmore.onTopLoaded()
         }
+        this.fetched = true
         this.loading = false
       }
     },
@@ -159,6 +285,14 @@ export default {
       M.invoker.readNotification({
         count: -1
       })
+    },
+    goToNotice() {
+      if (this.systemNotice.count) {
+        const api = new Api()
+        api.readNotice(this.systemNotice.id)
+        this.systemNotice.count = 0
+      }
+      this.$alias.notice()
     }
   }
 }
