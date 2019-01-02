@@ -10,5 +10,6 @@ export default {
   comment: 'calibur://comment/detail',
   review: 'calibur://score/detail',
   role: 'calibur://idol/detail',
-  browser: 'uri:calibur://browser/base'
+  video: 'calibur://video/detail',
+  browser: 'calibur://browser/base'
 }

@@ -52,11 +52,11 @@ export default {
   },
 
   bookmark() {
-    M.invoker.toNative('bookmarks')
+    M.invoker.toNative('bookmark')
   },
 
   transaction() {
-    M.invoker.toNative('transactions')
+    M.invoker.toNative('trasaction')
   },
 
   notification() {
