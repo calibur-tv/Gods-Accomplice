@@ -89,6 +89,9 @@ export default {
       user: null
     }
   },
+  created() {
+    document.title = this.post.title
+  },
   methods: {
     handleImagePreview(index) {
       M.invoker.previewImages({

@@ -107,6 +107,9 @@ export default {
       created_at: ''
     }
   },
+  created() {
+    document.title = this.name
+  },
   methods: {
     handleImagePreview(index) {
       M.invoker.previewImages({

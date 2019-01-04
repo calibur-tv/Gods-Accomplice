@@ -87,7 +87,6 @@ export default {
     FlowRewardPanel,
     FlowTagList
   },
-  props: {},
   data() {
     const labelMap = {
       lol: '笑点',
@@ -146,6 +145,7 @@ export default {
     }
   },
   created() {
+    document.title = this.title
     this.$channel.$on('json-editor-image-click', image => {
       const images = this.content
         .filter(_ => _.type === 'img')

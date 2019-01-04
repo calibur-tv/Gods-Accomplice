@@ -311,6 +311,9 @@ export default {
       userCoinTotal: M.user.coin || 0
     }
   },
+  created() {
+    document.title = this.data.name
+  },
   methods: {
     async loadFansList() {
       if (this.loading || this.noMore) {

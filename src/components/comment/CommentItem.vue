@@ -292,7 +292,7 @@ export default {
       }
     },
     isMaster() {
-      return this.currentUserId === this.masterId
+      return this.comment.from_user_id === this.masterId
     },
     isMine() {
       return this.currentUserId === this.comment.from_user_id
