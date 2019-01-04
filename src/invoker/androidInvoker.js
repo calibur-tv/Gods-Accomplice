@@ -15,6 +15,10 @@ export default class extends invokerInterface {
     this.JsCallApp('setUserInfo', data)
   }
 
+  logout() {
+    this.JsCallApp('logout')
+  }
+
   toNative(page, data = null) {
     let uri = scheme[page]
     if (data) {

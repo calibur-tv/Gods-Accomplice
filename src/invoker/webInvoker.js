@@ -43,6 +43,10 @@ export default class extends invokerInterface {
     M.user = data
   }
 
+  logout() {
+    this.JsCallApp('logout')
+  }
+
   toNative(page, params) {
     this.JsCallApp('toNative', { page, params })
   }

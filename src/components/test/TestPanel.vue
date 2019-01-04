@@ -74,6 +74,9 @@
       <button @click="testReadNotification">
         [readNotification]：点击清除已读消息
       </button>
+      <button @click="testLogot">
+        [logout]：点击退出登录
+      </button>
     </div>
     <h3>getUserInfo 获取当前用户</h3>
     <ul v-if="user">
@@ -223,6 +226,10 @@ export default {
         count: 1
       })
       this.$toast.info('readNotification')
+    },
+    testLogot() {
+      M.invoker.logout()
+      this.$toast.info('logout')
     }
   }
 }
