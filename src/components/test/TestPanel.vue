@@ -33,7 +33,7 @@
 </style>
 
 <template>
-  <div id="test-panel">
+  <div v-if="appName !== 'ios'" id="test-panel">
     <h3>meta 注入信息：</h3>
     <ul>
       <li>
@@ -91,7 +91,9 @@ export default {
   data() {
     return {
       appVersion: document.querySelector('meta[name=app-version]').content,
-      appName: document.querySelector('meta[name=app-name]').content,
+      appName: document
+        .querySelector('meta[name=app-name]')
+        .content.toLowerCase(),
       token: document.querySelector('meta[name=jwt-token]').content
         ? '有值'
         : '为空',

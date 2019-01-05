@@ -45,7 +45,6 @@
             @click="handleImagePreview(index)"
           />
         </section>
-        <p v-if="!images.image_count" class="no-image">还没有上传图片</p>
       </template>
       <section v-else class="flow-images">
         <VImg
@@ -59,7 +58,6 @@
           class="image"
           @click="handleImagePreview(0)"
         />
-        <p v-else class="no-image">还没有上传图片</p>
       </section>
     </main>
     <!-- 番剧 -->
