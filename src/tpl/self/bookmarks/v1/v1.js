@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import '@/style/global.scss'
 import '@/util/global'
+import '@/util/components'
 import FastClick from 'fastclick'
 import app from '@/containers/bookmarks/v1/app.vue'
 

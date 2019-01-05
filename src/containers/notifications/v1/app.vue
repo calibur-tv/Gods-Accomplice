@@ -166,10 +166,7 @@
             <img src="../../../images/system_notice.png" />
           </div>
           <div class="content">
-            <div
-              v-if="systemNotice.count"
-              class="meta"
-            >
+            <div v-if="systemNotice.count" class="meta">
               <VTime v-model="systemNotice.created_at" />
               <span>{{ systemNotice.count }}</span>
             </div>

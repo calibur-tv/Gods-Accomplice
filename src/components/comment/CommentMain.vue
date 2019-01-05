@@ -21,6 +21,32 @@
       margin: 1px 0 0 -2px;
     }
   }
+
+  .comment-nothing {
+    text-align: center;
+
+    img {
+      width: 140px;
+      height: auto;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 19px;
+      color: $color-text-light;
+    }
+
+    button {
+      width: 70px;
+      height: 28px;
+      border-radius: 14px;
+      text-align: center;
+      font-size: 13px;
+      color: #fff;
+      line-height: 28px;
+      background-color: $color-red;
+    }
+  }
 }
 </style>
 
@@ -51,7 +77,13 @@
       :error="error"
       :loading="loading"
       :fetch="getMainComments"
-    />
+    >
+      <div slot="nothing" class="comment-nothing">
+        <img src="../../images/no-comment.png" />
+        <p>还没有人发言呢！</p>
+        <button @click="createMainComment">抢沙发</button>
+      </div>
+    </Loadmore>
   </div>
 </template>
 
@@ -160,6 +192,12 @@ export default {
           this.list.splice(index, 1)
           this.total--
         }
+      })
+    },
+    createMainComment() {
+      M.invoker.createMainComment({
+        model_type: this.type,
+        model_id: this.id
       })
     }
   }

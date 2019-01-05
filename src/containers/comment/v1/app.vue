@@ -13,6 +13,32 @@
     height: 10px;
     margin-left: -$container-padding;
   }
+
+  .comment-nothing {
+    text-align: center;
+
+    img {
+      width: 140px;
+      height: auto;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 19px;
+      color: $color-text-light;
+    }
+
+    button {
+      width: 70px;
+      height: 28px;
+      border-radius: 14px;
+      text-align: center;
+      font-size: 13px;
+      color: #fff;
+      line-height: 28px;
+      background-color: $color-red;
+    }
+  }
 }
 </style>
 
@@ -38,7 +64,13 @@
       :no-more="noMore"
       :error="error"
       :fetch="loadSubComment"
-    />
+    >
+      <div slot="nothing" class="comment-nothing" @click="createMainComment">
+        <img src="../../../images/no-comment.png" />
+        <p>还没有人回复呢！</p>
+        <button @click="createSubComment">回复TA</button>
+      </div>
+    </Loadmore>
   </div>
 </template>
 
@@ -133,6 +165,14 @@ export default {
       } finally {
         this.loading = false
       }
+    },
+    createSubComment() {
+      M.invoker.createSubComment({
+        model_type: this.modal_type,
+        parent_comment_id: this.id,
+        target_user_id: this.from_user_id,
+        target_user_name: this.from_user_name
+      })
     }
   }
 }

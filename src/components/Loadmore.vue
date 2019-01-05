@@ -2,17 +2,20 @@
 $height: 50px;
 .loadmore {
   text-align: center;
+  font-size: 14px;
+  color: $color-text-light;
 
   .nothing {
     img {
-      width: 160px;
+      width: 140px;
       height: auto;
       display: block;
-      margin: 20px auto;
+      margin: 20px auto 5px auto;
     }
 
     p {
-      font-size: 12px;
+      font-size: 14px;
+      color: $color-text-light;
     }
   }
 
@@ -47,7 +50,7 @@ $height: 50px;
     display: block;
     height: $height;
     line-height: $height;
-    font-size: 15px;
+    font-size: 14px;
   }
 }
 </style>
@@ -64,13 +67,7 @@ $height: 50px;
     <div v-else-if="nothing">
       <slot name="nothing">
         <div :class="$style.nothing">
-          <img
-            :src="
-              $resize('https://image.calibur.tv/owner/no-content', {
-                width: 300
-              })
-            "
-          />
+          <img src="../images/no-content.png" />
           <p>还没有内容</p>
         </div>
       </slot>

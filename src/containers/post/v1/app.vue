@@ -11,6 +11,11 @@
         margin-bottom: 30px;
       }
     }
+
+    .flow-images {
+      margin-left: -$container-padding;
+      margin-right: -$container-padding;
+    }
   }
 }
 </style>
