@@ -249,10 +249,12 @@ export default {
       type: Boolean,
       default: true
     },
+    /*
     blur: {
       type: Boolean,
       default: false
     },
+    */
     poster: {
       type: Boolean,
       default: false
@@ -264,6 +266,7 @@ export default {
   },
   data() {
     return {
+      blur: false,
       loaded: false,
       error: false,
       toggleClick: false,

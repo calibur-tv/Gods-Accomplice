@@ -24,16 +24,18 @@
 
   .comment-nothing {
     text-align: center;
+    margin: 20px 0 40px 0;
 
     img {
       width: 140px;
       height: auto;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
     }
 
     p {
       font-size: 19px;
       color: $color-text-light;
+      margin-bottom: 15px;
     }
 
     button {
@@ -150,6 +152,7 @@ export default {
     M.channel.$on('create-main-comment', ({ data, exp, message }) => {
       this.total++
       this.list.push(data)
+      this.nothing = false
       this.$toast.success(message)
       this.$utils.updateUserExp(exp)
       M.invoker.setUserInfo(M.user)

@@ -16,16 +16,18 @@
 
   .comment-nothing {
     text-align: center;
+    margin: 20px 0 40px 0;
 
     img {
       width: 140px;
       height: auto;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
     }
 
     p {
       font-size: 19px;
       color: $color-text-light;
+      margin-bottom: 15px;
     }
 
     button {
@@ -50,7 +52,14 @@
       :type="modal_type"
       :master-id="-1"
     >
-      <button v-if="reply_id" slot="extra" class="to-parent">查看原帖子</button>
+      <button
+        v-if="reply_id"
+        slot="extra"
+        class="to-parent"
+        @click="goToDetail"
+      >
+        查看原帖子
+      </button>
     </CommentItem>
     <div class="hr" />
     <SubCommentList
@@ -65,7 +74,7 @@
       :error="error"
       :fetch="loadSubComment"
     >
-      <div slot="nothing" class="comment-nothing" @click="createMainComment">
+      <div slot="nothing" class="comment-nothing">
         <img src="../../../images/no-comment.png" />
         <p>还没有人回复呢！</p>
         <button @click="createSubComment">回复TA</button>
@@ -131,6 +140,7 @@ export default {
     M.channel.$on('create-sub-comment', ({ data, exp, message }) => {
       this.comments.total++
       this.comments.list.push(data)
+      this.nothing = false
       this.$toast.success(message)
       this.$utils.updateUserExp(exp)
       M.invoker.setUserInfo(M.user)
@@ -173,6 +183,9 @@ export default {
         target_user_id: this.from_user_id,
         target_user_name: this.from_user_name
       })
+    },
+    goToDetail() {
+      this.$alias[this.modal_type](this.modal_id)
     }
   }
 }
