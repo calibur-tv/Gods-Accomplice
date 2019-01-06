@@ -1,6 +1,5 @@
 import invokerInterface from './invokerInterface'
 import scheme from './scheme/android'
-import funcList from './func'
 
 export default class extends invokerInterface {
   getDeviceInfo(callback) {
@@ -153,13 +152,6 @@ export default class extends invokerInterface {
         this.appCallJsCallback(callbackId, data)
       }
     } catch (e) {
-      funcList.log({
-        message: 'JsCallAppCallback error',
-        func_type: typeof func,
-        params_type: typeof params,
-        callbackId_type: typeof callbackId,
-        error: e
-      })
       M.sentry.captureException(e)
     }
   }

@@ -85,8 +85,8 @@ export default {
         const data = await api.getTransactions({
           min_id: len ? this.list[len - 1].id : 0
         })
-        this.list = this.list.concat(data)
-        this.noMore = !data.length
+        this.list = this.list.concat(data.list)
+        this.noMore = !data.list.length
       } catch (e) {
         this.$toast.error(e)
         this.error = true
