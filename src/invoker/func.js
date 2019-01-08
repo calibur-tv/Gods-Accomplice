@@ -17,5 +17,9 @@ export default {
 
   createSubComment(data) {
     M.channel.$emit('create-sub-comment', data)
+  },
+
+  updateUserInfo(user) {
+    M.channel.$emit('user-info-updated', user)
   }
 }

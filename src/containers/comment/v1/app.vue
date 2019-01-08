@@ -17,6 +17,7 @@
   .comment-nothing {
     text-align: center;
     margin: 20px 0 40px 0;
+    padding-bottom: 20px;
 
     img {
       width: 140px;
@@ -137,6 +138,7 @@ export default {
     this.lastFetchSubCommentId = this.comments.total
       ? this.comments.list[this.comments.list.length - 1].id
       : 0
+    this.nothing = this.comments.total === 0
     M.channel.$on('create-sub-comment', ({ data, exp, message }) => {
       this.comments.total++
       this.comments.list.push(data)

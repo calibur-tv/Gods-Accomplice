@@ -35,7 +35,9 @@
 <template>
   <div class="user-panel">
     <UserAvatar :user="user" />
+    <!--
     <UserFollowBtn :user-id="user.id" :followed="isFollowed" />
+    -->
     <div class="user-info">
       <UserNickname :user="user" />
       <VTime v-model="time" />
@@ -44,13 +46,8 @@
 </template>
 
 <script>
-import UserFollowBtn from '@/components/UserFollowBtn'
-
 export default {
   name: 'FlowHeaderUser',
-  components: {
-    UserFollowBtn
-  },
   props: {
     user: {
       type: Object,

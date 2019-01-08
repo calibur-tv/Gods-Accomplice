@@ -284,6 +284,13 @@ export default {
       signature: ''
     }
   },
+  created() {
+    M.channel.$on('user-info-updated', user => {
+      Object.keys(user).forEach(key => {
+        this[key] = user[key]
+      })
+    })
+  },
   methods: {
     handleSigned({ exp, message }) {
       this.daySign = true
