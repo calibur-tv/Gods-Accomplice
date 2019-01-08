@@ -168,7 +168,7 @@
       <VanTab title="漫评">
         <ul class="scores">
           <li
-            v-for="item in source[3].list"
+            v-for="item in source[2].list"
             :key="item.id"
             @click="toNativePage(item, 'review')"
           >
@@ -181,17 +181,17 @@
         </ul>
         <Loadmore
           :auto="false"
-          :loading="source[3].loading"
-          :no-more="source[3].noMore"
-          :nothing="!source[3].list.length"
-          :error="source[3].error"
+          :loading="source[2].loading"
+          :no-more="source[2].noMore"
+          :nothing="!source[2].list.length"
+          :error="source[2].error"
           :fetch="loadMoreData"
         />
       </VanTab>
       <VanTab title="视频">
         <ul class="videos">
           <li
-            v-for="item in source[4].list"
+            v-for="item in source[3].list"
             :key="item.id"
             @click="toNativePage(item, 'video')"
           >
@@ -204,10 +204,10 @@
         </ul>
         <Loadmore
           :auto="false"
-          :loading="source[4].loading"
-          :no-more="source[4].noMore"
-          :nothing="!source[4].list.length"
-          :error="source[4].error"
+          :loading="source[3].loading"
+          :no-more="source[3].noMore"
+          :nothing="!source[3].list.length"
+          :error="source[3].error"
           :fetch="loadMoreData"
         />
       </VanTab>
@@ -264,14 +264,6 @@ export default {
           list: [],
           total: 0,
           page: 0
-        },
-        {
-          noMore: false,
-          error: false,
-          loading: false,
-          list: [],
-          total: 0,
-          page: 0
         }
       ]
     }
@@ -287,10 +279,8 @@ export default {
       } else if (index === 1) {
         type = 'image'
       } else if (index === 2) {
-        type = 'answer'
-      } else if (index === 3) {
         type = 'score'
-      } else if (index === 4) {
+      } else if (index === 3) {
         type = 'video'
       }
       this.getData(true, type)

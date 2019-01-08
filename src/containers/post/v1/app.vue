@@ -22,7 +22,6 @@
 
 <template>
   <div v-if="post" id="post-show" class="container">
-    <TestPanel />
     <!-- 头部 -->
     <header class="flow-header">
       <!-- 用户 -->
@@ -76,7 +75,6 @@ import CommentMain from '@/components/comment/CommentMain'
 import FlowHeaderUser from '@/components/FlowHeaderUser'
 import FlowTagList from '@/components/FlowTagList'
 import FlowRewardPanel from '@/components/FlowRewardPanel'
-import TestPanel from '@/components/test/TestPanel'
 
 export default {
   name: 'App',
@@ -84,8 +82,7 @@ export default {
     CommentMain,
     FlowHeaderUser,
     FlowTagList,
-    FlowRewardPanel,
-    TestPanel
+    FlowRewardPanel
   },
   data() {
     return {

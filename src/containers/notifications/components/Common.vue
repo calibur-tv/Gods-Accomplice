@@ -55,7 +55,6 @@
         height: 17px;
         line-height: 17px;
         float: right;
-        text-indent: -1px;
       }
     }
 

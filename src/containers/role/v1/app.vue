@@ -308,11 +308,18 @@ export default {
       loading: false,
       error: false,
       fansSort: 'hot',
-      userCoinTotal: M.user.coin || 0
+      userCoinTotal: 0,
+      user: null
     }
   },
   created() {
     document.title = this.data.name
+  },
+  mounted() {
+    M.invoker.getUserInfo(data => {
+      this.user = data
+      this.userCoinTotal = data.coin
+    })
   },
   methods: {
     async loadFansList() {
@@ -360,6 +367,8 @@ export default {
       if (!this.data.hasStar) {
         this.data.fans_count++
       }
+      this.user.coin--
+      M.invoker.setUserInfo(this.user)
       this.data.hasStar++
       this.$toast.info(`+${this.data.hasStar}s`)
     }

@@ -99,6 +99,10 @@ export default {
             rewarded: true
           }
         })
+        M.invoker.getUserInfo(user => {
+          user.coin--
+          M.invoker.setUserInfo(user)
+        })
       } catch (e) {
         this.$toast.error(e)
       } finally {
