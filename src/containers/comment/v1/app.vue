@@ -60,7 +60,7 @@
         class="to-parent"
         @click="goToDetail"
       >
-        查看原帖子
+        查看原文
       </button>
     </CommentItem>
     <div class="hr" />
@@ -188,7 +188,8 @@ export default {
       })
     },
     goToDetail() {
-      this.$alias[this.modal_type](this.modal_id)
+      const type = this.modal_type === 'score' ? 'review' : this.modal_type
+      this.$alias[type](this.modal_id)
     }
   }
 }
