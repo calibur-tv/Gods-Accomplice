@@ -169,13 +169,15 @@
     <div class="content">
       <div class="header">
         <div class="right-btn">
+          <!--
           <UserFollowBtn
             v-if="inDetail"
             :user-id="computeFromUser.id"
             :followed="false"
             class="user-follow-button"
           />
-          <div v-else-if="canDelete" class="tool-btn-wrap">
+          -->
+          <div v-if="!inDetail && canDelete" class="tool-btn-wrap">
             <button @click.stop="deleteComment">
               <img src="./images/dots.png" />
             </button>
@@ -246,14 +248,12 @@
 
 <script>
 import SubCommentList from './SubCommentList'
-import UserFollowBtn from '@/components/UserFollowBtn'
 import Api from '@/api/v1/commentApi'
 
 export default {
   name: 'CommentCommentItem',
   components: {
-    SubCommentList,
-    UserFollowBtn
+    SubCommentList
   },
   props: {
     comment: {

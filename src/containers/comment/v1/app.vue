@@ -18,6 +18,7 @@
     text-align: center;
     margin: 20px 0 40px 0;
     padding-bottom: 20px;
+    padding-top: 20px;
 
     img {
       width: 140px;
