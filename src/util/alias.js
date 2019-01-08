@@ -36,8 +36,9 @@ export default {
   },
 
   comment({ type, comment_id, reply_id }) {
+    const resultType = type === 'review' ? 'score' : type
     M.invoker.toNative('comment', {
-      type,
+      type: resultType,
       comment_id,
       reply_id: reply_id || 0
     })

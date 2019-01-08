@@ -369,6 +369,7 @@ export default {
         user.coin--
         M.invoker.setUserInfo(user)
       })
+      this.data.star_count++
       this.data.hasStar++
       this.$toast.info(`+${this.data.hasStar}s`)
     }

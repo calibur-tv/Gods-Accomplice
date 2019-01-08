@@ -83,7 +83,8 @@ export default {
       const len = this.list.length
       try {
         const data = await api.getTransactions({
-          min_id: len ? this.list[len - 1].id : 0
+          min_id: len ? this.list[len - 1].id : 0,
+          take: 20
         })
         this.list = this.list.concat(data.list)
         this.noMore = !data.list.length
