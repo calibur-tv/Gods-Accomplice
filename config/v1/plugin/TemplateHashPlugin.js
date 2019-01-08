@@ -59,17 +59,7 @@ class TemplateHashPlugin {
           const newHash = `${version}-${chunkHash}-${contentHash}`
           const newMustache = `${newHash}.mustache`
           const newFileAbsPath = path.join(rootPath, subPath, newMustache)
-          const gzipFileAbsPath = `${fileAbsPath}.gz`
-          const newGzipFileAbsPath = path.join(
-            rootPath,
-            subPath,
-            `${newMustache}.gz`
-          )
           fs.renameSync(fileAbsPath, newFileAbsPath)
-          if (fs.existsSync(gzipFileAbsPath)) {
-            fs.renameSync(gzipFileAbsPath, newGzipFileAbsPath)
-          }
-          fileAbsPath = newFileAbsPath
           // 写manifest
           const tplType = subPath.split('/')[0]
           const appName = _.kebabCase(subPath.split('/')[1])
