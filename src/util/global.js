@@ -20,7 +20,9 @@ M.user = {}
 M.invoker.getUserInfo(data => {
   M.user = data
   M.sentry.configureScope(scope => {
-    scope.setUser(data)
+    scope.setUser({
+      id: data.id
+    })
   })
 })
 M.invoker.getDeviceInfo(data => {

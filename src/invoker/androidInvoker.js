@@ -167,6 +167,9 @@ export default class extends invokerInterface {
    */
   JsCallApp(func, params = {}, callback = null) {
     try {
+      M.sentry.configureScope(scope => {
+        scope.setTag('last-js-call-app-func', func)
+      })
       // 生成 callback, callbackId 对应关系并返回 callbackId
       let callbackId = ''
       if (callback !== null && typeof callback === 'function') {
