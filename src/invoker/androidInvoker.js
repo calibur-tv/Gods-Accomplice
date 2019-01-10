@@ -154,6 +154,7 @@ export default class extends invokerInterface {
     } catch (e) {
       M.sentry.configureScope(scope => {
         scope.setTag('error-type', 'app-call-js')
+        scope.setExtra('error-data', jsonObj)
       })
       M.sentry.captureException(e)
     }
@@ -180,6 +181,7 @@ export default class extends invokerInterface {
     } catch (e) {
       M.sentry.configureScope(scope => {
         scope.setTag('error-type', 'js-call-app')
+        scope.setExtra('error-data', func)
       })
       M.sentry.captureException(e)
     }
@@ -218,6 +220,7 @@ export default class extends invokerInterface {
     } catch (e) {
       M.sentry.configureScope(scope => {
         scope.setTag('error-type', 'js-call-app-callback')
+        scope.setExtra('error-data', jsonObj)
       })
       M.sentry.captureException(e)
     }
@@ -236,6 +239,7 @@ export default class extends invokerInterface {
     } catch (e) {
       M.sentry.configureScope(scope => {
         scope.setTag('error-type', 'app-call-js-callback')
+        scope.setExtra('error-data', params)
       })
       M.sentry.captureException(e)
     }
