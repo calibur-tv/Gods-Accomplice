@@ -225,9 +225,13 @@ export default class extends invokerInterface {
     } catch (e) {
       M.sentry.configureScope(scope => {
         scope.setTag('error-type', 'js-call-app-callback')
-        scope.setExtra('error-data', JSON.stringify({
-          JsCallAppStack, AppCallJsStack
-        }))
+        scope.setExtra(
+          'error-data',
+          JSON.stringify({
+            JsCallAppStack,
+            AppCallJsStack
+          })
+        )
       })
       M.sentry.captureException(e)
     }

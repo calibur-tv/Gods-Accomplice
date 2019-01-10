@@ -35,7 +35,8 @@
 
       .avatar {
         float: left;
-        margin-right: 20px;
+        margin-right: 10px;
+        margin-left: -5px;
       }
 
       .content {
@@ -153,7 +154,14 @@
       }
 
       .content {
+        margin-top: 5px;
         overflow: hidden;
+
+        .score {
+          color: $color-red;
+          font-size: 14px;
+          margin-top: 3px;
+        }
       }
     }
 
@@ -170,6 +178,7 @@
       margin-right: -9px;
 
       .fans {
+        position: relative;
         margin-top: $container-padding;
         margin-left: 9px;
         margin-right: 9px;
@@ -179,6 +188,18 @@
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
+
+        .score {
+          position: absolute;
+          right: 2px;
+          top: 33px;
+          padding: 4px 10px;
+          background-color: $color-red;
+          color: #fff;
+          @include half-font(10px);
+          transform-origin: right center;
+          border-radius: 14px;
+        }
 
         .nickname {
           @include mutiline(19px);
@@ -255,7 +276,10 @@
             <div class="avatar">
               <UserAvatar :user="data.lover" :size="55" />
             </div>
-            <div class="content"><UserNickname :user="data.lover" /></div>
+            <div class="content">
+              <UserNickname :user="data.lover" />
+              <p class="score">应援数：{{ data.lover.score }}</p>
+            </div>
           </div>
         </div>
         <p v-else class="no-one">暂无守护者</p>
@@ -268,6 +292,7 @@
         <ul v-if="data.fans_count" class="fans-list">
           <li v-for="item in fans" :key="item.id" class="fans">
             <UserAvatar :user="item" :size="55" />
+            <div v-if="fansSort === 'hot'" class="score">{{ item.score }}</div>
             <p class="nickname">{{ item.nickname }}</p>
           </li>
         </ul>
@@ -308,7 +333,8 @@ export default {
       loading: false,
       error: false,
       fansSort: 'hot',
-      userCoinTotal: 0
+      userCoinTotal: 0,
+      userId: 0
     }
   },
   created() {
@@ -317,6 +343,7 @@ export default {
   mounted() {
     M.invoker.getUserInfo(user => {
       this.userCoinTotal = user.coin
+      this.userId = user.id
     })
   },
   methods: {
@@ -369,6 +396,9 @@ export default {
         user.coin--
         M.invoker.setUserInfo(user)
       })
+      if (this.data.lover && this.userId === this.data.lover.id) {
+        this.data.lover.score++
+      }
       this.data.star_count++
       this.data.hasStar++
       this.$toast.info(`+${this.data.hasStar}s`)
