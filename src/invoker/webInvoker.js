@@ -5,6 +5,7 @@ import { MessageBox } from 'mint-ui'
 export default class extends invokerInterface {
   getDeviceInfo(callback) {
     this.JsCallApp('getDeviceInfo', {}, callback)
+    callback(window.navigator.userAgent)
   }
 
   getUserInfo(callback) {

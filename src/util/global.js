@@ -19,12 +19,14 @@ M.channel = channel
 M.user = {}
 M.invoker.getUserInfo(data => {
   M.user = data
+  M.sentry.configureScope(scope => {
+    scope.setUser(data)
+  })
 })
 M.invoker.getDeviceInfo(data => {
   M.sentry.configureScope(scope => {
-    Object.keys(data).forEach(key => {
-      scope.setTag(key, data[key])
-    })
+    scope.setTag('device-info', data)
+    scope.setTag('error-type', 'init')
   })
 })
 

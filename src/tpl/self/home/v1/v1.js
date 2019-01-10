@@ -10,7 +10,7 @@ try {
   pageData = JSON.parse(document.getElementById('page-data').textContent)
 } catch (e) {
   M.sentry.configureScope(scope => {
-    scope.setExtra('error-type', 'page-data')
+    scope.setTag('error-type', 'page-data')
   })
   M.sentry.captureException(e)
   pageData = {}

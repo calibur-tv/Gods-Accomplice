@@ -153,7 +153,7 @@ export default class extends invokerInterface {
       }
     } catch (e) {
       M.sentry.configureScope(scope => {
-        scope.setExtra('error-type', 'app-call-js')
+        scope.setTag('error-type', 'app-call-js')
       })
       M.sentry.captureException(e)
     }
@@ -176,7 +176,7 @@ export default class extends invokerInterface {
       window.__AndroidBridge.handleMessageFromJS(data)
     } catch (e) {
       M.sentry.configureScope(scope => {
-        scope.setExtra('error-type', 'js-call-app')
+        scope.setTag('error-type', 'js-call-app')
       })
       M.sentry.captureException(e)
     }
@@ -214,7 +214,7 @@ export default class extends invokerInterface {
       }
     } catch (e) {
       M.sentry.configureScope(scope => {
-        scope.setExtra('error-type', 'js-call-app-callback')
+        scope.setTag('error-type', 'js-call-app-callback')
       })
       M.sentry.captureException(e)
     }
@@ -232,7 +232,7 @@ export default class extends invokerInterface {
       )
     } catch (e) {
       M.sentry.configureScope(scope => {
-        scope.setExtra('error-type', 'app-call-js-callback')
+        scope.setTag('error-type', 'app-call-js-callback')
       })
       M.sentry.captureException(e)
     }
