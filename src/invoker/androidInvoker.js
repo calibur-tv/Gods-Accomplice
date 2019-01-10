@@ -152,6 +152,9 @@ export default class extends invokerInterface {
         this.appCallJsCallback(callbackId, data)
       }
     } catch (e) {
+      M.sentry.configureScope(scope => {
+        scope.setExtra('error-type', 'app-call-js')
+      })
       M.sentry.captureException(e)
     }
   }
@@ -172,6 +175,9 @@ export default class extends invokerInterface {
       const data = JSON.stringify({ func, params, callbackId })
       window.__AndroidBridge.handleMessageFromJS(data)
     } catch (e) {
+      M.sentry.configureScope(scope => {
+        scope.setExtra('error-type', 'js-call-app')
+      })
       M.sentry.captureException(e)
     }
   }
@@ -207,6 +213,9 @@ export default class extends invokerInterface {
         callbackFunc(params)
       }
     } catch (e) {
+      M.sentry.configureScope(scope => {
+        scope.setExtra('error-type', 'js-call-app-callback')
+      })
       M.sentry.captureException(e)
     }
   }
@@ -222,6 +231,9 @@ export default class extends invokerInterface {
         JSON.stringify({ callbackId, params })
       )
     } catch (e) {
+      M.sentry.configureScope(scope => {
+        scope.setExtra('error-type', 'app-call-js-callback')
+      })
       M.sentry.captureException(e)
     }
   }

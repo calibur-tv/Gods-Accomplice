@@ -6,7 +6,16 @@ import '@/util/components'
 import FastClick from 'fastclick'
 
 // 初始化container
-const pageData = JSON.parse(document.getElementById('page-data').textContent)
+let pageData
+try {
+  pageData = JSON.parse(document.getElementById('page-data').textContent)
+} catch (e) {
+  M.sentry.configureScope(scope => {
+    scope.setExtra('error-type', 'page-data')
+  })
+  M.sentry.captureException(e)
+  pageData = {}
+}
 
 window.M = window.M || Object.create(null)
 
@@ -14,5 +23,8 @@ const App = Vue.extend(app)
 
 // 这里的M.app就是最大的Vue实例
 M.app = new App({ data: pageData }).$mount('#app')
+M.sentry.configureScope(scope => {
+  scope.setTag('page-name', 'role')
+})
 
 FastClick.attach(document.body)

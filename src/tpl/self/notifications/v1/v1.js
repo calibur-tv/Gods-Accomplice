@@ -7,6 +7,9 @@ import '@/util/components'
 window.M = window.M || Object.create(null)
 
 const App = Vue.extend(app)
+M.sentry.configureScope(scope => {
+  scope.setTag('page-name', 'notification')
+})
 
 // 这里的M.app就是最大的Vue实例
 M.app = new App().$mount('#app')

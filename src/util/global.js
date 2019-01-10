@@ -20,6 +20,13 @@ M.user = {}
 M.invoker.getUserInfo(data => {
   M.user = data
 })
+M.invoker.getDeviceInfo(data => {
+  M.sentry.configureScope(scope => {
+    Object.keys(data).forEach(key => {
+      scope.setTag(key, data[key])
+    })
+  })
+})
 
 Vue.use({
   install(Vue) {

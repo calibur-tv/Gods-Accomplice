@@ -10,5 +10,8 @@ window.M = window.M || Object.create(null)
 const App = Vue.extend(app)
 
 M.app = new App().$mount('#app')
+M.sentry.configureScope(scope => {
+  scope.setTag('page-name', 'notice')
+})
 
 FastClick.attach(document.body)
