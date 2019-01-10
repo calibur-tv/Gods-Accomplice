@@ -23,12 +23,14 @@ M.invoker.getUserInfo(data => {
     scope.setUser({
       id: data.id
     })
+    scope.setTag('config-user-success', '1')
   })
 })
 M.invoker.getDeviceInfo(data => {
   M.sentry.configureScope(scope => {
     scope.setTag('device-info', data)
     scope.setTag('error-type', 'init')
+    scope.setTag('config-device-success', '1')
   })
 })
 

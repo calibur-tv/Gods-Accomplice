@@ -1,6 +1,9 @@
 import invokerInterface from './invokerInterface'
 import scheme from './scheme/android'
 
+const JsCallAppStack = {}
+const AppCallJsStack = []
+
 export default class extends invokerInterface {
   getDeviceInfo(callback) {
     this.JsCallApp('getDeviceInfo', {}, callback)
@@ -176,6 +179,7 @@ export default class extends invokerInterface {
       if (callback !== null && typeof callback === 'function') {
         callbackId = this.registerCallbackId(callback)
       }
+      JsCallAppStack[callbackId] = func
       const data = JSON.stringify({ func, params, callbackId })
       window.__AndroidBridge.handleMessageFromJS(data)
     } catch (e) {
@@ -217,10 +221,13 @@ export default class extends invokerInterface {
       if (!!callbackFunc && typeof callbackFunc === 'function') {
         callbackFunc(params)
       }
+      AppCallJsStack.push(callbackId)
     } catch (e) {
       M.sentry.configureScope(scope => {
         scope.setTag('error-type', 'js-call-app-callback')
-        scope.setExtra('error-data', jsonObj)
+        scope.setExtra('error-data', JSON.stringify({
+          JsCallAppStack, AppCallJsStack
+        }))
       })
       M.sentry.captureException(e)
     }
