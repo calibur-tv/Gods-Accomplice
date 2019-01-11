@@ -14,6 +14,7 @@ import TxtParser from './TxtParser'
 import ImgParser from './ImgParser'
 import UseParser from './UseParser'
 import ListParser from './ListParser'
+import TitleParser from './TitleParser'
 
 export default {
   name: 'JsonContent',
@@ -21,7 +22,8 @@ export default {
     TxtParser,
     ImgParser,
     UseParser,
-    ListParser
+    ListParser,
+    TitleParser
   },
   props: {
     content: {
