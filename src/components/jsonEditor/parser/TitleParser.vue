@@ -16,21 +16,18 @@
 
 <template>
   <div class="json-content-txt-parser">
-    <h3
-      v-if="item.text"
-      v-text="item.text"
-    />
+    <h3 v-if="item.text" v-text="item.text" />
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'JsonContentTitleParser',
-    props: {
-      item: {
-        type: Object,
-        required: true
-      }
+export default {
+  name: 'JsonContentTitleParser',
+  props: {
+    item: {
+      type: Object,
+      required: true
     }
   }
+}
 </script>

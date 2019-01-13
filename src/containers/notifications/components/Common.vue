@@ -453,7 +453,7 @@ export default {
         this.$emit('read', this.item.id)
       }
       const urlParams = this.getSchemeLink
-      if (urlParams) {
+      if (urlParams && this.$alias[urlParams.name] === 'function') {
         this.$alias[urlParams.name](urlParams.params)
       }
     }

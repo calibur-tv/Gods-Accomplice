@@ -18,11 +18,8 @@ M.invoker = new Invoker({ appName, appVersion })
 M.channel = channel
 M.user = {}
 M.invoker.getUserInfo(data => {
-  M.user = data
+  M.user = data || {}
   M.sentry.configureScope(scope => {
-    scope.setUser({
-      id: data.id
-    })
     scope.setTag('config-user-success', '1')
   })
 })
