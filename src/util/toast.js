@@ -78,7 +78,7 @@ class Message {
       message = tip
     }
     Indicator.open({
-      text: message || '加载中...',
+      text: message || '加载中…',
       spinnerType: 'snake'
     })
     if (time) {

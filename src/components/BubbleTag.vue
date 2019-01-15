@@ -39,7 +39,7 @@
 
 <template>
   <button :class="$style.tag" @click="$emit('click')">
-    <slot name="icon" /> <span v-text="text" />
+    <slot name="icon" /> <span v-text="sortenText" />
   </button>
 </template>
 
@@ -54,6 +54,14 @@ export default {
     text: {
       type: String,
       required: true
+    }
+  },
+  computed: {
+    sortenText() {
+      if (this.text.length > 6) {
+        return `${this.text.slice(0, 6)}…`
+      }
+      return this.text
     }
   }
 }
