@@ -51,8 +51,8 @@
     <CommentItem
       :comment="comment"
       :in-detail="true"
+      :is-master="false"
       :type="modal_type"
-      :master-id="-1"
     >
       <button
         v-if="reply_id"

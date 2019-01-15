@@ -72,7 +72,9 @@
         @reward="handleReward"
       />
     </footer>
-    <VLazy> <CommentMain :id="id" :master-id="user.id" type="image" /> </VLazy>
+    <VLazy>
+      <CommentMain :id="id" :is-master="bangumi.is_master" type="image" />
+    </VLazy>
   </div>
 </template>
 

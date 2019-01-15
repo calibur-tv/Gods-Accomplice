@@ -69,7 +69,7 @@
           :key="comment.id"
           :type="type"
           :comment="comment"
-          :master-id="masterId"
+          :is-master="isMaster"
           @delete="deleteCommentCallback"
         />
       </div>
@@ -128,9 +128,9 @@ export default {
       type: String,
       default: '暂无评论，快来抢沙发吧╮(￣▽￣)╭！'
     },
-    masterId: {
-      required: true,
-      type: Number
+    isMaster: {
+      type: Boolean,
+      default: false
     },
     auto: {
       type: Boolean,

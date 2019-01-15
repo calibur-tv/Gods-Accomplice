@@ -63,7 +63,7 @@
         @reward="handleReward"
       />
       <VLazy>
-        <CommentMain :id="id" :master-id="user.id" type="score" />
+        <CommentMain :id="id" :is-master="bangumi.is_master" type="score" />
       </VLazy>
     </footer>
   </div>

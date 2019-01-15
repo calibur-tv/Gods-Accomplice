@@ -65,7 +65,7 @@
       />
     </footer>
     <VLazy>
-      <CommentMain :id="post.id" :master-id="user.id" type="post" />
+      <CommentMain :id="post.id" :is-master="bangumi.is_master" type="post" />
     </VLazy>
   </div>
 </template>

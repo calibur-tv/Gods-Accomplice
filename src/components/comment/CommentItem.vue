@@ -183,7 +183,7 @@
             </button>
           </div>
         </div>
-        <UserNickname :user="computeFromUser" :is-master="isMaster" />
+        <UserNickname :user="computeFromUser" :is-master="comment.is_master" />
       </div>
       <div class="main">
         <div class="text-area" v-html="comment.content" />
@@ -260,9 +260,9 @@ export default {
       required: true,
       type: Object
     },
-    masterId: {
-      required: true,
-      type: Number
+    isMaster: {
+      type: Boolean,
+      default: false
     },
     type: {
       required: true,
@@ -281,7 +281,7 @@ export default {
   },
   computed: {
     currentUserId() {
-      return M.user.id
+      return M.user.id || 0
     },
     computeFromUser() {
       return {
@@ -291,11 +291,8 @@ export default {
         zone: this.comment.from_user_zone
       }
     },
-    isMaster() {
-      return this.comment.from_user_id === this.masterId
-    },
     isMine() {
-      return this.currentUserId === this.comment.from_user_id
+      return this.currentUserId === this.computeFromUser.id
     },
     canDelete() {
       return this.isMine || this.isMaster || M.user.is_admin
