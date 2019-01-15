@@ -183,7 +183,7 @@
             </button>
           </div>
         </div>
-        <UserNickname :user="computeFromUser" :is-master="comment.is_master" />
+        <UserNickname :user="computeFromUser" :is-master="comment.is_owner" />
       </div>
       <div class="main">
         <div class="text-area" v-html="comment.content" />
