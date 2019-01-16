@@ -24,7 +24,7 @@
 </style>
 
 <template>
-  <CommonItem :id="item.id" class="list-item">
+  <CommonItem :id="item.id" :type="item.type" class="list-item">
     <template slot="poster">
       <i class="iconfont ic-list" />
     </template>

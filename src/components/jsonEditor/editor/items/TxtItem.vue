@@ -7,22 +7,16 @@
 </style>
 
 <template>
-  <CommonItem :id="item.id" class="txt-item">
+  <CommonItem :id="item.id" :type="item.type" class="txt-item">
     <template slot="poster">
       <i class="iconfont ic-text" />
     </template>
     <template slot="content">
-      <!-- title 和 text 之后要分开 -->
-      <template v-if="item.text || item.title">
-        <p v-if="item.text && !item.title" v-html="item.text" />
-        <h3 v-else-if="item.title && !item.text" v-text="item.title" />
-        <template v-else>
-          <h3 class="oneline" v-html="item.title" />
-          <p class="three-line" v-html="item.text" />
-        </template>
+      <template v-if="item.title">
+        <p v-if="item.title" v-html="item.title" />
       </template>
       <template v-else>
-        点击添加文字
+        点击添加段落
       </template>
     </template>
   </CommonItem>
@@ -32,7 +26,7 @@
 import CommonItem from './CommonItem.vue'
 
 export default {
-  name: 'ImgItem',
+  name: 'TxtItem',
   components: {
     CommonItem
   },

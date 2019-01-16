@@ -21,5 +21,9 @@ export default {
 
   updateUserInfo(user) {
     M.channel.$emit('user-info-updated', user)
+  },
+
+  getEditorContent() {
+    M.channel.$emit('get-editor-content')
   }
 }

@@ -59,7 +59,7 @@ import TxtItem from './items/TxtItem.vue'
 import ImgItem from './items/ImgItem.vue'
 import UseItem from './items/UseItem.vue'
 import ListItem from './items/ListItem.vue'
-import { ulid } from 'ulid'
+import TitleItem from './items/TitleItem.vue'
 import './font.css'
 import CreateBtn from './CreateBtn.vue'
 import StatsComponent from '@/components/StatsComponent'
@@ -70,6 +70,7 @@ export default {
     StatsComponent,
     CreateBtn,
     Draggable,
+    TitleItem,
     TxtItem,
     ImgItem,
     UseItem,
@@ -85,7 +86,9 @@ export default {
     return {
       content: this.value.map(_ => {
         return Object.assign(_, {
-          id: ulid()
+          id: Math.random()
+            .toString(36)
+            .substring(3, 6)
         })
       }),
       showCreatePopover: false
@@ -109,6 +112,9 @@ export default {
   created() {
     this.$channel.$on('delete-editor-item', this.handleDelete)
     this.$channel.$on('create-editor-item', this.handleCreate)
+    this.$channel.$on('edit-editor-item-poster', this.handleEditPoster)
+    this.$channel.$on('edit-editor-item-text', this.handleEditText)
+    this.$channel.$on('get-editor-content', this.sendEditorContent)
   },
   methods: {
     handleDelete({ id }) {
@@ -124,10 +130,49 @@ export default {
       })
     },
     handleCreate({ id, type }) {
-      M.invoker.createEditorSection({ id, type })
+      M.invoker.createEditorSection({ id, type }, data => {
+        this.content.forEach((item, index) => {
+          if (item.id === id) {
+            this.content.splice(index, 0, Object.assign(data, {
+              id: Math.random()
+                .toString(36)
+                .substring(3, 6)
+            }))
+          }
+        })
+      })
     },
     createNewSection({ type }) {
-      M.invoker.createEditorSection({ id: '-1', type })
+      M.invoker.createEditorSection({ id: '-1-', type }, data => {
+        this.content.push(Object.assign(data, {
+          id: Math.random()
+            .toString(36)
+            .substring(3, 6)
+        }))
+      })
+    },
+    handleEditPoster({ id, type }) {
+      this.content.forEach((item, index) => {
+        if (item.id === id) {
+          M.invoker.editEditorImageSection({ id, type, data: item }, data => {
+            this.content[index] = data
+          })
+        }
+      })
+    },
+    sendEditorContent() {
+      M.invoker.sendEditorContent({
+        content: this.content
+      })
+    },
+    handleEditText({ id, type }) {
+      this.content.forEach((item, index) => {
+        if (item.id === id) {
+          M.invoker.editEditorTextSection({ id, type, data: item }, data => {
+            this.content[index] = data
+          })
+        }
+      })
     },
     handleCreateBtnEnter() {
       this.showCreatePopover = true

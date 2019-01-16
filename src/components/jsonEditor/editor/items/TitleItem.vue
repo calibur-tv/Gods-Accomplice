@@ -1,29 +1,22 @@
 <style lang="scss">
-.img-item {
+.title-item {
   .poster {
-    background-color: #67c23a;
-
-    img {
-      display: block;
-      width: 100%;
-      height: 100%;
-    }
+    background-color: #9266f9;
   }
 }
 </style>
 
 <template>
-  <CommonItem :id="item.id" :type="item.type" class="img-item">
+  <CommonItem :id="item.id" :type="item.type" class="title-item">
     <template slot="poster">
-      <img v-if="item.url" :src="$resize(item.url, { width: 152 })" />
-      <i v-else class="iconfont ic-image" />
+      <i class="iconfont ic-text" />
     </template>
     <template slot="content">
       <template v-if="item.text">
-        {{ item.text }}
+        <p v-html="item.text" />
       </template>
       <template v-else>
-        点击添加图片描述
+        点击添加标题
       </template>
     </template>
   </CommonItem>
@@ -33,7 +26,7 @@
 import CommonItem from './CommonItem.vue'
 
 export default {
-  name: 'ImgItem',
+  name: 'TitleItem',
   components: {
     CommonItem
   },

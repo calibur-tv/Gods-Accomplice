@@ -63,12 +63,12 @@
   <div class="editor-item-wrap">
     <CreateBtn @create="emitCreateItem" />
     <div class="editor-item">
-      <div class="poster"><slot name="poster"> poster </slot></div>
+      <div class="poster" @click="emitEditPoster"><slot name="poster"> poster </slot></div>
       <div class="control">
         <i class="iconfont ic-cancel" @click="emitDeleteItem" />
         <i class="iconfont ic-sort" @click="showSortToast" />
       </div>
-      <div class="content"><slot name="content"> content </slot></div>
+      <div class="content" @click="emitEditText"><slot name="content"></slot></div>
     </div>
   </div>
 </template>
@@ -85,6 +85,10 @@ export default {
     id: {
       required: true,
       type: [Number, String]
+    },
+    type: {
+      required: true,
+      type: String
     }
   },
   methods: {
@@ -101,6 +105,21 @@ export default {
     },
     showSortToast() {
       this.$toast.info('长按并拖拽段落可以调整排序')
+    },
+    emitEditPoster() {
+      if (this.type !== 'img') {
+        return
+      }
+      this.$channel.$emit('edit-editor-item-poster', {
+        id: this.id,
+        type: this.type
+      })
+    },
+    emitEditText() {
+      this.$channel.$emit('edit-editor-item-text', {
+        id: this.id,
+        type: this.type
+      })
     }
   }
 }

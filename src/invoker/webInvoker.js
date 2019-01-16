@@ -84,12 +84,24 @@ export default class extends invokerInterface {
     this.JsCallApp('createMainComment', { model_type, model_id })
   }
 
-  createEditorSection({ type, id }) {
-    this.JsCallApp('createEditorSection', { type, id })
+  createEditorSection({ type, id }, callback) {
+    this.JsCallApp('createEditorSection', { type, id }, callback)
   }
 
-  editEditorSection({ type, id, data }) {
-    this.JsCallApp('editEditorSection', { type, id, data })
+  editEditorSection({ type, id, data }, callback) {
+    this.JsCallApp('editEditorSection', { type, id, data }, callback)
+  }
+
+  editEditorImageSection({ id, type, data }, callback) {
+    this.JsCallApp('editEditorImageSection', { type, id, data }, callback)
+  }
+
+  editEditorTextSection({ id, type, data }, callback) {
+    this.JsCallApp('editEditorTextSection', { type, id, data }, callback)
+  }
+
+  sendEditorContent({ content }) {
+    this.JsCallApp('sendEditorContent', { content })
   }
 
   createSubComment({

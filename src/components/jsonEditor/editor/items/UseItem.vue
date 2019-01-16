@@ -12,7 +12,7 @@
 </style>
 
 <template>
-  <CommonItem :id="item.id" class="use-item">
+  <CommonItem :id="item.id" :type="item.type" class="use-item">
     <template slot="poster">
       <i class="iconfont ic-use" />
     </template>
