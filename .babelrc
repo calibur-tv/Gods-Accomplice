@@ -1,7 +1,7 @@
 {
   "presets": [
     [
-      "env",
+      "@babel/preset-env",
       {
         "targets": {
           "browsers": [
@@ -10,29 +10,22 @@
             "iOS > 9",
             "chrome >= 33"
           ]
-        }
+        },
+        "useBuiltIns": "usage"
       }
-    ],
-    "stage-0"
+    ]
   ],
   "plugins": [
-    "syntax-dynamic-import",
-    "transform-runtime",
     "babel-plugin-lodash",
-    ["component", [
+    ["component", { "libraryName": "element-ui", "styleLibraryName": "theme-chalk"}, "element-ui"],
+    ["component", { "libraryName": "mint-ui", "style": false}, "mint-ui"],
+    [
+      "import",
       {
-        "libraryName": "element-ui",
-        "styleLibraryName": "theme-chalk"
-      },
-      {
-        "libraryName": "mint-ui",
-        "style": false
+        "libraryName": "vant",
+        "libraryDirectory": "es",
+        "style": true
       }
-    ]],
-    ["import", {
-      "libraryName": "vant",
-      "libraryDirectory": "es",
-      "style": true
-    }]
+    ]
   ]
 }
