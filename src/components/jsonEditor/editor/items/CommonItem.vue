@@ -87,13 +87,6 @@ export default {
       type: [Number, String]
     }
   },
-  data() {
-    return {}
-  },
-  computed: {},
-  watch: {},
-  created() {},
-  mounted() {},
   methods: {
     emitDeleteItem() {
       this.$channel.$emit('delete-editor-item', {

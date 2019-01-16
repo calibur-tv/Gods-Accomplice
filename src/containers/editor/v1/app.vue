@@ -17,17 +17,12 @@ export default {
   components: {
     JsonEditor
   },
-  props: {},
   data() {
     return {
-      content: [],
-      empty: []
+      id: 0,
+      banner: null,
+      content: []
     }
-  },
-  computed: {},
-  watch: {},
-  created() {},
-  mounted() {},
-  methods: {}
+  }
 }
 </script>

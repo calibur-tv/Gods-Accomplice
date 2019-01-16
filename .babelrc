@@ -7,7 +7,8 @@
           "browsers": [
             "> 1%",
             "last 3 versions",
-            "iOS > 9"
+            "iOS > 9",
+            "chrome >= 33"
           ]
         }
       }

@@ -44,13 +44,17 @@
       @enter="handleCreateBtnEnter"
       @leave="handleCreateBtnLeave"
     >
-      <CreateBtn v-model="showCreatePopover" class="last-create-btn" />
+      <CreateBtn
+        v-model="showCreatePopover"
+        class="last-create-btn"
+        @create="createNewSection"
+      />
     </StatsComponent>
   </div>
 </template>
 
 <script>
-import draggable from 'vuedraggable'
+import Draggable from 'vuedraggable'
 import TxtItem from './items/TxtItem.vue'
 import ImgItem from './items/ImgItem.vue'
 import UseItem from './items/UseItem.vue'
@@ -58,12 +62,14 @@ import ListItem from './items/ListItem.vue'
 import { ulid } from 'ulid'
 import './font.css'
 import CreateBtn from './CreateBtn.vue'
+import StatsComponent from '@/components/StatsComponent'
 
 export default {
   name: 'JsonEditor',
   components: {
+    StatsComponent,
     CreateBtn,
-    draggable,
+    Draggable,
     TxtItem,
     ImgItem,
     UseItem,
@@ -104,7 +110,6 @@ export default {
     this.$channel.$on('delete-editor-item', this.handleDelete)
     this.$channel.$on('create-editor-item', this.handleCreate)
   },
-  mounted() {},
   methods: {
     handleDelete({ id }) {
       M.invoker.confirm({
@@ -119,8 +124,10 @@ export default {
       })
     },
     handleCreate({ id, type }) {
-      console.log('id', id) // eslint-disable-line
-      console.log('type', type) // eslint-disable-line
+      M.invoker.createEditorSection({ id, type })
+    },
+    createNewSection({ type }) {
+      M.invoker.createEditorSection({ id: '-1', type })
     },
     handleCreateBtnEnter() {
       this.showCreatePopover = true

@@ -84,6 +84,14 @@ export default class extends invokerInterface {
     this.JsCallApp('createMainComment', { model_type, model_id })
   }
 
+  createEditorSection({ type, id }) {
+    this.JsCallApp('createEditorSection', { type, id })
+  }
+
+  editEditorSection({ type, id, data }) {
+    this.JsCallApp('editEditorSection', { type, id, data })
+  }
+
   createSubComment({
     model_type,
     parent_comment_id,
