@@ -3,14 +3,6 @@
     [
       "@babel/preset-env",
       {
-        "targets": {
-          "browsers": [
-            "> 1%",
-            "last 3 versions",
-            "iOS > 9",
-            "chrome >= 33"
-          ]
-        },
         "useBuiltIns": "usage"
       }
     ]
