@@ -70,6 +70,7 @@
       line-height: 21px;
       color: $color-text-normal;
       font-size: 15px;
+      user-select: text;
     }
   }
 }

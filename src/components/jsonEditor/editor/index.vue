@@ -133,22 +133,28 @@ export default {
       M.invoker.createEditorSection({ id, type }, data => {
         this.content.forEach((item, index) => {
           if (item.id === id) {
-            this.content.splice(index, 0, Object.assign(data, {
-              id: Math.random()
-                .toString(36)
-                .substring(3, 6)
-            }))
+            this.content.splice(
+              index,
+              0,
+              Object.assign(data, {
+                id: Math.random()
+                  .toString(36)
+                  .substring(3, 6)
+              })
+            )
           }
         })
       })
     },
     createNewSection({ type }) {
       M.invoker.createEditorSection({ id: '-1-', type }, data => {
-        this.content.push(Object.assign(data, {
-          id: Math.random()
-            .toString(36)
-            .substring(3, 6)
-        }))
+        this.content.push(
+          Object.assign(data, {
+            id: Math.random()
+              .toString(36)
+              .substring(3, 6)
+          })
+        )
       })
     },
     handleEditPoster({ id, type }) {

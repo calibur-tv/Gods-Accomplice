@@ -63,12 +63,16 @@
   <div class="editor-item-wrap">
     <CreateBtn @create="emitCreateItem" />
     <div class="editor-item">
-      <div class="poster" @click="emitEditPoster"><slot name="poster"> poster </slot></div>
+      <div class="poster" @click="emitEditPoster">
+        <slot name="poster"> poster </slot>
+      </div>
       <div class="control">
         <i class="iconfont ic-cancel" @click="emitDeleteItem" />
         <i class="iconfont ic-sort" @click="showSortToast" />
       </div>
-      <div class="content" @click="emitEditText"><slot name="content"></slot></div>
+      <div class="content" @click="emitEditText">
+        <slot name="content"></slot>
+      </div>
     </div>
   </div>
 </template>

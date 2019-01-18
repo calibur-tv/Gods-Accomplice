@@ -22,6 +22,7 @@
   .content {
     overflow: hidden;
     padding-right: 20px;
+    user-select: text;
 
     .header {
       margin-bottom: 5px;

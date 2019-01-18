@@ -6,6 +6,7 @@
       line-height: 30px;
       margin-bottom: 15px;
       color: $color-text-normal;
+      user-select: text;
 
       p:not(:last-child) {
         margin-bottom: 30px;
