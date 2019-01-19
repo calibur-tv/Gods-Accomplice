@@ -43,7 +43,7 @@
 
   .detail {
     font-size: 14px;
-    line-height: 1.7;
+    margin-bottom: 5px;
     color: #333;
   }
 
@@ -67,11 +67,11 @@
 
 <template>
   <div class="trans-item">
-    <div class="type" v-text="item.action" />
+    <div class="type"><slot name="title" /></div>
     <div :class="[item.type ? 'plus' : 'minus']" class="amount">
-      {{ sign }}{{ item.count }}
+      {{ sign }}{{ item.amount }}
     </div>
-    <div class="detail"><slot /></div>
+    <div class="detail"><slot name="desc" /></div>
     <div class="time">{{ item.created_at }}</div>
   </div>
 </template>
@@ -87,7 +87,7 @@ export default {
   },
   computed: {
     sign() {
-      return this.item.type ? '+' : '-'
+      return this.item.add ? '+' : '-'
     }
   }
 }

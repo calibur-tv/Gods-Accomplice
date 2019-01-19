@@ -1,5 +1,12 @@
 <template>
-  <VCommon :item="item"> 提现 </VCommon>
+  <VCommon :item="item">
+    <template slot="title">
+      提现
+    </template>
+    <template slot="desc">
+      提现扣除光玉
+    </template>
+  </VCommon>
 </template>
 
 <script>

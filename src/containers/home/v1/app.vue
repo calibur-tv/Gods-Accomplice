@@ -197,12 +197,18 @@
             <span>战斗力</span>
           </div>
           <div class="item">
-            <p class="oneline" v-text="exp.level" />
-            <span>等级</span>
+            <p
+              class="oneline"
+              v-text="$utils.shortenNumber(banlance.coin_count)"
+            />
+            <span>团子</span>
           </div>
           <div class="item">
-            <p class="oneline" v-text="$utils.shortenNumber(coin)" />
-            <span>团子</span>
+            <p
+              class="oneline"
+              v-text="$utils.shortenNumber(banlance.light_count)"
+            />
+            <span>光玉</span>
           </div>
         </div>
       </main>
@@ -295,11 +301,13 @@ export default {
     handleSigned({ exp, message }) {
       this.daySign = true
       this.coin++
+      this.banlance.coin_count++
       this.$toast.success(message)
       this.$utils.updateUserExp(exp)
       const user = M.user
       this.exp = user.exp
       user.coin++
+      user.banlance.coin_count++
       M.invoker.setUserInfo(user)
     }
   }

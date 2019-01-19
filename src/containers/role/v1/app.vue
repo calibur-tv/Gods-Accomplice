@@ -394,6 +394,13 @@ export default {
       }
       M.invoker.getUserInfo(user => {
         user.coin--
+        if (user.banlance) {
+          if (user.banlance.coin_count > 0) {
+            user.banlance.coin_count--
+          } else {
+            user.banlance.light_count--
+          }
+        }
         M.invoker.setUserInfo(user)
       })
       if (this.data.lover && this.userId === this.data.lover.id) {

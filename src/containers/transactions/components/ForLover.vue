@@ -1,6 +1,14 @@
 <template>
   <VCommon :item="item">
-    为 <a href="javascript:;" v-text="item.about.name" /> 应援
+    <template slot="title">
+      偶像应援
+    </template>
+    <template slot="desc">
+      为<a href="javascript:;" @click="$alias.role(item.model.id)">{{
+        item.model.title
+      }}</a
+      >应援
+    </template>
   </VCommon>
 </template>
 

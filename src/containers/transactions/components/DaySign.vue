@@ -1,12 +1,19 @@
 <template>
-  <VCommon :item="item"> 签到获得团子奖励（不可提现） </VCommon>
+  <VCommon :item="item">
+    <template slot="title">
+      每日签到
+    </template>
+    <template slot="desc">
+      签到获得团子奖励
+    </template>
+  </VCommon>
 </template>
 
 <script>
 import VCommon from './Common.vue'
 
 export default {
-  name: 'DaySignNew',
+  name: 'DaySignOld',
   components: {
     VCommon
   },

@@ -1,6 +1,17 @@
 <template>
   <VCommon :item="item">
-    邀请 <a href="javascript:;" v-text="item.about.nickname" /> 注册
+    <template slot="title">
+      邀请注册
+    </template>
+    <template slot="desc">
+      <span>邀请</span>
+      <a
+        href="javascript:;"
+        @click="$alias.user(item.user.zone)"
+        v-text="item.user.nickname"
+      />
+      <span>注册，赠送团子一枚</span>
+    </template>
   </VCommon>
 </template>
 

@@ -1,6 +1,11 @@
 <template>
   <VCommon :item="item">
-    删除答案 <a href="javascript:;" v-text="item.about.intro" />
+    <template slot="title"
+      >删除原创内容</template
+    >
+    <template slot="desc">
+      原创内容被删除，会扣除相应投食数的光玉
+    </template>
   </VCommon>
 </template>
 
@@ -8,7 +13,7 @@
 import VCommon from './Common.vue'
 
 export default {
-  name: 'DeleteAnswer',
+  name: 'DeletePost',
   components: {
     VCommon
   },
