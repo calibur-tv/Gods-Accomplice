@@ -249,10 +249,6 @@ export default {
       type: Boolean,
       default: true
     },
-    blur: {
-      type: Boolean,
-      default: false
-    },
     poster: {
       type: Boolean,
       default: false
@@ -278,6 +274,9 @@ export default {
     }
   },
   computed: {
+    blur() {
+      return this.gifNeedClickToLoad
+    },
     blockModeWrapStyle() {
       /**
        * block 模式下懒加载图片的容器宽高

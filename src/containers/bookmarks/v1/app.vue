@@ -283,12 +283,13 @@ export default {
       } else if (index === 3) {
         type = 'video'
       }
-      this.getData(true, type)
+      this.type = type
+      this.getData(true)
     },
-    loadMoreData(type) {
-      this.getData(false, type)
+    loadMoreData() {
+      this.getData(false)
     },
-    async getData(init = false, type) {
+    async getData(init = false) {
       const currentActive = this.active
       if (
         (this.source[currentActive].page && init) ||
@@ -308,7 +309,7 @@ export default {
         const data = await api.getBookmarks({
           page: this.source[currentActive].page,
           take: 16,
-          type
+          type: this.type
         })
         this.source[currentActive].list = this.source[
           currentActive
