@@ -226,7 +226,7 @@
       <slot name="extra" />
       <div class="footer">
         <div class="info">
-          <span>{{ comment.floor_count - 1 }}楼</span>
+          <span>{{ comment.floor_count }}楼</span>
           <VTime v-model="comment.created_at" />
         </div>
         <div class="social">

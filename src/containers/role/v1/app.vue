@@ -342,7 +342,7 @@ export default {
   },
   mounted() {
     M.invoker.getUserInfo(user => {
-      this.userCoinTotal = user.coin
+      this.userCoinTotal = user.banlance.light_count + user.banlance.coin_count
       this.userId = user.id
     })
   },
@@ -393,7 +393,6 @@ export default {
         this.data.fans_count++
       }
       M.invoker.getUserInfo(user => {
-        user.coin--
         if (user.banlance) {
           if (user.banlance.coin_count > 0) {
             user.banlance.coin_count--

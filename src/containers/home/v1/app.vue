@@ -306,7 +306,6 @@ export default {
       this.$utils.updateUserExp(exp)
       const user = M.user
       this.exp = user.exp
-      user.coin++
       user.banlance.coin_count++
       M.invoker.setUserInfo(user)
     }
