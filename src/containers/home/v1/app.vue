@@ -307,6 +307,7 @@ export default {
       const user = M.user
       this.exp = user.exp
       user.banlance.coin_count++
+      user.daySign = true
       M.invoker.setUserInfo(user)
     }
   }
