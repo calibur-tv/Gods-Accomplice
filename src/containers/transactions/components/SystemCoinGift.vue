@@ -1,7 +1,7 @@
 <template>
   <VCommon :item="item">
     <template slot="title">
-      特殊奖励
+      奖励团子
     </template>
     <template slot="desc">
       由于你触发了特殊剧情，获得系统为你奖励的团子

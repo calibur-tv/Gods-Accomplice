@@ -31,8 +31,8 @@ import Api from '@/api/v1/selfApi'
 import Loadmore from '@/components/Loadmore.vue'
 import Type0 from '../components/DaySign.vue'
 import Type1 from '../components/InviteUser.vue'
-import Type2 from '../components/ActivityGift.vue'
-import Type3 from '../components/ManagerGift.vue'
+import Type2 from '../components/ActivityCoinGift.vue'
+import Type3 from '../components/ManagerCoinGift.vue'
 import Type4 from '../components/RewardPost.vue'
 import Type5 from '../components/RewardImage.vue'
 import Type6 from '../components/RewardScore.vue'
@@ -42,7 +42,11 @@ import Type9 from '../components/ForLover.vue'
 import Type10 from '../components/Withdrawal.vue'
 import Type11 from '../components/DeleteCreator.vue'
 import Type12 from '../components/FreezeUser.vue'
-import Type13 from '../components/SystemGift.vue'
+import Type13 from '../components/SystemCoinGift.vue'
+import Type14 from '../components/SystemLightGift.vue'
+import Type15 from '../components/ActivityLightGift.vue'
+import Type16 from '../components/ManagerLightGift.vue'
+import Type17 from '../components/InviteByUser.vue'
 
 export default {
   name: 'App',
@@ -61,7 +65,11 @@ export default {
     Type10,
     Type11,
     Type12,
-    Type13
+    Type13,
+    Type14,
+    Type15,
+    Type16,
+    Type17
   },
   data() {
     return {
