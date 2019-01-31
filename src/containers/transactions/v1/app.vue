@@ -42,6 +42,7 @@ import Type9 from '../components/ForLover.vue'
 import Type10 from '../components/Withdrawal.vue'
 import Type11 from '../components/DeleteCreator.vue'
 import Type12 from '../components/FreezeUser.vue'
+import Type13 from '../components/SystemGift.vue'
 
 export default {
   name: 'App',
@@ -59,7 +60,8 @@ export default {
     Type9,
     Type10,
     Type11,
-    Type12
+    Type12,
+    Type13
   },
   data() {
     return {
