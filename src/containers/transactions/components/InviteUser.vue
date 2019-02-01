@@ -10,7 +10,7 @@
         @click="$alias.user(item.user.zone)"
         v-text="item.user.nickname"
       />
-      <span>注册，赠送团子一枚</span>
+      <span>注册，赠送团子</span>
     </template>
   </VCommon>
 </template>

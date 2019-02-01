@@ -84,7 +84,7 @@ export default {
   },
   methods: {
     async getData() {
-      if (this.list.length < 20) {
+      if (!this.list.length) {
         this.noMore = true
         return
       }
