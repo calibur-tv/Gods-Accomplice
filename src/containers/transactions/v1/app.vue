@@ -47,6 +47,7 @@ import Type14 from '../components/SystemLightGift.vue'
 import Type15 from '../components/ActivityLightGift.vue'
 import Type16 from '../components/ManagerLightGift.vue'
 import Type17 from '../components/InviteByUser.vue'
+import Type18 from '../components/BuyVideoPackage.vue'
 
 export default {
   name: 'App',
@@ -69,7 +70,8 @@ export default {
     Type14,
     Type15,
     Type16,
-    Type17
+    Type17,
+    Type18
   },
   data() {
     return {
