@@ -228,5 +228,9 @@
       "type": 2,
       "user": null
     }
-  ]
+  ],
+  "banlance": {
+    "get": 200,
+    "set": 1
+  }
 }

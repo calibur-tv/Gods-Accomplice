@@ -1,6 +1,41 @@
 <style lang="scss">
 #trans-list {
-  padding: 0 18px;
+  padding: 0 $container-padding;
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    div {
+      flex-grow: 1;
+      text-align: center;
+      height: 40px;
+      line-height: 40px;
+      font-size: 14px;
+    }
+
+    span,
+    strong {
+      vertical-align: middle;
+    }
+
+    .get {
+      color: $color-red;
+    }
+
+    .set {
+      color: $color-link;
+    }
+  }
+
+  .main-hr {
+    height: 10px;
+    background-color: $color-background-container;
+    margin-left: -$container-padding;
+    margin-right: -$container-padding;
+  }
 
   a {
     vertical-align: middle;
@@ -10,6 +45,15 @@
 
 <template>
   <div id="trans-list">
+    <div class="header">
+      <div>
+        <span>收入：</span><strong class="get">{{ banlance.get }}</strong>
+      </div>
+      <div>
+        <span>支出：</span><strong class="set">{{ banlance.set }}</strong>
+      </div>
+    </div>
+    <div class="main-hr" />
     <Component
       :is="`Type-${item.type}`"
       v-for="(item, index) in list"
@@ -79,7 +123,11 @@ export default {
       noMore: false,
       error: false,
       page: 1,
-      list: []
+      list: [],
+      banlance: {
+        get: 0,
+        set: 0
+      }
     }
   },
   methods: {
