@@ -384,30 +384,52 @@ export default {
         this.$toast.info('没有团子了~')
         return
       }
-      this.userCoinTotal--
-      const api = new Api()
-      api.star({
-        roleId: this.data.id
+      this.$prompt('请输入要应援的数额', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        inputPattern: /^\d+$/,
+        inputErrorMessage: '必须是正整数'
       })
-      if (!this.data.hasStar) {
-        this.data.fans_count++
-      }
-      M.invoker.getUserInfo(user => {
-        if (user.banlance) {
-          if (user.banlance.coin_count > 0) {
-            user.banlance.coin_count--
-          } else {
-            user.banlance.light_count--
+        .then(async ({ value }) => {
+          const amount = +value
+          if (amount < 0) {
+            this.$toast.error('必须是正整数')
+            return
           }
-        }
-        M.invoker.setUserInfo(user)
-      })
-      if (this.data.lover && this.userId === this.data.lover.id) {
-        this.data.lover.score++
-      }
-      this.data.star_count++
-      this.data.hasStar++
-      this.$toast.info(`+${this.data.hasStar}s`)
+          if (this.userCoinTotal < value) {
+            this.$toast.error('团子不足')
+            return
+          }
+          const api = new Api()
+          await api.star({
+            roleId: this.data.id,
+            amount
+          })
+          this.userCoinTotal -= amount
+          if (!this.data.hasStar) {
+            this.data.fans_count++
+          }
+          M.invoker.getUserInfo(user => {
+            if (user.banlance) {
+              if (user.banlance.coin_count >= amount) {
+                user.banlance.coin_count -= amount
+              } else {
+                user.banlance.light_count =
+                  user.banlance.light_count -
+                  (amount - user.banlance.coin_count)
+                user.banlance.coin_count = 0
+              }
+            }
+            M.invoker.setUserInfo(user)
+          })
+          if (this.data.lover && this.userId === this.data.lover.id) {
+            this.data.lover.score += amount
+          }
+          this.data.star_count += amount
+          this.data.hasStar += amount
+          this.$toast.info(`+${this.data.hasStar}s`)
+        })
+        .catch(() => {})
     }
   }
 }

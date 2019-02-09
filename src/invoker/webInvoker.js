@@ -21,6 +21,10 @@ export default class extends invokerInterface {
       exp: { have_exp: 455, level: 19, next_level_exp: 551 },
       faker: false,
       id: 1,
+      banlance: {
+        light_count: 10,
+        coin_count: 10
+      },
       is_admin: true,
       nickname: '冰淤',
       notification: '2',
