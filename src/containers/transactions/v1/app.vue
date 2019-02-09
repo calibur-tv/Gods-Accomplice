@@ -47,10 +47,10 @@
   <div id="trans-list">
     <div class="header">
       <div>
-        <span>收入：</span><strong class="get">{{ banlance.get }}</strong>
+        <span>收入：</span><strong class="get">{{ balance.get }}</strong>
       </div>
       <div>
-        <span>支出：</span><strong class="set">{{ banlance.set }}</strong>
+        <span>支出：</span><strong class="set">{{ balance.set }}</strong>
       </div>
     </div>
     <div class="main-hr" />
@@ -84,14 +84,18 @@ import Type7 from '../components/RewardAnswer.vue'
 import Type8 from '../components/RewardVideo.vue'
 import Type9 from '../components/ForLover.vue'
 import Type10 from '../components/Withdrawal.vue'
-import Type11 from '../components/DeleteCreator.vue'
-import Type12 from '../components/FreezeUser.vue'
-import Type13 from '../components/SystemCoinGift.vue'
-import Type14 from '../components/SystemLightGift.vue'
-import Type15 from '../components/ActivityLightGift.vue'
-import Type16 from '../components/ManagerLightGift.vue'
-import Type17 from '../components/InviteByUser.vue'
-import Type18 from '../components/BuyVideoPackage.vue'
+import Type11 from '../components/DeleteVideo.vue'
+import Type12 from '../components/DeleteAnswer.vue'
+import Type13 from '../components/DeleteScore.vue'
+import Type14 from '../components/DeleteImage.vue'
+import Type15 from '../components/DeletePost.vue'
+import Type16 from '../components/SystemCoinGift.vue'
+import Type17 from '../components/SystemLightGift.vue'
+import Type18 from '../components/ActivityLightGift.vue'
+import Type19 from '../components/ManagerLightGift.vue'
+import Type20 from '../components/InviteByUser.vue'
+import Type21 from '../components/BuyVideoPackage.vue'
+import Type23 from '../components/VideoPackageGet.vue'
 
 export default {
   name: 'App',
@@ -115,7 +119,11 @@ export default {
     Type15,
     Type16,
     Type17,
-    Type18
+    Type18,
+    Type19,
+    Type20,
+    Type21,
+    Type23
   },
   data() {
     return {
@@ -124,7 +132,7 @@ export default {
       error: false,
       page: 1,
       list: [],
-      banlance: {
+      balance: {
         get: 0,
         set: 0
       }
@@ -132,11 +140,7 @@ export default {
   },
   methods: {
     async getData() {
-      if (!this.list.length) {
-        this.noMore = true
-        return
-      }
-      if (this.loading) {
+      if (this.noMore || this.loading) {
         return
       }
       this.loading = true
@@ -147,7 +151,7 @@ export default {
           take: 20
         })
         this.list = this.list.concat(data.list)
-        this.noMore = data.list.length < 20
+        this.noMore = data.noMore
         this.page++
       } catch (e) {
         this.$toast.error(e)

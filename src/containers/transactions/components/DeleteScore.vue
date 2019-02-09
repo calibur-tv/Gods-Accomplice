@@ -1,10 +1,14 @@
 <template>
   <VCommon :item="item">
     <template slot="title"
-      >删除原创内容</template
+      >漫评被删除</template
     >
     <template slot="desc">
-      原创内容被删除，会扣除相应投食数的光玉
+      <span>漫评</span>
+      <a href="javascript:;" @click="$alias.review(item.model.id)">{{
+        item.model.title
+      }}</a>
+      <span>被删除，扣除光玉</span>
     </template>
   </VCommon>
 </template>

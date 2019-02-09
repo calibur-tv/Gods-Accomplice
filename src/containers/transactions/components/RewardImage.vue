@@ -4,7 +4,7 @@
       投食相册
     </template>
     <template slot="desc">
-      <template v-if="item.add">
+      <template v-if="item.amount > 0">
         <a href="javascript:;" @click="$alias.user(item.user.zone)">{{
           item.user.nickname
         }}</a>
