@@ -87,7 +87,7 @@ export default {
   },
   computed: {
     sign() {
-      return this.item.amount > 0 ? '+' : '-'
+      return this.item.amount > 0 ? '+' : ''
     }
   }
 }

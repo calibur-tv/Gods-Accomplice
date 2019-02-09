@@ -17,7 +17,8 @@
     }
 
     span,
-    strong {
+    strong,
+    a {
       vertical-align: middle;
     }
 
