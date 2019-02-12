@@ -4,7 +4,9 @@ import '@/style/global.scss'
 import '@/util/global'
 import '@/util/components'
 import FastClick from 'fastclick'
+import VueClipboards from 'vue-clipboards'
 
+Vue.use(VueClipboards)
 // 初始化container
 let pageData
 try {
@@ -26,5 +28,4 @@ M.app = new App({ data: pageData }).$mount('#app')
 M.sentry.configureScope(scope => {
   scope.setTag('page-name', 'role')
 })
-
 FastClick.attach(document.body)

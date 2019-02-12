@@ -211,6 +211,18 @@
         }
       }
     }
+
+    .copy-btn {
+      background-color: #f25d8e;
+      box-shadow: 0 4px 4px rgba(255, 112, 159, 0.3);
+      color: #fff;
+      border-radius: 4px;
+      padding: 10px 20px;
+      font-size: 12px;
+      display: block;
+      width: 150px;
+      margin: 10px auto 25px auto;
+    }
   }
 }
 </style>
@@ -237,27 +249,50 @@
         <div class="content">
           <div class="meta">
             <div class="item">
-              <p>{{ data.trending || '无' }}</p>
+              <p>？</p>
               <span>排名</span>
             </div>
             <div class="item">
-              <p>{{ $utils.shortenNumber(data.fans_count) }}</p>
+              <p>？</p>
               <span>粉丝</span>
             </div>
             <div class="item">
-              <p>{{ $utils.shortenNumber(data.star_count) }}</p>
+              <p>？</p>
               <span>团子</span>
             </div>
           </div>
-          <button @click="handleStar">
-            {{ data.hasStar ? '已应援×' + data.hasStar : '投食应援' }}
-          </button>
+          <button>应援功能已下线</button>
         </div>
       </div>
     </header>
     <BangumiPanel :bangumi="bangumi" />
     <div class="hr" />
     <main class="container">
+      <div class="panel">
+        <h3>更新</h3>
+        <div class="intro">
+          <p>
+            "初代守护者争夺战"已结束，感谢大家的参与；我们已经保存了历史数据，在将来会专门制作一个页面来纪念大家所做的贡献！
+          </p>
+          <p>
+            现在，我们有新的「股市」系统已经在网页版上线了，期待大家为自己的爱豆贡献自己的力量，点击下方按钮复制链接，在浏览器中访问：
+          </p>
+        </div>
+        <button
+          v-clipboard="`https://m.calibur.tv/role/${data.id}`"
+          class="copy-btn"
+          @success="$toast.success('复制成功')"
+        >
+          点我复制网页链接
+        </button>
+        <div class="intro">
+          <p>
+            若复制失败，请直接打开：https://m.calibur.tv/role/{{
+              data.id
+            }}，马上入股
+          </p>
+        </div>
+      </div>
       <div class="panel">
         <h3>简介</h3>
         <div v-if="collapsed" class="intro" @click="collapsed = false">
@@ -269,59 +304,18 @@
           <button>收起</button>
         </div>
       </div>
-      <div class="panel">
-        <h3>守护者</h3>
-        <div v-if="data.lover">
-          <div class="lover">
-            <div class="avatar">
-              <UserAvatar :user="data.lover" :size="55" />
-            </div>
-            <div class="content">
-              <UserNickname :user="data.lover" />
-              <p class="score">应援数：{{ data.lover.score }}</p>
-            </div>
-          </div>
-        </div>
-        <p v-else class="no-one">暂无守护者</p>
-      </div>
-      <div class="panel">
-        <h3>
-          应援团
-          <Switcher :list="['最多应援', '最新应援']" @click="switchFansSort" />
-        </h3>
-        <ul v-if="data.fans_count" class="fans-list">
-          <li v-for="item in fans" :key="item.id" class="fans">
-            <UserAvatar :user="item" :size="55" />
-            <div v-if="fansSort === 'hot'" class="score">{{ item.score }}</div>
-            <p class="nickname">{{ item.nickname }}</p>
-          </li>
-        </ul>
-        <Loadmore
-          :no-more="noMore"
-          :nothing="!data.fans_count"
-          :error="error"
-          :loading="loading"
-          :fetch="loadFansList"
-        >
-          <p slot="nothing" class="no-one">TA还没有真正的粉丝~</p>
-        </Loadmore>
-      </div>
     </main>
+    <div class="hr" />
   </div>
 </template>
 
 <script>
 import BangumiPanel from '@/components/BangumiPanel'
-import Loadmore from '@/components/Loadmore'
-import Switcher from '@/components/Switcher'
-import Api from '@/api/v1/cartoonRoleApi'
 
 export default {
   name: 'App',
   components: {
-    BangumiPanel,
-    Loadmore,
-    Switcher
+    BangumiPanel
   },
   data() {
     return {
@@ -340,97 +334,7 @@ export default {
   created() {
     document.title = this.data.name
   },
-  mounted() {
-    M.invoker.getUserInfo(user => {
-      this.userCoinTotal = user.banlance.light_count + user.banlance.coin_count
-      this.userId = user.id
-    })
-  },
-  methods: {
-    async loadFansList() {
-      if (this.loading || this.noMore) {
-        return
-      }
-      this.loading = true
-      const api = new Api()
-      try {
-        const data = await api.fans({
-          roleId: this.data.id,
-          seenIds: this.fans.map(_ => _.id).toString(),
-          minId: this.fans.length ? this.fans[this.fans.length - 1].id : 0,
-          sort: this.fansSort
-        })
-        this.fans = this.fans.concat(data.list)
-        this.noMore = data.noMore
-      } catch (e) {
-        this.$toast.error(e)
-        this.error = true
-      } finally {
-        this.loading = false
-      }
-    },
-    switchFansSort() {
-      if (this.loading) {
-        return
-      }
-      this.fansSort = this.fansSort === 'hot' ? 'new' : 'hot'
-      this.fans = []
-      this.noMore = false
-      this.error = false
-      this.loadFansList()
-    },
-    handleStar() {
-      if (!this.userCoinTotal) {
-        this.$toast.info('没有团子了~')
-        return
-      }
-      this.$prompt('请输入要应援的数额', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        inputPattern: /^\d+$/,
-        inputErrorMessage: '必须是正整数'
-      })
-        .then(async ({ value }) => {
-          const amount = +value
-          if (amount < 0) {
-            this.$toast.error('必须是正整数')
-            return
-          }
-          if (this.userCoinTotal < value) {
-            this.$toast.error('团子不足')
-            return
-          }
-          const api = new Api()
-          await api.star({
-            roleId: this.data.id,
-            amount
-          })
-          this.userCoinTotal -= amount
-          if (!this.data.hasStar) {
-            this.data.fans_count++
-          }
-          M.invoker.getUserInfo(user => {
-            if (user.banlance) {
-              if (user.banlance.coin_count >= amount) {
-                user.banlance.coin_count -= amount
-              } else {
-                user.banlance.light_count =
-                  user.banlance.light_count -
-                  (amount - user.banlance.coin_count)
-                user.banlance.coin_count = 0
-              }
-            }
-            M.invoker.setUserInfo(user)
-          })
-          if (this.data.lover && this.userId === this.data.lover.id) {
-            this.data.lover.score += amount
-          }
-          this.data.star_count += amount
-          this.data.hasStar += amount
-          this.$toast.info(`+${this.data.hasStar}s`)
-        })
-        .catch(() => {})
-    }
-  }
+  mounted() {},
+  methods: {}
 }
 </script>
