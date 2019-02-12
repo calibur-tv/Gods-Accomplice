@@ -1,13 +1,13 @@
 <template>
   <VCommon :item="item">
     <template slot="title">
-      偶像应援
+      偶像入股
     </template>
     <template slot="desc">
-      为<a href="javascript:;" @click="$alias.role(item.model.id)">{{
+      <span>入股</span>
+      <a href="javascript:;" @click="$alias.role(item.model.id)">{{
         item.model.title
-      }}</a
-      >应援
+      }}</a>
     </template>
   </VCommon>
 </template>

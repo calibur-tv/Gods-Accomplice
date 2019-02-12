@@ -96,6 +96,7 @@ import Type18 from '../components/ActivityLightGift.vue'
 import Type19 from '../components/ManagerLightGift.vue'
 import Type20 from '../components/InviteByUser.vue'
 import Type21 from '../components/BuyVideoPackage.vue'
+import Type22 from '../components/DealIdol.vue'
 import Type23 from '../components/VideoPackageGet.vue'
 
 export default {
@@ -124,6 +125,7 @@ export default {
     Type19,
     Type20,
     Type21,
+    Type22,
     Type23
   },
   data() {
