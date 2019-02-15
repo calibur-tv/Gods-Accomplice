@@ -35,7 +35,7 @@
         v-if="user"
         :user="user"
         :is-followed="false"
-        :time="created_at"
+        :time="published_at"
       />
       <!-- 标题 -->
       <div class="title">{{ title }}</div>
