@@ -100,12 +100,9 @@ export default {
           }
         })
         M.invoker.getUserInfo(user => {
-          if (user.banlance) {
-            if (user.banlance.coin_count > 0) {
-              user.banlance.coin_count--
-            } else {
-              user.banlance.light_count--
-            }
+          if (user.pocket && user.pocket >= 1) {
+            user.banlance.coin_count--
+            user.pocket--
           }
           M.invoker.setUserInfo(user)
         })

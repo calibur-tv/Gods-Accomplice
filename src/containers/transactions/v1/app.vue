@@ -98,6 +98,8 @@ import Type20 from '../components/InviteByUser.vue'
 import Type21 from '../components/BuyVideoPackage.vue'
 import Type22 from '../components/DealIdol.vue'
 import Type23 from '../components/VideoPackageGet.vue'
+import Type24 from '../components/IdolBuyPost.vue'
+import Type25 from '../components/RewardIdolByPost.vue'
 
 export default {
   name: 'App',
@@ -126,7 +128,9 @@ export default {
     Type20,
     Type21,
     Type22,
-    Type23
+    Type23,
+    Type24,
+    Type25
   },
   data() {
     return {

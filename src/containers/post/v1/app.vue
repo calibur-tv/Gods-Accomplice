@@ -55,7 +55,7 @@
     </main>
     <!-- 番剧 -->
     <footer>
-      <FlowTagList :bangumi="bangumi" :tags="post.tags" />
+      <FlowTagList :bangumi="bangumi" :tags="post.tags" :idol="post.idol" />
       <FlowRewardPanel
         v-if="post.is_creator"
         :id="post.id"

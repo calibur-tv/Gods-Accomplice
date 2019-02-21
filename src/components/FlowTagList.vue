@@ -12,7 +12,12 @@
     <BubbleTag :text="bangumi.name" @click="$alias.bangumi(bangumi.id)">
       <img slot="icon" src="../images/bangumi-icon.png" />
     </BubbleTag>
-    <BubbleTag v-for="item in tags" :key="item.id" :text="item.name" />
+    <BubbleTag v-if="idol" :text="idol.name" @click="$alias.role(idol.id)">
+      <img slot="icon" src="../images/bangumi-icon.png" />
+    </BubbleTag>
+    <template v-else>
+      <BubbleTag v-for="item in tags" :key="item.id" :text="item.name" />
+    </template>
   </div>
 </template>
 
@@ -28,6 +33,10 @@ export default {
     bangumi: {
       required: true,
       type: Object
+    },
+    idol: {
+      type: Object,
+      default: null
     },
     tags: {
       type: Array,

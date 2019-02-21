@@ -275,8 +275,6 @@ export default {
       zone: '',
       avatar: '',
       banner: '',
-      coin: 0,
-      coin_from_sign: 0,
       daySign: false,
       exp: {
         have_exp: 0,
@@ -285,6 +283,7 @@ export default {
       },
       nickname: '',
       power: '',
+      pocket: 0,
       sex: 0,
       sexSecret: false,
       signature: ''
@@ -300,13 +299,14 @@ export default {
   methods: {
     handleSigned({ exp, message }) {
       this.daySign = true
-      this.coin++
       this.banlance.coin_count++
+      this.pocket++
       this.$toast.success(message)
       this.$utils.updateUserExp(exp)
       const user = M.user
       this.exp = user.exp
       user.banlance.coin_count++
+      user.pocket++
       user.daySign = true
       M.invoker.setUserInfo(user)
     }
