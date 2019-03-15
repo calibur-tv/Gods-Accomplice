@@ -17,7 +17,7 @@ class TemplateHashPlugin {
     this.options = Object.assign(
       {
         outputAssetsPath: path.join(process.cwd(), 'dist'),
-        publicPath: 'https://static.calibur.tv'
+        publicPath: 'https://file.calibur.tv'
       },
       options || {}
     )

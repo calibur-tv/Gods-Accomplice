@@ -45,7 +45,7 @@ module.exports = {
       ENVIRONMENT: '"production"',
       NODE_ENV: '"production"'
     },
-    cdn: 'https://static.calibur.tv',
+    cdn: 'https://file.calibur.tv',
     assetsFiles: [
       {
         path: 'example.js'

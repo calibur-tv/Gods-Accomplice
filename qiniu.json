@@ -1,6 +1,6 @@
 {
   "src_dir"            :   "/Users/yuistack/Documents/calibur/Gods-Accomplice/dist",
-  "bucket"             :   "clannader",
+  "bucket"             :   "file",
   "overwrite"          :   true,
   "rescan_local"       :   true,
   "skip_suffixes"      :   ".DS_Store",
