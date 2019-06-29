@@ -1,7 +1,7 @@
 const path = require('path')
 const grunt = require('grunt')
 const webpack = require('webpack')
-const CleanPlugin = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const config = require('./env.config')
 const utils = require('./utils')
@@ -195,7 +195,7 @@ module.exports = env => {
         hashDigestLength: 8
       }),
       ...templatePlugins,
-      new CleanPlugin([BUILD_PATH], {
+      new CleanWebpackPlugin([BUILD_PATH], {
         root: ROOT_PATH
       })
     ],
